@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://c137k3r5rd0os"]
+
+[ext_resource type="Script" path="res://scripts/shoot_area.gd" id="1_u46cq"]
+
+[node name="ShootArea" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_u46cq")
+
+[node name="ShootPolygon" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-4, -2, 0, -5, 4, -2, 4, 3, 0, 5, -4, 3)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://7nk3om0x8xav"]
+
+[ext_resource type="Script" path="res://scenes/enemy.gd" id="1_hir0y"]
+
+[node name="Enemy" type="Area2D"]
+position = Vector2(370, 236)
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_hir0y")
+speed = 1.0
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(1, 0, 0.219608, 1)
+polygon = PackedVector2Array(-14, 10, -14, -20, 17, 0, -14, 14)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

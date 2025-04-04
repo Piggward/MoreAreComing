@@ -1,0 +1,139 @@
+[gd_scene load_steps=8 format=3 uid="uid://do804sfv5x0tt"]
+
+[ext_resource type="Script" path="res://scripts/level_1.gd" id="1_3ju04"]
+[ext_resource type="Script" path="res://scripts/turret.gd" id="1_iom35"]
+[ext_resource type="Script" path="res://scripts/wave.gd" id="2_5rwbk"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="2_sf0d6"]
+[ext_resource type="Script" path="res://scripts/enemy_manager.gd" id="3_v51cp"]
+
+[sub_resource type="Resource" id="Resource_4wihe"]
+script = ExtResource("2_5rwbk")
+batch = 2
+enemies = 2
+batch_cd = 5.0
+
+[sub_resource type="Resource" id="Resource_kpuuc"]
+script = ExtResource("2_5rwbk")
+batch = 3
+enemies = 3
+batch_cd = 5.0
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_3ju04")
+waves = Array[ExtResource("2_5rwbk")]([SubResource("Resource_4wihe"), SubResource("Resource_kpuuc")])
+
+[node name="Turret" type="Node2D" parent="." groups=["turret"]]
+position = Vector2(576, 324)
+script = ExtResource("1_iom35")
+
+[node name="Polygon2D" type="Polygon2D" parent="Turret"]
+color = Color(0.517647, 0.34902, 1, 1)
+polygon = PackedVector2Array(-17, -19, -3, -19, 13, -18, 40, 0, 13, 17, -17, 17)
+
+[node name="Nozzle" type="Marker2D" parent="Turret"]
+position = Vector2(40, 0)
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Turret" groups=["player"]]
+collision_mask = 2
+script = ExtResource("2_sf0d6")
+shoot_speed = 4.0
+damage = 10.0
+turn_rate = 0.04
+mag_size = 3
+reload_speed = 2.0
+shoot_cd = 0.4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Turret/CharacterBody2D"]
+
+[node name="EnemyManager" type="Node2D" parent="."]
+script = ExtResource("3_v51cp")
+damage = 10
+speed = 4.0
+
+[node name="Node2D" type="Node2D" parent="EnemyManager"]
+position = Vector2(-75, 139)
+
+[node name="Node2D2" type="Node2D" parent="EnemyManager"]
+position = Vector2(-73, 280)
+
+[node name="Node2D3" type="Node2D" parent="EnemyManager"]
+position = Vector2(-84, 449)
+
+[node name="Node2D4" type="Node2D" parent="EnemyManager"]
+position = Vector2(-75, 738)
+
+[node name="Node2D5" type="Node2D" parent="EnemyManager"]
+position = Vector2(224, 763)
+
+[node name="Node2D6" type="Node2D" parent="EnemyManager"]
+position = Vector2(532, 774)
+
+[node name="Node2D7" type="Node2D" parent="EnemyManager"]
+position = Vector2(751, 767)
+
+[node name="Node2D19" type="Node2D" parent="EnemyManager"]
+position = Vector2(1002, 763)
+
+[node name="Node2D8" type="Node2D" parent="EnemyManager"]
+position = Vector2(1312, 780)
+
+[node name="Node2D9" type="Node2D" parent="EnemyManager"]
+position = Vector2(1303, 543)
+
+[node name="Node2D10" type="Node2D" parent="EnemyManager"]
+position = Vector2(1298, 345)
+
+[node name="Node2D11" type="Node2D" parent="EnemyManager"]
+position = Vector2(1291, 144)
+
+[node name="Node2D12" type="Node2D" parent="EnemyManager"]
+position = Vector2(1239, -66)
+
+[node name="Node2D13" type="Node2D" parent="EnemyManager"]
+position = Vector2(995, -78)
+
+[node name="Node2D14" type="Node2D" parent="EnemyManager"]
+position = Vector2(719, -71)
+
+[node name="Node2D15" type="Node2D" parent="EnemyManager"]
+position = Vector2(512, -78)
+
+[node name="Node2D16" type="Node2D" parent="EnemyManager"]
+position = Vector2(314, -78)
+
+[node name="Node2D17" type="Node2D" parent="EnemyManager"]
+position = Vector2(127, -82)
+
+[node name="Node2D18" type="Node2D" parent="EnemyManager"]
+position = Vector2(-98, -77)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Shop" type="HBoxContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(0, 275)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Shop"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Shop/PanelContainer"]
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/Shop"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="PanelContainer3" type="PanelContainer" parent="CanvasLayer/Shop"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2

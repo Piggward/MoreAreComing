@@ -1,4 +1,4 @@
-[gd_scene load_steps=665 format=4 uid="uid://do804sfv5x0tt"]
+[gd_scene load_steps=688 format=4 uid="uid://do804sfv5x0tt"]
 
 [ext_resource type="Script" path="res://scripts/level_1.gd" id="1_3ju04"]
 [ext_resource type="Script" path="res://scripts/turret.gd" id="1_iom35"]
@@ -19,30 +19,24 @@
 [ext_resource type="AudioStream" uid="uid://cbaam4pwdps0q" path="res://sfx/PipeMoving.mp3" id="8_o0y8h"]
 [ext_resource type="Texture2D" uid="uid://bprj7nlhyl3so" path="res://art/Default size/towerDefense_tile103.png" id="8_y8nji"]
 [ext_resource type="Script" path="res://scripts/shop.gd" id="8_y74hh"]
-[ext_resource type="Script" path="res://scripts/power_up.gd" id="9_eb5a7"]
 [ext_resource type="Texture2D" uid="uid://cfylavpewfaml" path="res://art/Default size/towerDefense_tile104.png" id="9_idmji"]
 [ext_resource type="AudioStream" uid="uid://cw6o5bb8uihtt" path="res://sfx/shoot.ogg" id="9_iwjtq"]
 [ext_resource type="Texture2D" uid="uid://ct3tfm16tngun" path="res://art/Default size/towerDefense_tile105.png" id="10_t4fyq"]
 [ext_resource type="Texture2D" uid="uid://c0rdrtevsjb81" path="res://art/Default size/towerDefense_tile106.png" id="11_34j47"]
 [ext_resource type="Texture2D" uid="uid://318kuti2tkud" path="res://art/towerDefense_tile250.png" id="12_7tpjb"]
 [ext_resource type="Texture2D" uid="uid://cesyae1ad2n8x" path="res://art/Default size/towerDefense_tile107.png" id="12_dkqcl"]
-[ext_resource type="Resource" uid="uid://ca0lmqmywbw7b" path="res://resources/buff_turn_rate.tres" id="12_hq3gj"]
 [ext_resource type="Texture2D" uid="uid://btyfahkrp8f4y" path="res://art/Default size/towerDefense_tile108.png" id="13_4a5y8"]
-[ext_resource type="Resource" uid="uid://c6k3d0bq8vyic" path="res://resources/buff_mag_size.tres" id="14_dym15"]
 [ext_resource type="Texture2D" uid="uid://dt6qq6x103nlq" path="res://art/Default size/towerDefense_tile109.png" id="14_ekyev"]
 [ext_resource type="Texture2D" uid="uid://baujqeyapaqbm" path="res://art/ammoIcon.png" id="14_vnvs6"]
-[ext_resource type="Resource" uid="uid://brs0gvkp08rbm" path="res://resources/buff_reload_speed.tres" id="15_2save"]
 [ext_resource type="Script" path="res://scripts/ammo_label.gd" id="15_lps3h"]
 [ext_resource type="Texture2D" uid="uid://d03c7eds1jdn" path="res://art/Default size/towerDefense_tile110.png" id="15_ojoaj"]
 [ext_resource type="Texture2D" uid="uid://cnsri3cch1c51" path="res://art/Default size/towerDefense_tile012.png" id="16_61nej"]
 [ext_resource type="Script" path="res://scripts/reload_bar.gd" id="16_x7re1"]
 [ext_resource type="Texture2D" uid="uid://q3qmq5q70cqs" path="res://art/Default size/towerDefense_tile111.png" id="17_glxf2"]
 [ext_resource type="Texture2D" uid="uid://ccb3mwlnbsd5w" path="res://art/Default size/towerDefense_tile112.png" id="18_4jbol"]
-[ext_resource type="Resource" uid="uid://5gdvg0qh7opv" path="res://resources/buff_shoot_cd.tres" id="19_ieige"]
 [ext_resource type="Texture2D" uid="uid://drs8pbf5ta5wb" path="res://art/Default size/towerDefense_tile113.png" id="19_qqlj7"]
 [ext_resource type="AudioStream" uid="uid://dym6elgbylmyi" path="res://sfx/tanks_song.wav" id="19_vgfm5"]
 [ext_resource type="Texture2D" uid="uid://6ntmwyer6psj" path="res://art/Default size/towerDefense_tile114.png" id="20_2n2dt"]
-[ext_resource type="Resource" uid="uid://b80fugswh35wj" path="res://resources/buff_shoot_speed.tres" id="20_vfmyh"]
 [ext_resource type="AudioStream" uid="uid://8aityrwsd7xr" path="res://sfx/Goodjob2.mp3" id="21_3jg6r"]
 [ext_resource type="Texture2D" uid="uid://bf1pi3qkmiyya" path="res://art/Default size/towerDefense_tile115.png" id="21_fpvad"]
 [ext_resource type="Texture2D" uid="uid://pcqgdcrod4k1" path="res://art/Default size/towerDefense_tile116.png" id="22_betr3"]
@@ -326,55 +320,100 @@
 [ext_resource type="Texture2D" uid="uid://ddsjy1fs3p55e" path="res://art/Default size/towerDefense_tile098.png" id="299_x36w8"]
 [ext_resource type="Texture2D" uid="uid://7a7hoq6nslcm" path="res://art/Default size/towerDefense_tile099.png" id="300_uqdog"]
 [ext_resource type="Texture2D" uid="uid://g3c7vjladm6n" path="res://art/Default size/towerDefense_tile100.png" id="301_54igc"]
-[ext_resource type="Resource" uid="uid://xoad71hxo4p5" path="res://resources/buff_everything.tres" id="323_idtcc"]
-[ext_resource type="Resource" uid="uid://cywtyfgbfxicf" path="res://resources/buff_damage.tres" id="324_53wf1"]
-[ext_resource type="Resource" uid="uid://jvctkojgyusg" path="res://resources/buff_pierce.tres" id="325_2kqkg"]
-[ext_resource type="Resource" uid="uid://cifkpiqfs53nj" path="res://resources/automatic_reload.tres" id="326_m36l4"]
-[ext_resource type="Resource" uid="uid://capa1imfppbk6" path="res://resources/automatic_shooting.tres" id="327_uvqkc"]
-[ext_resource type="Resource" uid="uid://cd1bswuqndn86" path="res://resources/knockback.tres" id="328_nsxv6"]
+[ext_resource type="Script" path="res://scripts/PowerUpTree.gd" id="316_wvrm0"]
+[ext_resource type="Script" path="res://scripts/power_up.gd" id="317_lba3g"]
+[ext_resource type="Resource" uid="uid://c6k3d0bq8vyic" path="res://resources/ammo1.tres" id="318_85q7f"]
+[ext_resource type="Resource" uid="uid://bldgq00scngn0" path="res://resources/ammo2.tres" id="319_xtay8"]
+[ext_resource type="Resource" uid="uid://cqm117r3n4cgl" path="res://resources/ammo3.tres" id="320_ugbhw"]
+[ext_resource type="Resource" uid="uid://5gdvg0qh7opv" path="res://resources/burst1.tres" id="321_ldysd"]
+[ext_resource type="Resource" uid="uid://bdaq5wy46ohgn" path="res://resources/burst2.tres" id="322_3xn6c"]
+[ext_resource type="Resource" uid="uid://x84oswjc0nho" path="res://resources/burst3.tres" id="323_fjpg0"]
+[ext_resource type="Resource" uid="uid://cywtyfgbfxicf" path="res://resources/damage1.tres" id="324_d2ngo"]
+[ext_resource type="Resource" uid="uid://hbwpyk4ubrsb" path="res://resources/damage2.tres" id="325_t50af"]
+[ext_resource type="Resource" uid="uid://blf30gy2ja3uk" path="res://resources/damage3.tres" id="326_vudpf"]
+[ext_resource type="Resource" uid="uid://cd1bswuqndn86" path="res://resources/knockback1.tres" id="327_enn8s"]
+[ext_resource type="Resource" uid="uid://c6jtak1vpoxw7" path="res://resources/knockback2.tres" id="328_cbybw"]
 [ext_resource type="Script" path="res://scripts/camera_2d.gd" id="328_u2vmf"]
+[ext_resource type="Resource" uid="uid://fxnlvacr6gpw" path="res://resources/knockback3.tres" id="329_d6y4n"]
+[ext_resource type="Resource" uid="uid://jvctkojgyusg" path="res://resources/pierce1.tres" id="330_v76us"]
+[ext_resource type="Resource" uid="uid://dg3tfdf5uhjpp" path="res://resources/pierce2.tres" id="331_vibkg"]
+[ext_resource type="Resource" uid="uid://cn1qii6k60ih1" path="res://resources/pierce3.tres" id="332_6f8yy"]
 [ext_resource type="Script" path="res://scripts/wave_label.gd" id="332_513re"]
 [ext_resource type="PackedScene" uid="uid://crx5op20r610b" path="res://scenes/start_game_screen.tscn" id="332_dohws"]
+[ext_resource type="Resource" uid="uid://brs0gvkp08rbm" path="res://resources/reload_speed1.tres" id="333_da2tg"]
+[ext_resource type="Resource" uid="uid://bs5tris4qwh1h" path="res://resources/reload_speed2.tres" id="334_v8hh4"]
+[ext_resource type="Resource" uid="uid://cseqciiallrdo" path="res://resources/reload_speed3.tres" id="335_ac1wv"]
+[ext_resource type="Resource" uid="uid://b80fugswh35wj" path="res://resources/shoot_speed1.tres" id="336_oowne"]
+[ext_resource type="Resource" uid="uid://dfan8sq81o5c" path="res://resources/shoot_speed2.tres" id="337_tlx7t"]
+[ext_resource type="Resource" uid="uid://drtva5ojgxs1q" path="res://resources/shoot_speed3.tres" id="338_pkigc"]
+[ext_resource type="Resource" uid="uid://ca0lmqmywbw7b" path="res://resources/turn_rate1.tres" id="339_pxaff"]
+[ext_resource type="Resource" uid="uid://cv56pmgknhl0a" path="res://resources/turn_rate2.tres" id="340_wgbx0"]
+[ext_resource type="Resource" uid="uid://7hcyqcsnu2ph" path="res://resources/turn_rate3.tres" id="341_ou2mn"]
 
-[sub_resource type="Resource" id="Resource_a4tdf"]
+[sub_resource type="Resource" id="Resource_iaqbb"]
 script = ExtResource("2_5rwbk")
-batch = 2
-enemies = 2
+batch = 1
+enemies = 3
 special_factor = 0.0
 batch_cd = 5.0
-speed = 0.4
+speed = 0.3
 damage = 10
 health = 15
 
-[sub_resource type="Resource" id="Resource_1b4ci"]
+[sub_resource type="Resource" id="Resource_qkdxg"]
+script = ExtResource("2_5rwbk")
+batch = 1
+enemies = 5
+special_factor = 0.0
+batch_cd = 5.0
+speed = 0.3
+damage = 10
+health = 15
+
+[sub_resource type="Resource" id="Resource_2gj2k"]
 script = ExtResource("2_5rwbk")
 batch = 2
-enemies = 2
+enemies = 4
 special_factor = 0.2
 batch_cd = 4.0
-speed = 0.2
+speed = 0.3
 damage = 10
 health = 15
 
-[sub_resource type="Resource" id="Resource_fxrvs"]
+[sub_resource type="Resource" id="Resource_a5e7d"]
+script = ExtResource("2_5rwbk")
+batch = 2
+enemies = 5
+special_factor = 0.2
+batch_cd = 4.0
+speed = 0.3
+damage = 10
+health = 15
+
+[sub_resource type="Resource" id="Resource_bdgxe"]
 script = ExtResource("2_5rwbk")
 batch = 3
-enemies = 2
+enemies = 6
 special_factor = 0.2
-batch_cd = 3.0
-speed = 0.25
+batch_cd = 5.0
+speed = 0.6
 damage = 10
 health = 15
 
-[sub_resource type="Resource" id="Resource_rd3f6"]
-script = ExtResource("2_5rwbk")
-batch = 4
-enemies = 2
-special_factor = 0.2
-batch_cd = 3.0
-speed = 0.25
-damage = 10
-health = 15
+[sub_resource type="Animation" id="Animation_slm7m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
 
 [sub_resource type="Animation" id="Animation_vu1bk"]
 resource_name = "camera_intro"
@@ -406,21 +445,6 @@ tracks/1/keys = {
 "args": [],
 "method": &"spawn_wave"
 }]
-}
-
-[sub_resource type="Animation" id="Animation_slm7m"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera2D:zoom")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(2, 2)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uf4k2"]
@@ -6014,6 +6038,38 @@ fill_to = Vector2(0.8, 0.132)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c661y"]
 bg_color = Color(0.627451, 0.72549, 0.729412, 0.72549)
 
+[sub_resource type="Resource" id="Resource_6fcxt"]
+script = ExtResource("316_wvrm0")
+powerups = Array[ExtResource("317_lba3g")]([ExtResource("318_85q7f"), ExtResource("319_xtay8"), ExtResource("320_ugbhw")])
+
+[sub_resource type="Resource" id="Resource_ja0rh"]
+script = ExtResource("316_wvrm0")
+powerups = Array[ExtResource("317_lba3g")]([ExtResource("321_ldysd"), ExtResource("322_3xn6c"), ExtResource("323_fjpg0")])
+
+[sub_resource type="Resource" id="Resource_prxpu"]
+script = ExtResource("316_wvrm0")
+powerups = Array[ExtResource("317_lba3g")]([ExtResource("324_d2ngo"), ExtResource("325_t50af"), ExtResource("326_vudpf")])
+
+[sub_resource type="Resource" id="Resource_dtdsx"]
+script = ExtResource("316_wvrm0")
+powerups = Array[ExtResource("317_lba3g")]([ExtResource("327_enn8s"), ExtResource("328_cbybw"), ExtResource("329_d6y4n")])
+
+[sub_resource type="Resource" id="Resource_x0aja"]
+script = ExtResource("316_wvrm0")
+powerups = Array[ExtResource("317_lba3g")]([ExtResource("330_v76us"), ExtResource("331_vibkg"), ExtResource("332_6f8yy")])
+
+[sub_resource type="Resource" id="Resource_wbeea"]
+script = ExtResource("316_wvrm0")
+powerups = Array[ExtResource("317_lba3g")]([ExtResource("333_da2tg"), ExtResource("334_v8hh4"), ExtResource("335_ac1wv")])
+
+[sub_resource type="Resource" id="Resource_tbbta"]
+script = ExtResource("316_wvrm0")
+powerups = Array[ExtResource("317_lba3g")]([ExtResource("336_oowne"), ExtResource("337_tlx7t"), ExtResource("338_pkigc")])
+
+[sub_resource type="Resource" id="Resource_kj75j"]
+script = ExtResource("316_wvrm0")
+powerups = Array[ExtResource("317_lba3g")]([ExtResource("339_pxaff"), ExtResource("340_wgbx0"), ExtResource("341_ou2mn")])
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ip24r"]
 bg_color = Color(0.627451, 0.72549, 0.729412, 1)
 
@@ -6158,7 +6214,7 @@ fill_from = Vector2(0.495726, 0.538462)
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_3ju04")
-waves = Array[ExtResource("2_5rwbk")]([SubResource("Resource_a4tdf"), SubResource("Resource_1b4ci"), SubResource("Resource_fxrvs"), SubResource("Resource_rd3f6")])
+waves = Array[ExtResource("2_5rwbk")]([SubResource("Resource_iaqbb"), SubResource("Resource_qkdxg"), SubResource("Resource_2gj2k"), SubResource("Resource_a5e7d"), SubResource("Resource_bdgxe")])
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -6222,7 +6278,7 @@ shoot_speed = 4.0
 knock_back = 15.0
 damage = 10.0
 turn_rate = 0.01
-mag_size = 10
+mag_size = 5
 reload_speed = 1.5
 shoot_cd = 0.6
 health = 100
@@ -6351,7 +6407,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("8_y74hh")
-power_ups = Array[ExtResource("9_eb5a7")]([ExtResource("12_hq3gj"), ExtResource("14_dym15"), ExtResource("15_2save"), ExtResource("19_ieige"), ExtResource("20_vfmyh"), ExtResource("323_idtcc"), ExtResource("324_53wf1"), ExtResource("325_2kqkg"), ExtResource("326_m36l4"), ExtResource("327_uvqkc"), ExtResource("328_nsxv6")])
+power_ups = Array[ExtResource("316_wvrm0")]([SubResource("Resource_6fcxt"), SubResource("Resource_ja0rh"), SubResource("Resource_prxpu"), SubResource("Resource_dtdsx"), SubResource("Resource_x0aja"), SubResource("Resource_wbeea"), SubResource("Resource_tbbta"), SubResource("Resource_kj75j")])
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
 visible = false

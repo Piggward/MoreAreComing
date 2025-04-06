@@ -2,7 +2,7 @@ class_name Shop
 extends HBoxContainer
 
 const SHOP_ITEM = preload("res://scenes/shop_item.tscn")
-@export var power_ups: Array[PowerUp]
+@export var power_ups: Array[PowerUpTree]
 @onready var animation_player = $"../AnimationPlayer"
 @onready var panel_container = $"../PanelContainer"
 @onready var power_up_description = $"../PanelContainer/MarginContainer/PowerUpDescription"
@@ -27,6 +27,11 @@ func _on_door_opened(si: ShopItem):
 			
 	await get_tree().create_timer(1.1).timeout
 	si.open_door()
+	for p in power_ups:
+		if p.powerups.has(si.power_up):
+			p.powerups.pop_front()
+			if p.powerups.size() == 0:
+				power_ups.erase(p)
 	await get_tree().create_timer(0.85).timeout
 	power_up.play()
 	power_up_description.text = si.power_up.power_up_description
@@ -44,13 +49,12 @@ func leave_shop():
 	
 func add_powerup():
 	var p = SHOP_ITEM.instantiate()
-	var pup = power_ups.pop_front()
+	var pup_tree = power_ups.pop_front()
+	var pup = pup_tree.powerups[0]
 	p.power_up = pup
 	p.door_open.connect(_on_door_opened)
 	add_child(p)
-	pup.amount -= 1
-	if pup.amount > 0:
-		power_ups.push_back(pup)
+	power_ups.push_back(pup_tree)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

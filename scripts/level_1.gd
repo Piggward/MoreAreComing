@@ -37,6 +37,9 @@ func start_game():
 	music.play()
 	
 func _on_enemies_cleared():
+	if current_wave_number >= waves.size() - 1:
+		game_over(true)
+		return
 	wave_cleared.play()
 	shop.provide_powerups()
 	turret.process_mode = Node.PROCESS_MODE_DISABLED
@@ -52,9 +55,6 @@ func next_wave():
 	turret.process_mode = Node.PROCESS_MODE_INHERIT
 	turret.reset()
 	current_wave_number += 1 
-	if current_wave_number >= waves.size():
-		print("CONGRATS U WON!!")
-		return
 	current_wave = waves[current_wave_number]
 	wave_label.text = "WAVE " + str(current_wave_number + 1) + " / " + str(waves.size())
 	spawn_wave()

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://ca0lmqmywbw7b"]
+
+[ext_resource type="Script" path="res://scripts/power_up.gd" id="1_upq1r"]
+
+[resource]
+script = ExtResource("1_upq1r")
+title = "GREASE"
+title_color = Color(1, 1, 1, 1)
+power_up_description = "TURN RATE INCREASED"
+shoot_speed = 1.0
+damage = 1.0
+shoot_cd = 1.0
+turn_rate = 1.25
+mag_size = 0
+reload_speed = 1.0
+aoe = 1.0
+pierce = 0
+knock_back = 0.0
+has_automatic_shooting = false
+has_automatic_reload = false

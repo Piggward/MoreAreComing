@@ -19,6 +19,8 @@ signal door_open(sh: ShopItem)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	power_up_label.text = power_up.title
+	var randstr = str(randi())
+	power_up_label.add_theme_color_override("font_color", power_up.title_color)
 	bonus_label.text = power_up.power_up_description
 	bonus_container.visible = false
 	door_on_hover_panel.visible = false

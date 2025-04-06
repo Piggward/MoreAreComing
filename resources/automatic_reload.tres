@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_b513d")
-amount = 1
-title = "ADD MORE QUALITY OF LIFE"
+title = "QUALITY OF LIFE"
+title_color = Color(0.627451, 0.12549, 0.941176, 1)
 power_up_description = "AUTOMATIC RELOAD"
 shoot_speed = 1.0
 damage = 1.0

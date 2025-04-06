@@ -53,7 +53,6 @@ func take_damage(damage: int):
 	
 
 func update_attributes():
-	turret.scale *= (damage / 10) * 0.75
 	turret.scale.x = clamp(turret.scale.x, 1, 3)
 	turret.scale.y = clamp(turret.scale.y, 1, 3)
 	attributes_updated.emit()

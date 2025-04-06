@@ -13,7 +13,7 @@ var disappear = false
 @onready var open_door_sound = $OpenDoorSound
 @onready var knock_door_sound = $KnockDoorSound
 var has_knocked = false
-
+var gotime = false
 signal door_open(sh: ShopItem)
 
 # Called when the node enters the scene tree for the first time.
@@ -26,6 +26,8 @@ func _ready():
 	door_on_hover_panel.visible = false
 	door_texture_rect.visible = true
 	open_door_texture_rect.visible = false
+	await get_tree().create_timer(0.4).timeout
+	gotime = true
 	pass # Replace with function body.
 	
 func open_door():
@@ -54,7 +56,7 @@ func _on_door_texture_rect_mouse_exited():
 	pass # Replace with function body.
 
 func _on_door_texture_rect_gui_input(event):
-	if event.is_action_pressed("left_click") and not has_knocked:
+	if event.is_action_pressed("left_click") and not has_knocked and gotime:
 		has_knocked = true
 		knock_door_sound.play()
 		door_open.emit(self)

@@ -20,6 +20,8 @@ var has_automatic_shooting = false
 @onready var health_label = $"../../CanvasLayer/ProgressBar/HealthLabel"
 @onready var progress_bar = $"../../CanvasLayer/ProgressBar"
 @onready var level_1 = $"../.."
+@export var level_progression: Array[int] = []
+var current_level = 0
 
 signal attributes_updated
 

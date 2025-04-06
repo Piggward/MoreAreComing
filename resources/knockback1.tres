@@ -15,6 +15,6 @@ mag_size = 0
 reload_speed = 1.0
 aoe = 1.0
 pierce = 0
-knock_back = 10.0
+knock_back = 15.0
 has_automatic_shooting = false
 has_automatic_reload = false

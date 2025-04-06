@@ -8,15 +8,49 @@ const SHOP_ITEM = preload("res://scenes/shop_item.tscn")
 @onready var power_up_description = $"../PanelContainer/MarginContainer/PowerUpDescription"
 @onready var control = $"../Control"
 @onready var power_up = $"../../Turret/CharacterBody2D/PowerUp"
-
+var current: Array[PowerUp] = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.visible = false
+	if Global.has_reloaded:
+		power_ups = Global.saving_tree
+	else:
+		var arr: Array[PowerUpTree] = []
+		for n in power_ups:
+			arr.append(n.duplicate(true))
+			Global.saving_tree  = arr
 	pass # Replace with function body.
 
 func provide_powerups():
 	self.visible = true
+	current = []
+	var eras: Array[PowerUpTree] = []
+	for p in power_ups:
+		if p.powerups.is_empty():
+			eras.append(p)
+	for d in eras:
+		power_ups.erase(d)
 	power_ups.shuffle()
+	var fpp = power_ups.filter(func(a): return a.powerups[0].title == "POWER")
+	var fp = power_ups.filter(func(a): return a.powerups[0].title == "GREASE")
+	var fb = power_ups.filter(func(a): return a.powerups[0].title == "BURST")
+	var ff = power_ups.filter(func(a): return a.powerups[0].title == "FINESSE")
+	if fpp.size() == 1:
+		power_ups.find(fpp[0])
+		power_ups.remove_at(power_ups.find(fpp[0]))
+		power_ups.push_front(fpp[0])
+	if fp.size() == 1:
+		power_ups.find(fp[0])
+		power_ups.remove_at(power_ups.find(fp[0]))
+		power_ups.push_front(fp[0])
+	if fb.size() == 1:
+		power_ups.find(fb[0])
+		power_ups.remove_at(power_ups.find(fb[0]))
+		power_ups.push_front(fb[0])
+	if ff.size() == 1:
+		power_ups.find(ff[0])
+		power_ups.remove_at(power_ups.find(ff[0]))
+		power_ups.push_front(ff[0])
 	for i in 3:
 		add_powerup()
 		
@@ -27,18 +61,15 @@ func _on_door_opened(si: ShopItem):
 			
 	await get_tree().create_timer(1.1).timeout
 	si.open_door()
-	for p in power_ups:
-		if p.powerups.has(si.power_up):
-			p.powerups.pop_front()
-			if p.powerups.size() == 0:
-				power_ups.erase(p)
+	for i in power_ups.size():
+		if power_ups[i].powerups.any(func(a): return a.title == si.power_up.title):
+			power_ups[i].powerups.pop_front()
+			
 	await get_tree().create_timer(0.85).timeout
-	power_up.play()
 	power_up_description.text = si.power_up.power_up_description
 	animation_player.play("show_powerup")
 	si.power_up.apply(get_tree().get_first_node_in_group("player"))
 	await animation_player.animation_finished
-	await get_tree().create_timer(1).timeout
 	control.visible = true
 	
 func leave_shop():
@@ -51,6 +82,10 @@ func add_powerup():
 	var p = SHOP_ITEM.instantiate()
 	var pup_tree = power_ups.pop_front()
 	var pup = pup_tree.powerups[0]
+	if current.any(func(s): return s.title == pup.title):
+		power_ups.push_back(pup_tree)
+		return add_powerup()
+	current.append(pup)
 	p.power_up = pup
 	p.door_open.connect(_on_door_opened)
 	add_child(p)

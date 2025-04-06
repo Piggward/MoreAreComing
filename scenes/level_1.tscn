@@ -1,4 +1,4 @@
-[gd_scene load_steps=688 format=4 uid="uid://do804sfv5x0tt"]
+[gd_scene load_steps=697 format=4 uid="uid://do804sfv5x0tt"]
 
 [ext_resource type="Script" path="res://scripts/level_1.gd" id="1_3ju04"]
 [ext_resource type="Script" path="res://scripts/turret.gd" id="1_iom35"]
@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_sf0d6"]
 [ext_resource type="Texture2D" uid="uid://lso33r3xub01" path="res://art/Default size/towerDefense_tile001.png" id="3_ilbg7"]
 [ext_resource type="Shader" path="res://scripts/round.gdshader" id="3_l581a"]
-[ext_resource type="Texture2D" uid="uid://dg52q8lvdowpt" path="res://art/PNG/Environment/dirt.png" id="3_p1oh1"]
+[ext_resource type="Texture2D" uid="uid://dg52q8lvdowpt" path="res://art/dirt.png" id="3_p1oh1"]
 [ext_resource type="Script" path="res://scripts/enemy_manager.gd" id="3_v51cp"]
 [ext_resource type="Texture2D" uid="uid://dyvkpbg43v4dd" path="res://art/white.png" id="3_vwpgy"]
 [ext_resource type="Texture2D" uid="uid://cmwifmalhd85v" path="res://art/Default size/towerDefense_tile002.png" id="4_h4dwc"]
@@ -35,7 +35,6 @@
 [ext_resource type="Texture2D" uid="uid://q3qmq5q70cqs" path="res://art/Default size/towerDefense_tile111.png" id="17_glxf2"]
 [ext_resource type="Texture2D" uid="uid://ccb3mwlnbsd5w" path="res://art/Default size/towerDefense_tile112.png" id="18_4jbol"]
 [ext_resource type="Texture2D" uid="uid://drs8pbf5ta5wb" path="res://art/Default size/towerDefense_tile113.png" id="19_qqlj7"]
-[ext_resource type="AudioStream" uid="uid://dym6elgbylmyi" path="res://sfx/tanks_song.wav" id="19_vgfm5"]
 [ext_resource type="Texture2D" uid="uid://6ntmwyer6psj" path="res://art/Default size/towerDefense_tile114.png" id="20_2n2dt"]
 [ext_resource type="AudioStream" uid="uid://8aityrwsd7xr" path="res://sfx/Goodjob2.mp3" id="21_3jg6r"]
 [ext_resource type="Texture2D" uid="uid://bf1pi3qkmiyya" path="res://art/Default size/towerDefense_tile115.png" id="21_fpvad"]
@@ -349,56 +348,118 @@
 [ext_resource type="Resource" uid="uid://ca0lmqmywbw7b" path="res://resources/turn_rate1.tres" id="339_pxaff"]
 [ext_resource type="Resource" uid="uid://cv56pmgknhl0a" path="res://resources/turn_rate2.tres" id="340_wgbx0"]
 [ext_resource type="Resource" uid="uid://7hcyqcsnu2ph" path="res://resources/turn_rate3.tres" id="341_ou2mn"]
+[ext_resource type="Resource" uid="uid://cifkpiqfs53nj" path="res://resources/automatic_reload.tres" id="342_k21d5"]
+[ext_resource type="Resource" uid="uid://capa1imfppbk6" path="res://resources/automatic_shooting.tres" id="343_ouygx"]
 
 [sub_resource type="Resource" id="Resource_iaqbb"]
 script = ExtResource("2_5rwbk")
-batch = 1
-enemies = 3
+batches = 1
+enemies = 5
 special_factor = 0.0
-batch_cd = 5.0
-speed = 0.3
+batch_cd = 6.5
+speed = 0.45
 damage = 10
-health = 15
+health = 10
 
 [sub_resource type="Resource" id="Resource_qkdxg"]
 script = ExtResource("2_5rwbk")
-batch = 1
-enemies = 5
-special_factor = 0.0
-batch_cd = 5.0
-speed = 0.3
+batches = 3
+enemies = 6
+special_factor = 0.1
+batch_cd = 7.0
+speed = 0.26
 damage = 10
 health = 15
 
 [sub_resource type="Resource" id="Resource_2gj2k"]
 script = ExtResource("2_5rwbk")
-batch = 2
-enemies = 4
-special_factor = 0.2
-batch_cd = 4.0
-speed = 0.3
+batches = 4
+enemies = 9
+special_factor = 0.1
+batch_cd = 6.5
+speed = 0.26
 damage = 10
 health = 15
 
 [sub_resource type="Resource" id="Resource_a5e7d"]
 script = ExtResource("2_5rwbk")
-batch = 2
-enemies = 5
-special_factor = 0.2
-batch_cd = 4.0
-speed = 0.3
+batches = 5
+enemies = 8
+special_factor = 0.1
+batch_cd = 7.0
+speed = 0.32
 damage = 10
 health = 15
 
 [sub_resource type="Resource" id="Resource_bdgxe"]
 script = ExtResource("2_5rwbk")
-batch = 3
-enemies = 6
+batches = 5
+enemies = 12
 special_factor = 0.2
-batch_cd = 5.0
-speed = 0.6
+batch_cd = 6.0
+speed = 0.32
 damage = 10
-health = 15
+health = 20
+
+[sub_resource type="Resource" id="Resource_51hkr"]
+script = ExtResource("2_5rwbk")
+batches = 3
+enemies = 25
+special_factor = 0.3
+batch_cd = 8.0
+speed = 0.32
+damage = 10
+health = 20
+
+[sub_resource type="Resource" id="Resource_mhs0h"]
+script = ExtResource("2_5rwbk")
+batches = 4
+enemies = 20
+special_factor = 0.3
+batch_cd = 8.0
+speed = 0.4
+damage = 10
+health = 25
+
+[sub_resource type="Resource" id="Resource_xuvsk"]
+script = ExtResource("2_5rwbk")
+batches = 3
+enemies = 30
+special_factor = 0.3
+batch_cd = 8.0
+speed = 0.4
+damage = 10
+health = 25
+
+[sub_resource type="Resource" id="Resource_66pus"]
+script = ExtResource("2_5rwbk")
+batches = 5
+enemies = 20
+special_factor = 0.3
+batch_cd = 3.0
+speed = 0.4
+damage = 10
+health = 30
+
+[sub_resource type="Resource" id="Resource_o1u30"]
+script = ExtResource("2_5rwbk")
+batches = 6
+enemies = 50
+special_factor = 0.4
+batch_cd = 8.0
+speed = 0.4
+damage = 10
+health = 30
+
+[sub_resource type="Resource" id="Resource_3cr6w"]
+script = ExtResource("2_5rwbk")
+batches = 6
+enemies = 20
+special_factor = 0.7
+batch_cd = 2.0
+speed = 0.3
+damage = 10
+health = 30
 
 [sub_resource type="Animation" id="Animation_slm7m"]
 length = 0.001
@@ -443,7 +504,7 @@ tracks/1/keys = {
 "method": &"start_game"
 }, {
 "args": [],
-"method": &"spawn_wave"
+"method": &"next_wave"
 }]
 }
 
@@ -6066,6 +6127,10 @@ powerups = Array[ExtResource("317_lba3g")]([ExtResource("333_da2tg"), ExtResourc
 script = ExtResource("316_wvrm0")
 powerups = Array[ExtResource("317_lba3g")]([ExtResource("336_oowne"), ExtResource("337_tlx7t"), ExtResource("338_pkigc")])
 
+[sub_resource type="Resource" id="Resource_gduxd"]
+script = ExtResource("316_wvrm0")
+powerups = Array[ExtResource("317_lba3g")]([ExtResource("342_k21d5"), ExtResource("343_ouygx")])
+
 [sub_resource type="Resource" id="Resource_kj75j"]
 script = ExtResource("316_wvrm0")
 powerups = Array[ExtResource("317_lba3g")]([ExtResource("339_pxaff"), ExtResource("340_wgbx0"), ExtResource("341_ou2mn")])
@@ -6114,7 +6179,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_7h7od"]
 resource_name = "show_powerup"
-length = 0.9
+length = 1.75
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -6137,7 +6202,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.5, 0.866667),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(556, 304), Vector2(577, 314), Vector2(652, 314), Vector2(404, 314)]
+"values": [Vector2(556, 394), Vector2(577, 404), Vector2(652, 404), Vector2(404, 404)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -6150,6 +6215,23 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Turret/CharacterBody2D/PowerUp")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.7),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [],
+"method": &"stop"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_221h7"]
@@ -6178,6 +6260,20 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ur24"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0pq74"]
+bg_color = Color(0.117647, 0.6, 0.6, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7riqm"]
 bg_color = Color(0.6, 0, 0, 1)
 corner_radius_top_left = 20
@@ -6196,12 +6292,6 @@ corner_radius_bottom_left = 20
 background_mode = 3
 glow_enabled = true
 
-[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_enkod"]
-clip_count = 1
-clip_0/name = &"Tanks Song"
-clip_0/stream = ExtResource("19_vgfm5")
-clip_0/auto_advance = 0
-
 [sub_resource type="Gradient" id="Gradient_vdlwh"]
 offsets = PackedFloat32Array(0, 0.570895, 0.757463, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.266575, 0.266575, 0.266575, 1, 0.699653, 0.699653, 0.699653, 1, 1, 1, 1, 1)
@@ -6210,11 +6300,11 @@ colors = PackedColorArray(0, 0, 0, 1, 0.266575, 0.266575, 0.266575, 1, 0.699653,
 gradient = SubResource("Gradient_vdlwh")
 width = 1000
 height = 1000
-fill_from = Vector2(0.495726, 0.538462)
+fill_from = Vector2(0.401709, 0.611111)
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_3ju04")
-waves = Array[ExtResource("2_5rwbk")]([SubResource("Resource_iaqbb"), SubResource("Resource_qkdxg"), SubResource("Resource_2gj2k"), SubResource("Resource_a5e7d"), SubResource("Resource_bdgxe")])
+waves = Array[ExtResource("2_5rwbk")]([SubResource("Resource_iaqbb"), SubResource("Resource_qkdxg"), SubResource("Resource_2gj2k"), SubResource("Resource_a5e7d"), SubResource("Resource_bdgxe"), SubResource("Resource_51hkr"), SubResource("Resource_mhs0h"), SubResource("Resource_xuvsk"), SubResource("Resource_66pus"), SubResource("Resource_o1u30"), SubResource("Resource_3cr6w")])
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -6251,7 +6341,7 @@ position = Vector2(576, 324)
 rotation = -1.57594
 texture = ExtResource("6_k0x3s")
 
-[node name="Turret" type="Node2D" parent="." groups=["turret"]]
+[node name="Turret" type="Node2D" parent="." groups=["pauseable", "turret"]]
 position = Vector2(576, 324)
 script = ExtResource("1_iom35")
 
@@ -6277,11 +6367,12 @@ script = ExtResource("2_sf0d6")
 shoot_speed = 4.0
 knock_back = 15.0
 damage = 10.0
-turn_rate = 0.01
-mag_size = 5
-reload_speed = 1.5
-shoot_cd = 0.6
-health = 100
+turn_rate = 0.03
+mag_size = 10
+reload_speed = 1.2
+shoot_cd = 0.4
+health = 10
+level_progression = Array[int]([3, 5, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Turret/CharacterBody2D"]
 visible = false
@@ -6290,7 +6381,7 @@ shape = SubResource("RectangleShape2D_fblkm")
 
 [node name="PowerUp" type="AudioStreamPlayer" parent="Turret/CharacterBody2D"]
 stream = ExtResource("7_ucylw")
-volume_db = 5.0
+volume_db = 3.0
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Turret/CharacterBody2D"]
 update_rotation = false
@@ -6309,37 +6400,37 @@ pitch_scale = 0.7
 stream = ExtResource("9_iwjtq")
 volume_db = -5.0
 
-[node name="EnemyManager" type="Node2D" parent="."]
+[node name="EnemyManager" type="Node2D" parent="." groups=["pauseable"]]
 script = ExtResource("3_v51cp")
 damage = 10
 speed = 2.0
 
 [node name="Node2D" type="Node2D" parent="EnemyManager"]
-position = Vector2(-75, 139)
+position = Vector2(-114, 138)
 
 [node name="Node2D2" type="Node2D" parent="EnemyManager"]
-position = Vector2(-73, 280)
+position = Vector2(-112, 279)
 
 [node name="Node2D3" type="Node2D" parent="EnemyManager"]
-position = Vector2(-84, 449)
+position = Vector2(-123, 448)
 
 [node name="Node2D4" type="Node2D" parent="EnemyManager"]
-position = Vector2(-75, 738)
+position = Vector2(-114, 737)
 
 [node name="Node2D5" type="Node2D" parent="EnemyManager"]
-position = Vector2(224, 763)
+position = Vector2(220, 787)
 
 [node name="Node2D6" type="Node2D" parent="EnemyManager"]
-position = Vector2(532, 774)
+position = Vector2(528, 798)
 
 [node name="Node2D7" type="Node2D" parent="EnemyManager"]
-position = Vector2(751, 767)
+position = Vector2(747, 791)
 
 [node name="Node2D19" type="Node2D" parent="EnemyManager"]
-position = Vector2(1002, 763)
+position = Vector2(998, 787)
 
 [node name="Node2D8" type="Node2D" parent="EnemyManager"]
-position = Vector2(1312, 780)
+position = Vector2(1279, 780)
 
 [node name="Node2D9" type="Node2D" parent="EnemyManager"]
 position = Vector2(1303, 543)
@@ -6351,27 +6442,28 @@ position = Vector2(1298, 345)
 position = Vector2(1291, 144)
 
 [node name="Node2D12" type="Node2D" parent="EnemyManager"]
-position = Vector2(1239, -66)
+position = Vector2(1251, -75)
 
 [node name="Node2D13" type="Node2D" parent="EnemyManager"]
-position = Vector2(995, -78)
+position = Vector2(998, -115)
 
 [node name="Node2D14" type="Node2D" parent="EnemyManager"]
-position = Vector2(719, -71)
+position = Vector2(722, -108)
 
 [node name="Node2D15" type="Node2D" parent="EnemyManager"]
-position = Vector2(512, -78)
+position = Vector2(515, -115)
 
 [node name="Node2D16" type="Node2D" parent="EnemyManager"]
-position = Vector2(314, -78)
+position = Vector2(317, -115)
 
 [node name="Node2D17" type="Node2D" parent="EnemyManager"]
-position = Vector2(127, -82)
+position = Vector2(130, -119)
 
 [node name="Node2D18" type="Node2D" parent="EnemyManager"]
 position = Vector2(-98, -77)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
 
 [node name="ReloadReminder" type="PanelContainer" parent="CanvasLayer"]
 visible = false
@@ -6381,9 +6473,9 @@ anchor_top = 0.435
 anchor_right = 0.596
 anchor_bottom = 0.563
 offset_left = 6.35199
-offset_top = 247.12
+offset_top = -74.0
 offset_right = 6.40796
-offset_bottom = 247.176
+offset_bottom = -73.944
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_c661y")
@@ -6407,7 +6499,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("8_y74hh")
-power_ups = Array[ExtResource("316_wvrm0")]([SubResource("Resource_6fcxt"), SubResource("Resource_ja0rh"), SubResource("Resource_prxpu"), SubResource("Resource_dtdsx"), SubResource("Resource_x0aja"), SubResource("Resource_wbeea"), SubResource("Resource_tbbta"), SubResource("Resource_kj75j")])
+power_ups = Array[ExtResource("316_wvrm0")]([SubResource("Resource_6fcxt"), SubResource("Resource_ja0rh"), SubResource("Resource_prxpu"), SubResource("Resource_dtdsx"), SubResource("Resource_x0aja"), SubResource("Resource_wbeea"), SubResource("Resource_tbbta"), SubResource("Resource_gduxd"), SubResource("Resource_kj75j")])
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
 visible = false
@@ -6457,7 +6549,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_styles/normal = SubResource("StyleBoxFlat_t6inf")
-text = "NEXT WAVE"
+text = "CONTINUE"
 
 [node name="UI" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -6470,10 +6562,10 @@ mouse_filter = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/UI"]
 layout_mode = 0
-offset_left = 45.0
-offset_top = 536.0
-offset_right = 193.0
-offset_bottom = 597.0
+offset_left = 20.0
+offset_top = 716.0
+offset_right = 168.0
+offset_bottom = 782.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_j1xit")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UI/PanelContainer"]
@@ -6529,10 +6621,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.015
 anchor_right = 0.02
-offset_left = 936.72
-offset_top = 536.0
-offset_right = 1084.72
-offset_bottom = 597.0
+offset_left = 960.72
+offset_top = 710.0
+offset_right = 1108.72
+offset_bottom = 771.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_j1xit")
 
 [node name="Wave_label" type="Label" parent="CanvasLayer/UI/PanelContainer2" groups=["WaveLabel"]]
@@ -6542,11 +6634,32 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("332_513re")
 
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/UI"]
+layout_mode = 0
+offset_left = 993.0
+offset_top = 17.0
+offset_right = 1128.0
+offset_bottom = 44.0
+theme_override_styles/background = SubResource("StyleBoxFlat_0ur24")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0pq74")
+show_percentage = false
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/ProgressBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exp"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
-offset_left = 24.0
-offset_top = 41.0
-offset_right = 283.0
-offset_bottom = 68.0
+offset_left = 446.0
+offset_top = 17.0
+offset_right = 705.0
+offset_bottom = 44.0
 theme_override_styles/background = SubResource("StyleBoxFlat_7riqm")
 theme_override_styles/fill = SubResource("StyleBoxFlat_4hpke")
 value = 75.0
@@ -6581,7 +6694,6 @@ blend_mode = 1
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
-stream = SubResource("AudioStreamInteractive_enkod")
 volume_db = -2.0
 autoplay = true
 
@@ -6595,28 +6707,30 @@ volume_db = -8.0
 [node name="Lighting" type="Node2D" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="Lighting"]
-position = Vector2(697, 451)
+position = Vector2(738, 419)
 energy = 0.5
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_afrwy")
 
 [node name="PointLight2D2" type="PointLight2D" parent="Lighting"]
-position = Vector2(437, 211)
+position = Vector2(408, 254)
 rotation = 3.14159
 energy = 0.5
 texture = SubResource("GradientTexture2D_afrwy")
 
 [node name="PointLight2D3" type="PointLight2D" parent="Lighting"]
-position = Vector2(450, 446)
+position = Vector2(409, 410)
 rotation = -1.5708
 energy = 0.5
 texture = SubResource("GradientTexture2D_afrwy")
 
 [node name="PointLight2D4" type="PointLight2D" parent="Lighting"]
-position = Vector2(703, 223)
+position = Vector2(747, 276)
 rotation = 1.5708
 energy = 0.5
 texture = SubResource("GradientTexture2D_afrwy")
+
+[node name="Timer" type="Timer" parent="."]
 
 [connection signal="button_down" from="CanvasLayer/Control/Button" to="." method="_on_button_button_down"]
 [connection signal="button_up" from="CanvasLayer/Control/Button" to="." method="_on_button_button_up"]

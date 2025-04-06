@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://brs0gvkp08rbm"]
+
+[ext_resource type="Script" path="res://scripts/power_up.gd" id="1_31hd6"]
+
+[resource]
+script = ExtResource("1_31hd6")
+title = "ADD MORE EFFICIENCY"
+power_up_description = "RELOAD SPEED INCREASED BY 50%"
+shoot_speed = 1.0
+damage = 1.0
+shoot_cd = 1.0
+turn_rate = 1.0
+mag_size = 0
+reload_speed = 0.5
+aoe = 1.0

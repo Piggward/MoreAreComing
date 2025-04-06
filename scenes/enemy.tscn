@@ -1,18 +1,72 @@
-[gd_scene load_steps=2 format=3 uid="uid://7nk3om0x8xav"]
+[gd_scene load_steps=12 format=3 uid="uid://7nk3om0x8xav"]
 
 [ext_resource type="Script" path="res://scenes/enemy.gd" id="1_hir0y"]
+[ext_resource type="Texture2D" uid="uid://iklq3onauy0v" path="res://art/enemy.png" id="2_l5g7g"]
+[ext_resource type="Texture2D" uid="uid://dm85jmuycd2jr" path="res://art/enemy2.png" id="3_jjiyb"]
+[ext_resource type="Texture2D" uid="uid://5ruhyx5o1vwg" path="res://art/enemy3.png" id="4_jywlc"]
+[ext_resource type="Texture2D" uid="uid://cqfv4hfew32qf" path="res://art/enemy4.png" id="5_ea1wc"]
+[ext_resource type="Texture2D" uid="uid://b4dpalgrej3wh" path="res://art/enemy5.png" id="6_jkbd0"]
+[ext_resource type="PackedScene" uid="uid://cietdm4cyiak" path="res://scenes/enemy_light.tscn" id="7_8tklk"]
+[ext_resource type="AudioStream" uid="uid://bcjvnd1mehaap" path="res://sfx/bulldozer_moving.mp3" id="8_84sdw"]
+[ext_resource type="PackedScene" uid="uid://b5hlr5dl4mtg3" path="res://scenes/health_bar.tscn" id="9_i2xrf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ggr7f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_jjiyb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jywlc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ea1wc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_jkbd0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_l5g7g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pwanm"]
+size = Vector2(433.333, 426.667)
 
 [node name="Enemy" type="Area2D"]
 position = Vector2(370, 236)
+scale = Vector2(0.3, 0.3)
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_hir0y")
-speed = 1.0
+speed = 0.01
+damage = 10.0
+max_health = 15
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(1, 0, 0.219608, 1)
-polygon = PackedVector2Array(-14, 10, -14, -20, 17, 0, -14, 14)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ggr7f")
+autoplay = "default"
+frame_progress = 0.0979066
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 1)
+scale = Vector2(0.449095, 0.449095)
+shape = SubResource("RectangleShape2D_pwanm")
+
+[node name="PointLight2D" parent="." instance=ExtResource("7_8tklk")]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_84sdw")
+autoplay = true
+attenuation = 6.72717
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../Node2D")
+update_rotation = false
+
+[node name="Node2D" parent="." instance=ExtResource("9_i2xrf")]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

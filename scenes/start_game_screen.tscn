@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://crx5op20r610b"]
+
+[ext_resource type="Script" path="res://scripts/start_game_screen.gd" id="1_s067q"]
+
+[node name="StartGameScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s067q")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.245
+anchor_right = 0.755
+anchor_bottom = 0.191
+offset_left = -3.23999
+offset_top = 51.0
+offset_right = -3.76007
+offset_bottom = 51.232
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 45
+text = "START GAME"
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]

@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://dskynthchdy5p"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_m2d2m"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_k2wym"]
+offsets = PackedFloat32Array(0.0210084, 0.10084, 0.302521, 0.789916, 1)
+colors = PackedColorArray(1, 1, 0, 0, 1, 1, 0, 1, 1, 0.466667, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7q733"]
+gradient = SubResource("Gradient_k2wym")
+
+[sub_resource type="Curve" id="Curve_tcven"]
+max_value = 100.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_52u2q"]
+curve = SubResource("Curve_tcven")
+
+[sub_resource type="Curve" id="Curve_ytebp"]
+_data = [Vector2(0, 0.495342), 0.0, 0.0, 0, 0, Vector2(0.744361, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0108695), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_m027y"]
+curve = SubResource("Curve_ytebp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nfp0e"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 180.0
+initial_velocity_min = 150.0
+initial_velocity_max = 250.0
+gravity = Vector3(0, 0, 0)
+damping_curve = SubResource("CurveTexture_52u2q")
+scale_min = 0.2
+scale_max = 0.2
+scale_curve = SubResource("CurveTexture_m027y")
+color_ramp = SubResource("GradientTexture1D_7q733")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sn5nt"]
+load_path = "res://.godot/imported/fireorsmth.png-df432cd3b17daf5868c1c075594cc524.ctex"
+
+[node name="ExplosionParticles" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_m2d2m")
+emitting = false
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_nfp0e")
+texture = SubResource("CompressedTexture2D_sn5nt")
+one_shot = true
+speed_scale = 1.2
+explosiveness = 1.0

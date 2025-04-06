@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctw144b1mvk8f"]
+
+[ext_resource type="PackedScene" uid="uid://7nk3om0x8xav" path="res://scenes/enemy.tscn" id="1_q1frx"]
+
+[node name="Enemy" instance=ExtResource("1_q1frx")]
+scale = Vector2(0.19, 0.19)
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+self_modulate = Color(0.105882, 1, 0.560784, 1)
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false
+
+[node name="Node2D" parent="." index="5"]
+scale = Vector2(0.19, 0.19)
+
+[node name="SPEED" type="Node" parent="." index="6"]

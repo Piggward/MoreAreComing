@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bd06iieu368q7"]
+
+[ext_resource type="PackedScene" uid="uid://7nk3om0x8xav" path="res://scenes/enemy.tscn" id="1_i8mfi"]
+
+[node name="Enemy" instance=ExtResource("1_i8mfi")]
+scale = Vector2(0.959784, 0.959784)
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+self_modulate = Color(1, 1, 0.415686, 1)
+
+[node name="Node2D" parent="." index="5"]
+scale = Vector2(0.959784, 0.959784)
+
+[node name="TANK" type="Node" parent="." index="6"]

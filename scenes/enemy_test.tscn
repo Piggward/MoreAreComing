@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfwsbidkxl80o"]
+
+[ext_resource type="PackedScene" uid="uid://7nk3om0x8xav" path="res://scenes/enemy.tscn" id="1_n5abf"]
+[ext_resource type="Texture2D" uid="uid://dup13i1c6s0ku" path="res://art/Default size/towerDefense_tile087.png" id="2_7f65o"]
+
+[node name="Enemy" instance=ExtResource("1_n5abf")]
+speed = 0.0
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+visible = false
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 0)
+
+[node name="PointLight2D" parent="." index="2"]
+visible = false
+
+[node name="AudioStreamPlayer2D" parent="." index="3"]
+autoplay = false
+
+[node name="RemoteTransform2D" parent="." index="4"]
+visible = false
+
+[node name="Node2D" parent="." index="5"]
+visible = false
+
+[node name="TowerDefenseTile180" type="Sprite2D" parent="." index="6"]
+visible = false
+position = Vector2(1.66664, 1.66667)
+scale = Vector2(6.71875, 6.61458)
+texture = ExtResource("2_7f65o")

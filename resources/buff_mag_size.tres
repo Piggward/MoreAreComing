@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://c6k3d0bq8vyic"]
+
+[ext_resource type="Script" path="res://scripts/power_up.gd" id="1_bgw87"]
+
+[resource]
+script = ExtResource("1_bgw87")
+title = "ADD MORE BULLETS"
+power_up_description = "MAG INCREASED BY 5"
+shoot_speed = 1.0
+damage = 1.0
+shoot_cd = 1.0
+turn_rate = 1.0
+mag_size = 5
+reload_speed = 1.0
+aoe = 1.0

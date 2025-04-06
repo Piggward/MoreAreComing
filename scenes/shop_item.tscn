@@ -1,0 +1,112 @@
+[gd_scene load_steps=10 format=3 uid="uid://cqjptdrnjclk5"]
+
+[ext_resource type="Script" path="res://scripts/shop_item.gd" id="1_d5whu"]
+[ext_resource type="Texture2D" uid="uid://enj7v1h55055" path="res://art/ClosedDoor.png" id="1_o02a3"]
+[ext_resource type="Texture2D" uid="uid://0hsnbycvoxvn" path="res://art/OpenDoor.png" id="2_844k4"]
+[ext_resource type="AudioStream" uid="uid://bjchafsq7lfrp" path="res://sfx/door.mp3" id="4_da86b"]
+[ext_resource type="AudioStream" uid="uid://berbj1u4r1ear" path="res://sfx/door-knocking-44953.mp3" id="5_ld0wi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xsu3x"]
+bg_color = Color(0.227451, 0.376471, 0.290196, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lvlb4"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2mf7o"]
+bg_color = Color(0.627451, 0.72549, 0.729412, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6quvi"]
+bg_color = Color(0.627451, 0.72549, 0.729412, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="ShopItem" type="VBoxContainer"]
+script = ExtResource("1_d5whu")
+
+[node name="LabelPanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xsu3x")
+
+[node name="MarginContainer" type="MarginContainer" parent="LabelPanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_bottom = 7
+
+[node name="PowerUpLabel" type="Label" parent="LabelPanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "ACCURACY"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DoorPanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lvlb4")
+
+[node name="MarginContainer" type="MarginContainer" parent="DoorPanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="DoorOnHoverPanel" type="Panel" parent="DoorPanelContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2mf7o")
+
+[node name="DoorTextureRect" type="TextureRect" parent="DoorPanelContainer/MarginContainer"]
+visible = false
+texture_filter = 1
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+texture = ExtResource("1_o02a3")
+expand_mode = 4
+
+[node name="OpenDoorTextureRect" type="TextureRect" parent="DoorPanelContainer/MarginContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("2_844k4")
+expand_mode = 4
+
+[node name="BonusContainer" type="PanelContainer" parent="DoorPanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_6quvi")
+
+[node name="MarginContainer" type="MarginContainer" parent="DoorPanelContainer/MarginContainer/BonusContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+
+[node name="BonusLabel" type="Label" parent="DoorPanelContainer/MarginContainer/BonusContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "TURNRATE INCREASED BY "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OpenDoorSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_da86b")
+
+[node name="KnockDoorSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ld0wi")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="gui_input" from="DoorPanelContainer/MarginContainer/DoorTextureRect" to="." method="_on_door_texture_rect_gui_input"]
+[connection signal="mouse_entered" from="DoorPanelContainer/MarginContainer/DoorTextureRect" to="." method="_on_door_texture_rect_mouse_entered"]
+[connection signal="mouse_exited" from="DoorPanelContainer/MarginContainer/DoorTextureRect" to="." method="_on_door_texture_rect_mouse_exited"]

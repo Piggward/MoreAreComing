@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://b80fugswh35wj"]
+
+[ext_resource type="Script" path="res://scripts/power_up.gd" id="1_b8me3"]
+
+[resource]
+script = ExtResource("1_b8me3")
+title = "ADD MORE SPEED"
+power_up_description = "PROJECTILE SPEED INCREASED BY 50 %"
+shoot_speed = 1.5
+damage = 1.0
+shoot_cd = 1.0
+turn_rate = 1.0
+mag_size = 0
+reload_speed = 1.0
+aoe = 1.0

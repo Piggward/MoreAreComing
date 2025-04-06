@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://qbm1vvstpdgl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t8beq"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eln23"]
+bg_color = Color(0.129412, 0.231373, 0.145098, 1)
+
+[node name="Node2D" type="Node2D"]
+top_level = true
+position = Vector2(370, 236)
+scale = Vector2(0.3, 0.3)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -77.0
+offset_top = -150.0
+offset_right = 80.0
+offset_bottom = -123.0
+theme_override_styles/background = SubResource("StyleBoxFlat_t8beq")
+theme_override_styles/fill = SubResource("StyleBoxFlat_eln23")
+show_percentage = false

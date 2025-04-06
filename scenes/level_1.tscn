@@ -1,4 +1,4 @@
-[gd_scene load_steps=697 format=4 uid="uid://do804sfv5x0tt"]
+[gd_scene load_steps=690 format=4 uid="uid://do804sfv5x0tt"]
 
 [ext_resource type="Script" path="res://scripts/level_1.gd" id="1_3ju04"]
 [ext_resource type="Script" path="res://scripts/turret.gd" id="1_iom35"]
@@ -330,10 +330,7 @@
 [ext_resource type="Resource" uid="uid://cywtyfgbfxicf" path="res://resources/damage1.tres" id="324_d2ngo"]
 [ext_resource type="Resource" uid="uid://hbwpyk4ubrsb" path="res://resources/damage2.tres" id="325_t50af"]
 [ext_resource type="Resource" uid="uid://blf30gy2ja3uk" path="res://resources/damage3.tres" id="326_vudpf"]
-[ext_resource type="Resource" uid="uid://cd1bswuqndn86" path="res://resources/knockback1.tres" id="327_enn8s"]
-[ext_resource type="Resource" uid="uid://c6jtak1vpoxw7" path="res://resources/knockback2.tres" id="328_cbybw"]
 [ext_resource type="Script" path="res://scripts/camera_2d.gd" id="328_u2vmf"]
-[ext_resource type="Resource" uid="uid://fxnlvacr6gpw" path="res://resources/knockback3.tres" id="329_d6y4n"]
 [ext_resource type="Resource" uid="uid://jvctkojgyusg" path="res://resources/pierce1.tres" id="330_v76us"]
 [ext_resource type="Resource" uid="uid://dg3tfdf5uhjpp" path="res://resources/pierce2.tres" id="331_vibkg"]
 [ext_resource type="Resource" uid="uid://cn1qii6k60ih1" path="res://resources/pierce3.tres" id="332_6f8yy"]
@@ -350,6 +347,7 @@
 [ext_resource type="Resource" uid="uid://7hcyqcsnu2ph" path="res://resources/turn_rate3.tres" id="341_ou2mn"]
 [ext_resource type="Resource" uid="uid://cifkpiqfs53nj" path="res://resources/automatic_reload.tres" id="342_k21d5"]
 [ext_resource type="Resource" uid="uid://capa1imfppbk6" path="res://resources/automatic_shooting.tres" id="343_ouygx"]
+[ext_resource type="Script" path="res://scripts/enemies_killed.gd" id="345_7gdhx"]
 
 [sub_resource type="Resource" id="Resource_iaqbb"]
 script = ExtResource("2_5rwbk")
@@ -357,7 +355,7 @@ batches = 1
 enemies = 5
 special_factor = 0.0
 batch_cd = 6.5
-speed = 0.45
+speed = 0.26
 damage = 10
 health = 10
 
@@ -373,18 +371,18 @@ health = 15
 
 [sub_resource type="Resource" id="Resource_2gj2k"]
 script = ExtResource("2_5rwbk")
-batches = 4
-enemies = 9
+batches = 3
+enemies = 10
 special_factor = 0.1
-batch_cd = 6.5
+batch_cd = 8.0
 speed = 0.26
 damage = 10
 health = 15
 
 [sub_resource type="Resource" id="Resource_a5e7d"]
 script = ExtResource("2_5rwbk")
-batches = 5
-enemies = 8
+batches = 3
+enemies = 13
 special_factor = 0.1
 batch_cd = 7.0
 speed = 0.32
@@ -393,10 +391,10 @@ health = 15
 
 [sub_resource type="Resource" id="Resource_bdgxe"]
 script = ExtResource("2_5rwbk")
-batches = 5
-enemies = 12
-special_factor = 0.2
-batch_cd = 6.0
+batches = 3
+enemies = 15
+special_factor = 0.3
+batch_cd = 9.0
 speed = 0.32
 damage = 10
 health = 20
@@ -404,62 +402,32 @@ health = 20
 [sub_resource type="Resource" id="Resource_51hkr"]
 script = ExtResource("2_5rwbk")
 batches = 3
-enemies = 25
-special_factor = 0.3
+enemies = 20
+special_factor = 0.5
 batch_cd = 8.0
 speed = 0.32
 damage = 10
-health = 20
+health = 25
 
 [sub_resource type="Resource" id="Resource_mhs0h"]
 script = ExtResource("2_5rwbk")
-batches = 4
-enemies = 20
-special_factor = 0.3
-batch_cd = 8.0
-speed = 0.4
-damage = 10
-health = 25
-
-[sub_resource type="Resource" id="Resource_xuvsk"]
-script = ExtResource("2_5rwbk")
-batches = 3
-enemies = 30
-special_factor = 0.3
-batch_cd = 8.0
-speed = 0.4
-damage = 10
-health = 25
-
-[sub_resource type="Resource" id="Resource_66pus"]
-script = ExtResource("2_5rwbk")
 batches = 5
-enemies = 20
-special_factor = 0.3
-batch_cd = 3.0
-speed = 0.4
+enemies = 35
+special_factor = 0.6
+batch_cd = 6.0
+speed = 0.55
 damage = 10
 health = 30
 
-[sub_resource type="Resource" id="Resource_o1u30"]
-script = ExtResource("2_5rwbk")
-batches = 6
-enemies = 50
-special_factor = 0.4
-batch_cd = 8.0
-speed = 0.4
-damage = 10
-health = 30
+[sub_resource type="Gradient" id="Gradient_vdlwh"]
+offsets = PackedFloat32Array(0, 0.570895, 0.757463, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.266575, 0.266575, 0.266575, 1, 0.699653, 0.699653, 0.699653, 1, 1, 1, 1, 1)
 
-[sub_resource type="Resource" id="Resource_3cr6w"]
-script = ExtResource("2_5rwbk")
-batches = 6
-enemies = 20
-special_factor = 0.7
-batch_cd = 2.0
-speed = 0.3
-damage = 10
-health = 30
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_afrwy"]
+gradient = SubResource("Gradient_vdlwh")
+width = 1000
+height = 1000
+fill_from = Vector2(0.401709, 0.611111)
 
 [sub_resource type="Animation" id="Animation_slm7m"]
 length = 0.001
@@ -6111,10 +6079,6 @@ powerups = Array[ExtResource("317_lba3g")]([ExtResource("321_ldysd"), ExtResourc
 script = ExtResource("316_wvrm0")
 powerups = Array[ExtResource("317_lba3g")]([ExtResource("324_d2ngo"), ExtResource("325_t50af"), ExtResource("326_vudpf")])
 
-[sub_resource type="Resource" id="Resource_dtdsx"]
-script = ExtResource("316_wvrm0")
-powerups = Array[ExtResource("317_lba3g")]([ExtResource("327_enn8s"), ExtResource("328_cbybw"), ExtResource("329_d6y4n")])
-
 [sub_resource type="Resource" id="Resource_x0aja"]
 script = ExtResource("316_wvrm0")
 powerups = Array[ExtResource("317_lba3g")]([ExtResource("330_v76us"), ExtResource("331_vibkg"), ExtResource("332_6f8yy")])
@@ -6261,14 +6225,14 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ur24"]
-bg_color = Color(0, 0, 0, 1)
+bg_color = Color(0, 0, 0, 0.537255)
 corner_radius_top_left = 15
 corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0pq74"]
-bg_color = Color(0.117647, 0.6, 0.6, 1)
+bg_color = Color(0.117647, 0.6, 0.6, 0.482353)
 corner_radius_top_left = 15
 corner_radius_top_right = 15
 corner_radius_bottom_right = 15
@@ -6292,19 +6256,35 @@ corner_radius_bottom_left = 20
 background_mode = 3
 glow_enabled = true
 
-[sub_resource type="Gradient" id="Gradient_vdlwh"]
-offsets = PackedFloat32Array(0, 0.570895, 0.757463, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.266575, 0.266575, 0.266575, 1, 0.699653, 0.699653, 0.699653, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_afrwy"]
-gradient = SubResource("Gradient_vdlwh")
-width = 1000
-height = 1000
-fill_from = Vector2(0.401709, 0.611111)
-
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_3ju04")
-waves = Array[ExtResource("2_5rwbk")]([SubResource("Resource_iaqbb"), SubResource("Resource_qkdxg"), SubResource("Resource_2gj2k"), SubResource("Resource_a5e7d"), SubResource("Resource_bdgxe"), SubResource("Resource_51hkr"), SubResource("Resource_mhs0h"), SubResource("Resource_xuvsk"), SubResource("Resource_66pus"), SubResource("Resource_o1u30"), SubResource("Resource_3cr6w")])
+waves = Array[ExtResource("2_5rwbk")]([SubResource("Resource_iaqbb"), SubResource("Resource_qkdxg"), SubResource("Resource_2gj2k"), SubResource("Resource_a5e7d"), SubResource("Resource_bdgxe"), SubResource("Resource_51hkr"), SubResource("Resource_mhs0h")])
+
+[node name="Lighting" type="Node2D" parent="."]
+
+[node name="PointLight2D" type="PointLight2D" parent="Lighting"]
+position = Vector2(738, 419)
+energy = 0.5
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_afrwy")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Lighting"]
+position = Vector2(408, 254)
+rotation = 3.14159
+energy = 0.5
+texture = SubResource("GradientTexture2D_afrwy")
+
+[node name="PointLight2D3" type="PointLight2D" parent="Lighting"]
+position = Vector2(409, 410)
+rotation = -1.5708
+energy = 0.5
+texture = SubResource("GradientTexture2D_afrwy")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Lighting"]
+position = Vector2(747, 276)
+rotation = 1.5708
+energy = 0.5
+texture = SubResource("GradientTexture2D_afrwy")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -6371,8 +6351,8 @@ turn_rate = 0.03
 mag_size = 10
 reload_speed = 1.2
 shoot_cd = 0.4
-health = 10
-level_progression = Array[int]([3, 5, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54])
+health = 100
+level_progression = Array[int]([3, 5, 8, 10, 12, 14, 16, 18, 20, 20, 22, 22, 24, 24, 26, 28, 30, 30, 40, 42, 44, 46, 48, 50, 52, 54])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Turret/CharacterBody2D"]
 visible = false
@@ -6466,16 +6446,15 @@ position = Vector2(-98, -77)
 process_mode = 3
 
 [node name="ReloadReminder" type="PanelContainer" parent="CanvasLayer"]
-visible = false
 anchors_preset = -1
-anchor_left = 0.399
-anchor_top = 0.435
-anchor_right = 0.596
-anchor_bottom = 0.563
-offset_left = 6.35199
-offset_top = -74.0
-offset_right = 6.40796
-offset_bottom = -73.944
+anchor_left = 0.381
+anchor_top = 0.426
+anchor_right = 0.633
+anchor_bottom = 0.552
+offset_left = 0.0879822
+offset_top = 0.199982
+offset_right = -0.216003
+offset_bottom = 0.399963
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_c661y")
@@ -6499,7 +6478,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("8_y74hh")
-power_ups = Array[ExtResource("316_wvrm0")]([SubResource("Resource_6fcxt"), SubResource("Resource_ja0rh"), SubResource("Resource_prxpu"), SubResource("Resource_dtdsx"), SubResource("Resource_x0aja"), SubResource("Resource_wbeea"), SubResource("Resource_tbbta"), SubResource("Resource_gduxd"), SubResource("Resource_kj75j")])
+power_ups = Array[ExtResource("316_wvrm0")]([SubResource("Resource_6fcxt"), SubResource("Resource_ja0rh"), SubResource("Resource_prxpu"), SubResource("Resource_x0aja"), SubResource("Resource_wbeea"), SubResource("Resource_tbbta"), SubResource("Resource_gduxd"), SubResource("Resource_kj75j")])
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
 visible = false
@@ -6561,11 +6540,16 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/UI"]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 716.0
-offset_right = 168.0
-offset_bottom = 782.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.017
+anchor_top = 0.895
+anchor_right = 0.146
+anchor_bottom = 0.977
+offset_left = 0.415998
+offset_top = 8.99994
+offset_right = -0.192017
+offset_bottom = 9.39996
 theme_override_styles/panel = SubResource("StyleBoxFlat_j1xit")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UI/PanelContainer"]
@@ -6619,12 +6603,14 @@ script = ExtResource("16_x7re1")
 [node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer/UI"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.015
-anchor_right = 0.02
-offset_left = 960.72
-offset_top = 710.0
-offset_right = 1108.72
-offset_bottom = 771.0
+anchor_left = 0.849
+anchor_top = 0.887
+anchor_right = 0.982
+anchor_bottom = 0.964
+offset_left = -964.048
+offset_top = -701.6
+offset_right = -963.504
+offset_bottom = -702.2
 theme_override_styles/panel = SubResource("StyleBoxFlat_j1xit")
 
 [node name="Wave_label" type="Label" parent="CanvasLayer/UI/PanelContainer2" groups=["WaveLabel"]]
@@ -6634,12 +6620,37 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("332_513re")
 
+[node name="PanelContainer3" type="PanelContainer" parent="CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.779
+anchor_top = 0.011
+anchor_right = 0.982
+anchor_bottom = 0.087
+offset_left = -0.408081
+offset_top = 0.199999
+offset_right = -3.26404
+offset_bottom = 0.399994
+theme_override_styles/panel = SubResource("StyleBoxFlat_j1xit")
+
+[node name="EnemiesKilled" type="Label" parent="CanvasLayer/UI/PanelContainer3"]
+layout_mode = 2
+text = "Enemies Killed: "
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("345_7gdhx")
+
 [node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/UI"]
-layout_mode = 0
-offset_left = 993.0
-offset_top = 17.0
-offset_right = 1128.0
-offset_bottom = 44.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.862
+anchor_top = 0.038
+anchor_right = 0.979
+anchor_bottom = 0.055
+offset_left = -711.024
+offset_top = 698.6
+offset_right = -268.808
+offset_bottom = 730.0
 theme_override_styles/background = SubResource("StyleBoxFlat_0ur24")
 theme_override_styles/fill = SubResource("StyleBoxFlat_0pq74")
 show_percentage = false
@@ -6703,32 +6714,6 @@ stream = ExtResource("21_3jg6r")
 [node name="WaveStart" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("22_sqdr1")
 volume_db = -8.0
-
-[node name="Lighting" type="Node2D" parent="."]
-
-[node name="PointLight2D" type="PointLight2D" parent="Lighting"]
-position = Vector2(738, 419)
-energy = 0.5
-shadow_enabled = true
-texture = SubResource("GradientTexture2D_afrwy")
-
-[node name="PointLight2D2" type="PointLight2D" parent="Lighting"]
-position = Vector2(408, 254)
-rotation = 3.14159
-energy = 0.5
-texture = SubResource("GradientTexture2D_afrwy")
-
-[node name="PointLight2D3" type="PointLight2D" parent="Lighting"]
-position = Vector2(409, 410)
-rotation = -1.5708
-energy = 0.5
-texture = SubResource("GradientTexture2D_afrwy")
-
-[node name="PointLight2D4" type="PointLight2D" parent="Lighting"]
-position = Vector2(747, 276)
-rotation = 1.5708
-energy = 0.5
-texture = SubResource("GradientTexture2D_afrwy")
 
 [node name="Timer" type="Timer" parent="."]
 

@@ -5,7 +5,6 @@ const ENEMY = preload("res://scenes/enemy.tscn")
 @export var speed: float
 var positions: Array[Node]
 var min_enemy_time = 0.1
-var max_enemy_time = 0.3
 var enemies_killed = 0
 var total_enemies_killed = 0
 signal batch_spawned
@@ -24,7 +23,7 @@ func spawn_batch(batch: int, wave: Wave):
 		var sp = randf_range(0.0, 1.0)
 		var ps = 0 if sp > wave.special_factor else 1 if sp > wave.special_factor / 2 else 2
 		spawn_enemy(wave, ps)
-		await get_tree().create_timer(randf_range(min_enemy_time, max_enemy_time)).timeout
+		await get_tree().create_timer(0.1).timeout
 	batch_spawned.emit()
 	
 func spawn_enemy(wave: Wave, special: int):
@@ -41,7 +40,6 @@ func spawn_enemy(wave: Wave, special: int):
 	
 func _on_enemy_died():
 	enemies_killed += 1
-	total_enemies_killed += 1
 	enemy_killed.emit()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

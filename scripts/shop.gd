@@ -82,9 +82,6 @@ func add_powerup():
 	var p = SHOP_ITEM.instantiate()
 	var pup_tree = power_ups.pop_front()
 	var pup = pup_tree.powerups[0]
-	if current.any(func(s): return s.title == pup.title):
-		power_ups.push_back(pup_tree)
-		return add_powerup()
 	current.append(pup)
 	p.power_up = pup
 	p.door_open.connect(_on_door_opened)

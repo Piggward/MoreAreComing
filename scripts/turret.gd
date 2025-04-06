@@ -19,7 +19,7 @@ var og_pos: Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
-	shots_left = player.mag_size
+	shots_left = 0
 	original_pitch = audio_stream_player.pitch_scale
 	original_pitch2 = shoot_audio.pitch_scale
 	og_pos = position

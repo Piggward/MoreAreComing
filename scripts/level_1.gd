@@ -33,13 +33,12 @@ func _ready() -> void:
 	progress_bar.visible = false
 	ui.visible = false
 	start_game_screen.visible = true
-	music.stream = GOODJOB
-	music.play()
 	music.stream = TANKS_SONG
 	player = get_tree().get_first_node_in_group("player")
 	exp_progress_bar.max_value = player.level_progression[player.current_level]
 	exp_progress_bar.value = 0
 	wave_label.text = "STAGE LEVEL 1"
+
 	#music["parameters/switch_to_clip"] = "Silence"
 	pass # Replace with function body.
 	
@@ -103,6 +102,9 @@ func spawn_wave():
 	
 func increase_wave():
 	current_wave_number += 1
+	if current_wave_number >= waves.size():
+		game_over(true)
+		return
 	current_wave = waves[current_wave_number]
 	current_batch = 0
 	wave_label.text = "STAGE LEVEL " + str(current_wave_number + 1)

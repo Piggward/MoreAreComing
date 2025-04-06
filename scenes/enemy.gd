@@ -25,10 +25,12 @@ func _ready() -> void:
 func find_bonus():
 	for child in get_children():
 		if child.name == "TANK":
-			self.speed *= 0.5
-			self.max_health *= 3
+			self.speed *= 0.8
+			self.max_health *= 4
+			self.damage = 20
 		if child.name == "SPEED":
-			self.speed += clamp(self.speed * 1.4, 0.1, 1) 
+			self.speed += clamp(self.speed * 1.5, 0.1, 1) 
+			self.damage = 5
 
 func take_damage(damage: int, knock_back: float):
 	current_health -= damage

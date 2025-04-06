@@ -14,5 +14,6 @@ func _process(delta):
 
 
 func _on_button_button_down():
-	camera.play_intro()
+	if get_tree().get_first_node_in_group("turret").shots_left > 0:
+		camera.play_intro()
 	pass # Replace with function body.

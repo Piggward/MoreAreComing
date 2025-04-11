@@ -43,6 +43,7 @@ func shoot():
 	s.damage = player.damage
 	s.pierce = player.pierce
 	s.knock_back = player.knock_back
+	s.scale *= player.shot_scale
 	get_parent().add_child(s)
 	shots_left -= 1
 	if shots_left == 0:
@@ -61,7 +62,7 @@ func shoot():
 func _process(delta: float) -> void:
 	var ro = get_angle_to(get_global_mouse_position())
 	var factor = -1 if ro < 0 else 1
-	if abs(ro) > player.turn_rate * 4:
+	if abs(ro) > player.turn_rate:
 		if not audio_stream_player.playing:
 			var rpitch = 0.01 * factor
 			audio_stream_player.pitch_scale += rpitch

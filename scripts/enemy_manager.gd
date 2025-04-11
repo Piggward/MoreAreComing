@@ -12,10 +12,12 @@ signal enemies_cleared
 signal enemy_killed
 const SPEEDY_ENEMY = preload("res://scenes/speedy_enemy.tscn")
 const TANKY_ENEMY = preload("res://scenes/tanky_enemy.tscn")
+@onready var level_1 = $".."
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	positions = get_children()
+	level_1.spawn_batch_requested.connect(spawn_batch)
 	pass # Replace with function body.
 
 func spawn_batch(batch: int, wave: Wave):
@@ -45,3 +47,8 @@ func _on_enemy_died():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+
+func _on_child_entered_tree(node):
+	print(node)
+	pass # Replace with function body.

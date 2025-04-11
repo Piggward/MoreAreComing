@@ -5,6 +5,7 @@ extends Resource
 @export var title_color: Color = Color.WHITE
 @export var power_up_description: String
 @export var shoot_speed: float = 1
+@export var shot_scale: float = 1
 @export var damage: float = 1
 @export var shoot_cd: float = 1
 @export var turn_rate: float = 1
@@ -28,6 +29,7 @@ func apply(player: Player):
 	player.knock_back += knock_back
 	player.has_automatic_reload = has_automatic_reload || player.has_automatic_reload
 	player.has_automatic_shooting = has_automatic_shooting || player.has_automatic_shooting
+	player.shot_scale *= shot_scale
 	if damage > 1:
 		var turret = player.get_tree().get_first_node_in_group("turret")
 		turret.scale = Vector2(1 + (damage / 10) * 0.75, 1 + (damage / 10) * 0.75)

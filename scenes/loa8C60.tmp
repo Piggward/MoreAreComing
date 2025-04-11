@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2bucpdxbelgu"]
+
+[ext_resource type="PackedScene" uid="uid://dskynthchdy5p" path="res://scenes/explosion_particles.tscn" id="1_hsvov"]
+[ext_resource type="Script" path="res://scripts/load_resources.gd" id="1_idwnb"]
+[ext_resource type="Script" path="res://scripts/load_particle.gd" id="2_h86pe"]
+[ext_resource type="PackedScene" uid="uid://c137k3r5rd0os" path="res://scenes/shoot_area.tscn" id="3_hci4l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jwj08"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="LoadedResources" type="Node2D"]
+script = ExtResource("1_idwnb")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jwj08")
+
+[node name="ExplosionParticles" parent="." instance=ExtResource("1_hsvov")]
+position = Vector2(487, 343)
+script = ExtResource("2_h86pe")
+
+[node name="ShootArea" parent="." instance=ExtResource("3_hci4l")]
+position = Vector2(571, 346)

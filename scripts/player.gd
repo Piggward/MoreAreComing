@@ -9,6 +9,7 @@ extends CharacterBody2D
 @export var mag_size: int
 @export var reload_speed: float
 @export var shoot_cd: float
+@export var shot_scale: float = 1
 @export var aoe: float
 @export var pierce: int = 0
 @onready var power_up = $PowerUp

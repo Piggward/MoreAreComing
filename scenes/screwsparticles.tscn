@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://bhlif1f827745"]
+
+[ext_resource type="Texture2D" uid="uid://dpholxwifyih8" path="res://art/genericItem_color_018.png" id="1_87hht"]
+
+[sub_resource type="Curve" id="Curve_oqflo"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vo272"]
+curve = SubResource("Curve_oqflo")
+
+[sub_resource type="Gradient" id="Gradient_sjg3w"]
+offsets = PackedFloat32Array(0.933481, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8kesg"]
+gradient = SubResource("Gradient_sjg3w")
+
+[sub_resource type="Curve" id="Curve_we2c4"]
+max_value = 100.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0167015, 100), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1bbjp"]
+curve = SubResource("Curve_we2c4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x6m33"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 360.0
+spread = 180.0
+initial_velocity_min = 60.0
+initial_velocity_max = 120.0
+angular_velocity_curve = SubResource("CurveTexture_vo272")
+gravity = Vector3(0, 0, 0)
+damping_min = 90.0
+damping_max = 100.0
+damping_curve = SubResource("CurveTexture_1bbjp")
+scale_min = 0.15
+scale_max = 0.15
+color = Color(0.533038, 0.533036, 0.533037, 1)
+color_ramp = SubResource("GradientTexture1D_8kesg")
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+z_index = -1
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_x6m33")
+texture = ExtResource("1_87hht")
+lifetime = 120.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0

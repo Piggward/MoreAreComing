@@ -8,6 +8,7 @@ title = "MAXIMUM POWER"
 title_color = Color(1, 0.843137, 0, 1)
 power_up_description = "DAMAGE INCREASED"
 shoot_speed = 1.0
+shot_scale = 1.5
 damage = 1.5
 shoot_cd = 1.0
 turn_rate = 1.0

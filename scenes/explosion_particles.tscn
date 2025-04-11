@@ -42,6 +42,7 @@ color_ramp = SubResource("GradientTexture1D_7q733")
 load_path = "res://.godot/imported/fireorsmth.png-df432cd3b17daf5868c1c075594cc524.ctex"
 
 [node name="ExplosionParticles" type="GPUParticles2D"]
+process_mode = 3
 material = SubResource("CanvasItemMaterial_m2d2m")
 emitting = false
 amount = 200

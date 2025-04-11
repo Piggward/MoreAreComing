@@ -23,6 +23,7 @@ var player: Player
 @onready var timer = $Timer
 @onready var exp_progress_bar = $CanvasLayer/UI/ProgressBar
 var current_batch = 0
+signal spawn_batch_requested(amount: int, wave: Wave)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -33,20 +34,18 @@ func _ready() -> void:
 	progress_bar.visible = false
 	ui.visible = false
 	start_game_screen.visible = true
-	music.stream = TANKS_SONG
 	player = get_tree().get_first_node_in_group("player")
 	exp_progress_bar.max_value = player.level_progression[player.current_level]
 	exp_progress_bar.value = 0
 	wave_label.text = "STAGE LEVEL 1"
-
 	#music["parameters/switch_to_clip"] = "Silence"
 	pass # Replace with function body.
 	
 func start_game():
+	music.play()
 	progress_bar.visible = true
 	ui.visible = true
 	start_game_screen.visible = false
-	music.play()
 	spawn_wave()
 	
 func _on_enemy_killed():
@@ -91,8 +90,7 @@ func next_wave():
 	timer.set_paused(false)
 
 func spawn_wave():
-	print("spawning batch!")
-	spawn_batch()
+	spawn_batch_requested.emit(current_wave.enemies, current_wave)
 	timer.start(current_wave.batch_cd)
 	current_batch += 1
 	if current_batch > current_wave.batches:
@@ -108,20 +106,10 @@ func increase_wave():
 	current_wave = waves[current_wave_number]
 	current_batch = 0
 	wave_label.text = "STAGE LEVEL " + str(current_wave_number + 1)
-	
-func spawn_batch():
-	enemy_manager.spawn_batch(current_wave.enemies, current_wave)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
-
-#func _on_button_button_down():
-	#next_wave()
-	#shop.leave_shop()
-	#control.visible = false
-	#pass # Replace with function body.
 
 
 func _on_button_button_up():

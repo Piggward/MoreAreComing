@@ -6,7 +6,6 @@ extends Area2D
 @export var damage: int
 @export var pierce: int
 @export var knock_back: float
-@onready var collision_polygon_2d: CollisionPolygon2D = $CollisionPolygon2D
 @onready var shoot_polygon: Polygon2D = $ShootPolygon
 @onready var audio_stream_player_2d = $AudioStreamPlayer2D
 var has_hit = false
@@ -14,13 +13,19 @@ var camera: Camera
 var dead = false
 var enemies: Array[Enemy]
 @onready var point_light_2d = $PointLight2D
-@onready var gpu_particles_2d = $GPUParticles2D
+@onready var particles = $Particles
+@onready var trail = $Particles/Trail
+@onready var sprite_2d = $Sprite2D
+@onready var collision_shape_2d = $CollisionShape2D
+@onready var polygon_2d = $Polygon2D
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	collision_polygon_2d.polygon = shoot_polygon.polygon
 	camera = get_tree().get_first_node_in_group("camera")
-	self.scale *= damage / 10
+	particles.rotation = direction - deg_to_rad(90)
+	sprite_2d.rotation = direction + deg_to_rad(180)
+	point_light_2d.rotation += direction - deg_to_rad(90)
 	await get_tree().create_timer(10).timeout
 	self.queue_free()
 	pass # Replace with function body.
@@ -28,8 +33,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if not dead:
-		self.position += Vector2(0, speed).rotated(direction)
+	self.position += Vector2(0, speed).rotated(direction)
 	pass
 
 func terminate_self():
@@ -38,10 +42,16 @@ func terminate_self():
 	if pierce >= 0:
 		return
 	dead = true
-	gpu_particles_2d.emitting = false
-	collision_polygon_2d.queue_free()
+	collision_shape_2d.queue_free()
 	point_light_2d.visible = false
-	shoot_polygon.visible = false
+	sprite_2d.visible = false
+	polygon_2d.visible = false
+	for child in particles.get_children():
+		if child.name != "Trail":
+			child.visible = false
+		else:
+			child.enabled = false
+		child.emitting = false
 	await audio_stream_player_2d.finished
 	await get_tree().create_timer(4).timeout
 	self.queue_free()

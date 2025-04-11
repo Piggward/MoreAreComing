@@ -11,6 +11,9 @@ signal died
 @onready var animated_sprite_2d = $AnimatedSprite2D
 const EXPLOSION_PARTICLES = preload("res://scenes/explosion_particles.tscn")
 var normal_color: Color
+const NAILSPARTICLES = preload("res://scenes/nailsparticles.tscn")
+const SCREWSPARTICLES = preload("res://scenes/screwsparticles.tscn")
+const EXPLOSION_2 = preload("res://explosion2.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -44,9 +47,18 @@ func take_damage(damage: int, knock_back: float):
 	
 func die():
 	died.emit()
-	var exp = EXPLOSION_PARTICLES.instantiate()
-	exp.emitting = true
+	#var exp = EXPLOSION_PARTICLES.instantiate()
+	#exp.emitting = true
+	var exp = EXPLOSION_2.instantiate()
 	get_parent().add_child(exp)
+	var np = NAILSPARTICLES.instantiate()
+	var sp = SCREWSPARTICLES.instantiate()
+	np.emitting = true
+	sp.emitting = true
+	get_parent().add_child(np)
+	get_parent().add_child(sp)
+	np.global_position = self.global_position
+	sp.global_position = self.global_position
 	exp.global_position = self.global_position
 	self.queue_free()
 	

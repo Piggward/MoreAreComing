@@ -1,4 +1,4 @@
-[gd_scene load_steps=693 format=4 uid="uid://do804sfv5x0tt"]
+[gd_scene load_steps=695 format=4 uid="uid://do804sfv5x0tt"]
 
 [ext_resource type="Script" path="res://scripts/level_1.gd" id="1_3ju04"]
 [ext_resource type="Script" path="res://scripts/turret.gd" id="1_iom35"]
@@ -350,6 +350,7 @@
 [ext_resource type="Script" path="res://scripts/enemies_killed.gd" id="345_7gdhx"]
 [ext_resource type="AudioStream" uid="uid://dba3b1hwbe16s" path="res://sfx/tanks_song_intro.mp3" id="347_cirr1"]
 [ext_resource type="AudioStream" uid="uid://dlvon3tc8ks6n" path="res://sfx/tanks_song_main.mp3" id="348_3fsji"]
+[ext_resource type="Script" path="res://scripts/shoot_bounds_area.gd" id="351_xsr3h"]
 
 [sub_resource type="Resource" id="Resource_iaqbb"]
 script = ExtResource("2_5rwbk")
@@ -357,8 +358,8 @@ batches = 1
 enemies = 5
 special_factor = 0.0
 batch_cd = 6.5
-speed = 0.26
-damage = 10
+speed = 35.0
+damage = 0
 health = 10
 
 [sub_resource type="Resource" id="Resource_qkdxg"]
@@ -367,7 +368,7 @@ batches = 3
 enemies = 6
 special_factor = 0.1
 batch_cd = 7.0
-speed = 0.26
+speed = 35.0
 damage = 10
 health = 15
 
@@ -377,7 +378,7 @@ batches = 3
 enemies = 10
 special_factor = 0.1
 batch_cd = 8.0
-speed = 0.26
+speed = 35.0
 damage = 10
 health = 15
 
@@ -6054,6 +6055,9 @@ sources/298 = SubResource("TileSetAtlasSource_kb2s5")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_60s3t"]
 shader = ExtResource("3_l581a")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fblkm"]
+size = Vector2(72, 76)
+
 [sub_resource type="Gradient" id="Gradient_npw4x"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
@@ -6062,9 +6066,6 @@ gradient = SubResource("Gradient_npw4x")
 fill = 1
 fill_from = Vector2(0.5, 0.491)
 fill_to = Vector2(0.8, 0.8)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fblkm"]
-size = Vector2(72, 76)
 
 [sub_resource type="Gradient" id="Gradient_ofnja"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -6196,7 +6197,7 @@ tracks/2/keys = {
 tracks/3/type = "method"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../Turret/CharacterBody2D/PowerUp")
+tracks/3/path = NodePath("../CharacterBody2D/PowerUp")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -6279,7 +6280,10 @@ clip_1/name = &"Tanks Song Main"
 clip_1/stream = ExtResource("348_3fsji")
 clip_1/auto_advance = 0
 
-[node name="Level1" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_eudq3"]
+radius = 300.0
+
+[node name="Level1" type="Node2D" groups=["level"]]
 script = ExtResource("1_3ju04")
 waves = Array[ExtResource("2_5rwbk")]([SubResource("Resource_iaqbb"), SubResource("Resource_qkdxg"), SubResource("Resource_2gj2k"), SubResource("Resource_a5e7d"), SubResource("Resource_bdgxe"), SubResource("Resource_51hkr"), SubResource("Resource_mhs0h")])
 
@@ -6346,6 +6350,29 @@ position = Vector2(576, 324)
 rotation = -1.57594
 texture = ExtResource("6_k0x3s")
 
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["player"]]
+position = Vector2(576, 324)
+collision_mask = 2
+script = ExtResource("2_sf0d6")
+shoot_speed = 200.0
+knock_back = 15.0
+damage = 10.0
+turn_rate = 4.0
+mag_size = 10
+reload_speed = 0.2
+shoot_cd = 0.4
+health = 100
+level_progression = Array[int]([3, 5, 8, 10, 12, 14, 16, 18, 20, 20, 22, 22, 24, 24, 26, 28, 30, 30, 40, 42, 44, 46, 48, 50, 52, 54])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+visible = false
+position = Vector2(-4, 0)
+shape = SubResource("RectangleShape2D_fblkm")
+
+[node name="PowerUp" type="AudioStreamPlayer" parent="CharacterBody2D"]
+stream = ExtResource("7_ucylw")
+volume_db = 3.0
+
 [node name="Turret" type="Node2D" parent="." groups=["pauseable", "turret"]]
 position = Vector2(576, 324)
 script = ExtResource("1_iom35")
@@ -6366,37 +6393,12 @@ color = Color(1, 0.333333, 0, 1)
 energy = 2.0
 texture = SubResource("GradientTexture2D_y6o7x")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="Turret" groups=["player"]]
-collision_mask = 2
-script = ExtResource("2_sf0d6")
-shoot_speed = 2.5
-knock_back = 15.0
-damage = 10.0
-turn_rate = 0.03
-mag_size = 10
-reload_speed = 0.2
-shoot_cd = 0.4
-health = 100
-level_progression = Array[int]([300, 5, 8, 10, 12, 14, 16, 18, 20, 20, 22, 22, 24, 24, 26, 28, 30, 30, 40, 42, 44, 46, 48, 50, 52, 54])
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Turret/CharacterBody2D"]
-visible = false
-position = Vector2(-4, 0)
-shape = SubResource("RectangleShape2D_fblkm")
-
-[node name="PowerUp" type="AudioStreamPlayer" parent="Turret/CharacterBody2D"]
-stream = ExtResource("7_ucylw")
-volume_db = 3.0
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Turret/CharacterBody2D"]
-update_rotation = false
-
 [node name="PointLight2D" type="PointLight2D" parent="Turret"]
 visible = false
 energy = 2.0
 texture = SubResource("GradientTexture2D_g8n2b")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Turret"]
+[node name="RotatingPipe" type="AudioStreamPlayer" parent="Turret"]
 stream = ExtResource("8_o0y8h")
 volume_db = -12.0
 pitch_scale = 0.7
@@ -6404,6 +6406,11 @@ pitch_scale = 0.7
 [node name="ShootAudio" type="AudioStreamPlayer" parent="Turret"]
 stream = ExtResource("9_iwjtq")
 volume_db = -5.0
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Turret"]
+remote_path = NodePath("../../CharacterBody2D")
+update_position = false
+update_rotation = false
 
 [node name="EnemyManager" type="Node2D" parent="." groups=["pauseable"]]
 script = ExtResource("3_v51cp")
@@ -6742,7 +6749,17 @@ volume_db = -8.0
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="ShootBoundsArea" type="Area2D" parent="."]
+position = Vector2(575, 324)
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("351_xsr3h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShootBoundsArea"]
+shape = SubResource("CircleShape2D_eudq3")
+
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="child_entered_tree" from="EnemyManager" to="EnemyManager" method="_on_child_entered_tree"]
 [connection signal="button_down" from="CanvasLayer/Control/Button" to="." method="_on_button_button_down"]
 [connection signal="button_up" from="CanvasLayer/Control/Button" to="." method="_on_button_button_up"]
+[connection signal="area_exited" from="ShootBoundsArea" to="ShootBoundsArea" method="_on_area_exited"]

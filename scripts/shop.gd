@@ -8,6 +8,9 @@ const SHOP_ITEM = preload("res://scenes/shop_item.tscn")
 @onready var power_up_description = $"../PanelContainer/MarginContainer/PowerUpDescription"
 @onready var control = $"../Control"
 @onready var power_up = $"../../Turret/CharacterBody2D/PowerUp"
+
+
+var opening_door = false
 var current: Array[PowerUp] = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -55,6 +58,10 @@ func provide_powerups():
 		add_powerup()
 		
 func _on_door_opened(si: ShopItem):
+	if opening_door:
+		return
+	opening_door = true
+	si.knock()
 	for child in get_children():
 		if child != si:
 			child.disappear = true
@@ -71,6 +78,7 @@ func _on_door_opened(si: ShopItem):
 	si.power_up.apply(get_tree().get_first_node_in_group("player"))
 	await animation_player.animation_finished
 	control.visible = true
+	opening_door = false
 	
 func leave_shop():
 	panel_container.visible = false

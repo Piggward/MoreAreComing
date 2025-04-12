@@ -36,6 +36,8 @@ func open_door():
 	door_on_hover_panel.visible = false
 	open_door_sound.play()
 
+func knock():
+	knock_door_sound.play()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -57,7 +59,5 @@ func _on_door_texture_rect_mouse_exited():
 
 func _on_door_texture_rect_gui_input(event):
 	if event.is_action_pressed("left_click") and not has_knocked and gotime:
-		has_knocked = true
-		knock_door_sound.play()
 		door_open.emit(self)
 	pass # Replace with function body.

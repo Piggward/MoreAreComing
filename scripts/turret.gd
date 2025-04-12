@@ -10,7 +10,7 @@ signal reload_requested
 const SHOOT_AREA = preload("res://scenes/shoot_area.tscn")
 var original_pitch: float
 var original_pitch2: float
-@onready var audio_stream_player = $AudioStreamPlayer
+@onready var rotating_pipe: AudioStreamPlayer = $RotatingPipe
 @onready var shoot_audio = $ShootAudio
 @onready var progress_bar = $"../CanvasLayer/UI/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/ProgressBar"
 var og_pos: Vector2
@@ -20,7 +20,7 @@ var og_pos: Vector2
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
 	shots_left = 0
-	original_pitch = audio_stream_player.pitch_scale
+	original_pitch = rotating_pipe.pitch_scale
 	original_pitch2 = shoot_audio.pitch_scale
 	og_pos = position
 	pass # Replace with function body.
@@ -62,19 +62,19 @@ func shoot():
 func _process(delta: float) -> void:
 	var ro = get_angle_to(get_global_mouse_position())
 	var factor = -1 if ro < 0 else 1
-	if abs(ro) > player.turn_rate:
-		if not audio_stream_player.playing:
+	if abs(ro) > (player.turn_rate * delta):
+		if not rotating_pipe.playing:
 			var rpitch = 0.01 * factor
-			audio_stream_player.pitch_scale += rpitch
-			audio_stream_player.play()
+			rotating_pipe.pitch_scale += rpitch
+			rotating_pipe.play()
 	else:
-		audio_stream_player.stop()
-		audio_stream_player.pitch_scale = original_pitch
+		rotating_pipe.stop()
+		rotating_pipe.pitch_scale = original_pitch
 	#var add_ro = get_angle_to(get_global_mouse_position()) if ro < 0.005 else get_angle_to(get_global_mouse_position()) * player.turn_rate
-	if abs(ro) < player.turn_rate:
+	if abs(ro) < 0.05:
 		self.rotation += ro
 	else:
-		self.rotation += player.turn_rate * factor
+		self.rotation += (player.turn_rate * delta) * factor
 		
 	position = lerp(position, og_pos, 0.1)
 	pass

@@ -4,7 +4,8 @@ extends Area2D
 @export var speed: float
 @export var damage: float
 @export var max_health: int
-var turret: Turret
+var player: Player
+var level: Level
 var current_health: int
 signal died
 @onready var progress_bar = $Node2D/ProgressBar
@@ -13,12 +14,13 @@ const EXPLOSION_PARTICLES = preload("res://scenes/explosion_particles.tscn")
 var normal_color: Color
 const NAILSPARTICLES = preload("res://scenes/nailsparticles.tscn")
 const SCREWSPARTICLES = preload("res://scenes/screwsparticles.tscn")
-const EXPLOSION_2 = preload("res://explosion2.tscn")
+const EXPLOSION_2 = preload("res://scenes/explosion2.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	find_bonus()
-	turret = get_tree().get_first_node_in_group("turret")
+	player = get_tree().get_first_node_in_group("player")
+	level = get_tree().get_first_node_in_group("level")
 	progress_bar.max_value = max_health
 	current_health = max_health
 	progress_bar.value = current_health
@@ -46,27 +48,27 @@ func take_damage(damage: int, knock_back: float):
 	animated_sprite_2d.self_modulate = normal_color
 	
 func die():
-	died.emit()
 	#var exp = EXPLOSION_PARTICLES.instantiate()
 	#exp.emitting = true
 	var exp = EXPLOSION_2.instantiate()
-	get_parent().add_child(exp)
+	level.add_child(exp)
 	var np = NAILSPARTICLES.instantiate()
 	var sp = SCREWSPARTICLES.instantiate()
 	np.emitting = true
 	sp.emitting = true
-	get_parent().add_child(np)
-	get_parent().add_child(sp)
+	level.add_child(np)
+	level.add_child(sp)
 	np.global_position = self.global_position
 	sp.global_position = self.global_position
 	exp.global_position = self.global_position
+	died.emit()
 	self.queue_free()
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	look_at(turret.global_position)
-	self.position += Vector2(0, -speed).rotated(self.rotation + deg_to_rad(90))
+	look_at(player.global_position)
+	self.position += Vector2(0, -speed * delta).rotated(self.rotation + deg_to_rad(90))
 	pass
 
 func _on_body_entered(body: Node2D) -> void:

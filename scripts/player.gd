@@ -1,7 +1,7 @@
 class_name Player
 extends CharacterBody2D
 
-@onready var turret: Turret = $".."
+var turret: Turret
 @export var shoot_speed: float
 @export var knock_back: float = 1
 @export var damage: float
@@ -17,19 +17,19 @@ extends CharacterBody2D
 @onready var sprite_2d_2 = $"../Sprite2D2"
 var has_automatic_reload = false
 var has_automatic_shooting = false
-@onready var shop = $"../../CanvasLayer/Shop"
-@onready var health_label = $"../../CanvasLayer/ProgressBar/HealthLabel"
-@onready var progress_bar = $"../../CanvasLayer/ProgressBar"
-@onready var level_1 = $"../.."
+@onready var shop = $"../CanvasLayer/Shop"
+@onready var health_label = $"../CanvasLayer/ProgressBar/HealthLabel"
+@onready var progress_bar = $"../CanvasLayer/ProgressBar"
+@onready var level_1 = $".."
 @export var level_progression: Array[int] = []
 var current_level = 0
-
 signal attributes_updated
 
 func _ready():
 	progress_bar.max_value = health
 	progress_bar.value = self.health
 	health_label.text = str(health) + " / " + str(health)
+	turret = get_tree().get_first_node_in_group("turret")
 
 func _physics_process(delta: float) -> void:
 	

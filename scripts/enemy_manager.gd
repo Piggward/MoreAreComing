@@ -50,5 +50,4 @@ func _process(delta: float) -> void:
 
 
 func _on_child_entered_tree(node):
-	print(node)
 	pass # Replace with function body.

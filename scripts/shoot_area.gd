@@ -33,7 +33,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	self.position += Vector2(0, speed * delta).rotated(direction)
+	if not dead:
+		self.position += Vector2(0, speed * delta).rotated(direction)
 	pass
 
 func terminate_self():

@@ -5,7 +5,8 @@ extends GPUParticles2D
 func _ready():
 	self.emitting = true
 	for child in get_children():
-		child.emitting = true
+		if child is GPUParticles2D:
+			child.emitting = true
 	pass # Replace with function body.
 
 

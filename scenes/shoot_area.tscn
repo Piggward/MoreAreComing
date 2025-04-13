@@ -1,13 +1,13 @@
 [gd_scene load_steps=31 format=3 uid="uid://c137k3r5rd0os"]
 
 [ext_resource type="Script" path="res://scripts/shoot_area.gd" id="1_u46cq"]
-[ext_resource type="AudioStream" uid="uid://d0cja7xy1seww" path="res://sfx/small_explosion.mp3" id="2_vxyp0"]
 [ext_resource type="Texture2D" uid="uid://bsq0vjs08aocx" path="res://art/star_07.png" id="3_5vdp2"]
 [ext_resource type="Texture2D" uid="uid://d1vyj2r4bywm1" path="res://art/smoke_07.png" id="3_gkvkq"]
 [ext_resource type="Texture2D" uid="uid://bq25ewhaqcn0w" path="res://art/circle_05.png" id="3_iicjb"]
 [ext_resource type="Script" path="res://scripts/trail.gd" id="4_fmvss"]
 [ext_resource type="Texture2D" uid="uid://b63phd1s6qt0r" path="res://art/slash_02.png" id="4_tdjhk"]
 [ext_resource type="Texture2D" uid="uid://cbdp7nrn3odv4" path="res://art/trace_01.png" id="5_dsovy"]
+[ext_resource type="AudioStream" uid="uid://bwamlv2otq8la" path="res://sfx/muffled_explosion.mp3" id="8_aa30y"]
 
 [sub_resource type="Curve" id="Curve_do362"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.189979, 1), 0.0, 0.0, 0, 0, Vector2(0.647182, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -211,7 +211,7 @@ enabled = true
 texture = SubResource("GradientTexture2D_r864m")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_vxyp0")
+stream = ExtResource("8_aa30y")
 volume_db = 24.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

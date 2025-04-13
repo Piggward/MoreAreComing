@@ -15,7 +15,6 @@ var last_emitted : int
 func _ready():
 	if not get_parent().get_parent().is_node_ready():
 		await get_parent().get_parent().ready
-	print(Vector2(min_scale * get_parent().scale.x, min_scale * get_parent().scale.y))
 	self.set_amount(get_parent().get_parent().speed * 50)
 	self.process_material.set("scale", Vector2(min_scale * get_parent().get_parent().scale.x, min_scale * get_parent().get_parent().scale.y));
 	pass

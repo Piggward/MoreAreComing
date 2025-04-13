@@ -1,5 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dskynthchdy5p"]
 
+[ext_resource type="Texture2D" uid="uid://cbdp7nrn3odv4" path="res://art/trace_01.png" id="1_bgp3x"]
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_m2d2m"]
 blend_mode = 1
 
@@ -26,11 +28,12 @@ point_count = 3
 curve = SubResource("Curve_ytebp")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nfp0e"]
+particle_flag_align_y = true
 particle_flag_disable_z = true
 direction = Vector3(0, -1, 0)
 spread = 180.0
-initial_velocity_min = 150.0
-initial_velocity_max = 250.0
+initial_velocity_min = 50.0
+initial_velocity_max = 75.0
 gravity = Vector3(0, 0, 0)
 damping_curve = SubResource("CurveTexture_52u2q")
 scale_min = 0.2
@@ -38,16 +41,13 @@ scale_max = 0.2
 scale_curve = SubResource("CurveTexture_m027y")
 color_ramp = SubResource("GradientTexture1D_7q733")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_sn5nt"]
-load_path = "res://.godot/imported/fireorsmth.png-df432cd3b17daf5868c1c075594cc524.ctex"
-
 [node name="ExplosionParticles" type="GPUParticles2D"]
 process_mode = 3
 material = SubResource("CanvasItemMaterial_m2d2m")
 emitting = false
-amount = 200
+amount = 30
 process_material = SubResource("ParticleProcessMaterial_nfp0e")
-texture = SubResource("CompressedTexture2D_sn5nt")
+texture = ExtResource("1_bgp3x")
 one_shot = true
 speed_scale = 1.2
 explosiveness = 1.0

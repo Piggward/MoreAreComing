@@ -7,14 +7,19 @@ extends Area2D
 var player: Player
 var level: Level
 var current_health: int
+var normal_scale = 0.3
 signal died
 @onready var progress_bar = $Node2D/ProgressBar
 @onready var animated_sprite_2d = $AnimatedSprite2D
-const EXPLOSION_PARTICLES = preload("res://scenes/explosion_particles.tscn")
 var normal_color: Color
 const NAILSPARTICLES = preload("res://scenes/nailsparticles.tscn")
 const SCREWSPARTICLES = preload("res://scenes/screwsparticles.tscn")
 const EXPLOSION_2 = preload("res://scenes/explosion2.tscn")
+const EXPLOSION_PARTICLES = preload("res://scenes/explosion_particles.tscn")
+@export var main_color: Color
+@export var wheel_color_1: Color
+@export var wheel_color_2: Color
+@export var accent_color: Color
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -48,22 +53,42 @@ func take_damage(damage: int, knock_back: float):
 	animated_sprite_2d.self_modulate = normal_color
 	
 func die():
-	#var exp = EXPLOSION_PARTICLES.instantiate()
-	#exp.emitting = true
-	var exp = EXPLOSION_2.instantiate()
-	level.add_child(exp)
-	var np = NAILSPARTICLES.instantiate()
-	var sp = SCREWSPARTICLES.instantiate()
-	np.emitting = true
-	sp.emitting = true
-	level.add_child(np)
-	level.add_child(sp)
-	np.global_position = self.global_position
-	sp.global_position = self.global_position
-	exp.global_position = self.global_position
+	spawn_all_particles()
 	died.emit()
 	self.queue_free()
 	
+func spawn_all_particles():
+	spawn_particles(EXPLOSION_2.instantiate())
+	spawn_junk()
+	spawn_particles(SCREWSPARTICLES.instantiate())
+	
+func spawn_junk():
+	var x = NAILSPARTICLES.instantiate()
+	x.junktype = Junk.JUNKTYPE.SCREW
+	x.self_modulate = wheel_color_1
+	var y = NAILSPARTICLES.instantiate()
+	y.junktype = Junk.JUNKTYPE.NAIL
+	y.self_modulate = wheel_color_2
+	var z = NAILSPARTICLES.instantiate()
+	z.junktype = Junk.JUNKTYPE.ROUND
+	z.self_modulate = wheel_color_1
+	#var u = NAILSPARTICLES.instantiate()
+	#u.junktype = Junk.JUNKTYPE.PLATE
+	#u.self_modulate = main_color
+	#var v = NAILSPARTICLES.instantiate()
+	#v.junktype = Junk.JUNKTYPE.WHEEL
+	#v.self_modulate = accent_color
+	spawn_particles(x)
+	spawn_particles(y)
+	spawn_particles(z)
+	#spawn_particles(u)
+	#spawn_particles(v)
+	
+func spawn_particles(obj:GPUParticles2D):
+	obj.global_position = self.global_position
+	obj.emitting = false
+	obj.scale *= self.scale / normal_scale
+	level.add_child(obj)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

@@ -1,13 +1,12 @@
 class_name Camera
 extends Camera2D
 
-
+@onready var animation_player = $"../AnimationPlayer"
 @export var decay := 0.8 #How quickly shaking will stop [0,1].
 @export var max_offset := Vector2(20, 15) #Maximum displacement in pixels.
 @export var max_roll := 0.0 #Maximum rotation in radians (use sparingly).
 @export var noise : FastNoiseLite #The source of random values.
 var noise_y = 0 #Value used to move through the noise
-@onready var animation_player = $"../AnimationPlayer"
 
 var trauma := 0.0 #Current shake strength
 var trauma_pwr := 3 #Trauma exponent. Use [2,3]

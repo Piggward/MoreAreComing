@@ -1,11 +1,9 @@
-[gd_scene load_steps=701 format=4 uid="uid://do804sfv5x0tt"]
+[gd_scene load_steps=698 format=4 uid="uid://do804sfv5x0tt"]
 
 [ext_resource type="Script" path="res://scripts/level_1.gd" id="1_3ju04"]
 [ext_resource type="Script" path="res://scripts/turret.gd" id="1_iom35"]
 [ext_resource type="Script" path="res://scripts/wave.gd" id="2_5rwbk"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_sf0d6"]
-[ext_resource type="Script" path="res://scripts/shoot_to_start.gd" id="3_60mx6"]
-[ext_resource type="Texture2D" uid="uid://chw6i8srhg7sv" path="res://art/target_red1.png" id="3_cc1fx"]
 [ext_resource type="Texture2D" uid="uid://lso33r3xub01" path="res://art/Default size/towerDefense_tile001.png" id="3_ilbg7"]
 [ext_resource type="Shader" path="res://scripts/round.gdshader" id="3_l581a"]
 [ext_resource type="Texture2D" uid="uid://dg52q8lvdowpt" path="res://art/dirt.png" id="3_p1oh1"]
@@ -13,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://dyvkpbg43v4dd" path="res://art/white.png" id="3_vwpgy"]
 [ext_resource type="Texture2D" uid="uid://cmwifmalhd85v" path="res://art/Default size/towerDefense_tile002.png" id="4_h4dwc"]
 [ext_resource type="Texture2D" uid="uid://cq6udrr7q56ie" path="res://art/Default size/towerDefense_tile011.png" id="5_f5crx"]
-[ext_resource type="AudioStream" uid="uid://pbsqt0psisn6" path="res://sfx/start_gun.mp3" id="5_kfucn"]
 [ext_resource type="Texture2D" uid="uid://7nlpyoxejark" path="res://art/Default size/towerDefense_tile101.png" id="6_8itc7"]
 [ext_resource type="Script" path="res://scripts/nozzle.gd" id="6_idce5"]
 [ext_resource type="Texture2D" uid="uid://c3j7hqyl4icb7" path="res://art/towerDefense_tile180.png" id="6_k0x3s"]
@@ -355,6 +352,8 @@
 [ext_resource type="AudioStream" uid="uid://dba3b1hwbe16s" path="res://sfx/tanks_song_intro.mp3" id="347_cirr1"]
 [ext_resource type="AudioStream" uid="uid://dlvon3tc8ks6n" path="res://sfx/tanks_song_main.mp3" id="348_3fsji"]
 [ext_resource type="Script" path="res://scripts/shoot_bounds_area.gd" id="351_xsr3h"]
+[ext_resource type="PackedScene" uid="uid://7nk3om0x8xav" path="res://scenes/enemy.tscn" id="352_ay4eh"]
+[ext_resource type="PackedScene" uid="uid://bd06iieu368q7" path="res://scenes/tanky_enemy.tscn" id="352_lo0ha"]
 
 [sub_resource type="Resource" id="Resource_iaqbb"]
 script = ExtResource("2_5rwbk")
@@ -426,18 +425,22 @@ speed = 0.55
 damage = 10
 health = 30
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_bqecd"]
-radius = 44.0454
+[sub_resource type="Gradient" id="Gradient_vdlwh"]
+offsets = PackedFloat32Array(0, 0.570895, 0.757463, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.266575, 0.266575, 0.266575, 1, 0.699653, 0.699653, 0.699653, 1, 1, 1, 1, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_od66j"]
-bg_color = Color(2.21401e-06, 0.665565, 0.815768, 1)
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_afrwy"]
+gradient = SubResource("Gradient_vdlwh")
+width = 1000
+height = 1000
+fill_from = Vector2(0.401709, 0.611111)
 
 [sub_resource type="Animation" id="Animation_slm7m"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CameraPaner/Camera2D:zoom")
+tracks/0/path = NodePath("CharacterBody2D/CameraPaner/Camera2D:zoom")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -452,7 +455,7 @@ resource_name = "camera_intro"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CameraPaner/Camera2D:zoom")
+tracks/0/path = NodePath("CharacterBody2D/CameraPaner/Camera2D:zoom")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -495,18 +498,6 @@ _data = {
 "RESET": SubResource("Animation_slm7m"),
 "camera_intro": SubResource("Animation_vu1bk")
 }
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_1vrhe"]
-
-[sub_resource type="Gradient" id="Gradient_vdlwh"]
-offsets = PackedFloat32Array(0, 0.570895, 0.757463, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.266575, 0.266575, 0.266575, 1, 0.699653, 0.699653, 0.699653, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_afrwy"]
-gradient = SubResource("Gradient_vdlwh")
-width = 1000
-height = 1000
-fill_from = Vector2(0.401709, 0.611111)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jhpbg"]
 texture = ExtResource("3_ilbg7")
@@ -6068,6 +6059,8 @@ shader = ExtResource("3_l581a")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fblkm"]
 size = Vector2(72, 76)
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1vrhe"]
+
 [sub_resource type="Gradient" id="Gradient_npw4x"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
@@ -6297,62 +6290,6 @@ radius = 300.0
 script = ExtResource("1_3ju04")
 waves = Array[ExtResource("2_5rwbk")]([SubResource("Resource_iaqbb"), SubResource("Resource_qkdxg"), SubResource("Resource_2gj2k"), SubResource("Resource_a5e7d"), SubResource("Resource_bdgxe"), SubResource("Resource_51hkr"), SubResource("Resource_mhs0h")])
 
-[node name="ShootToStart" type="Area2D" parent="."]
-position = Vector2(576, 158)
-collision_layer = 2
-collision_mask = 4
-script = ExtResource("3_60mx6")
-
-[node name="Target" type="Sprite2D" parent="ShootToStart"]
-self_modulate = Color(2, 2, 2, 1)
-scale = Vector2(0.384855, 0.384855)
-texture = ExtResource("3_cc1fx")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ShootToStart"]
-visible = false
-scale = Vector2(0.575869, 0.575869)
-shape = SubResource("CircleShape2D_bqecd")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="ShootToStart"]
-stream = ExtResource("5_kfucn")
-
-[node name="PanelContainer" type="PanelContainer" parent="ShootToStart"]
-offset_left = -32.0
-offset_top = 25.0
-offset_right = 86.0
-offset_bottom = 78.0
-scale = Vector2(0.54488, 0.54488)
-theme_override_styles/panel = SubResource("StyleBoxFlat_od66j")
-
-[node name="MarginContainer" type="MarginContainer" parent="ShootToStart/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
-
-[node name="Label" type="Label" parent="ShootToStart/PanelContainer/MarginContainer"]
-texture_filter = 1
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-text = "Start Game"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CameraPaner" type="Node2D" parent="." groups=["pauseable"]]
-script = ExtResource("308_7j1gf")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraPaner"]
-root_node = NodePath("../..")
-libraries = {
-"": SubResource("AnimationLibrary_uf4k2")
-}
-
-[node name="Camera2D" type="Camera2D" parent="CameraPaner" groups=["camera"]]
-zoom = Vector2(2, 2)
-script = ExtResource("328_u2vmf")
-noise = SubResource("FastNoiseLite_1vrhe")
-
 [node name="Lighting" type="Node2D" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="Lighting"]
@@ -6378,6 +6315,11 @@ position = Vector2(747, 276)
 rotation = 1.5708
 energy = 0.5
 texture = SubResource("GradientTexture2D_afrwy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_uf4k2")
+}
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -99
@@ -6428,12 +6370,21 @@ shape = SubResource("RectangleShape2D_fblkm")
 stream = ExtResource("7_ucylw")
 volume_db = 3.0
 
+[node name="CameraPaner" type="Node2D" parent="CharacterBody2D"]
+position = Vector2(-576, -324)
+script = ExtResource("308_7j1gf")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D/CameraPaner" groups=["camera"]]
+position = Vector2(576, 324)
+zoom = Vector2(2, 2)
+script = ExtResource("328_u2vmf")
+noise = SubResource("FastNoiseLite_1vrhe")
+
 [node name="Turret" type="Node2D" parent="." groups=["pauseable", "turret"]]
 position = Vector2(576, 324)
 script = ExtResource("1_iom35")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Turret"]
-self_modulate = Color(1.5, 1.5, 1.5, 1)
 position = Vector2(4, 0)
 rotation = 1.5708
 texture = ExtResource("12_7tpjb")
@@ -6534,7 +6485,6 @@ position = Vector2(-98, -77)
 process_mode = 3
 
 [node name="ReloadReminder" type="PanelContainer" parent="CanvasLayer"]
-visible = false
 anchors_preset = -1
 anchor_left = 0.381
 anchor_top = 0.426
@@ -6807,7 +6757,6 @@ volume_db = -8.0
 [node name="Timer" type="Timer" parent="."]
 
 [node name="ShootBoundsArea" type="Area2D" parent="."]
-visible = false
 position = Vector2(575, 324)
 collision_layer = 8
 collision_mask = 4
@@ -6818,8 +6767,20 @@ script = ExtResource("351_xsr3h")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShootBoundsArea"]
 shape = SubResource("CircleShape2D_eudq3")
 
+[node name="Enemy" parent="." instance=ExtResource("352_lo0ha")]
+position = Vector2(761, 330)
+max_health = 1
+
+[node name="Enemy2" parent="." instance=ExtResource("352_ay4eh")]
+position = Vector2(434, 302)
+
+[node name="Enemy3" parent="." instance=ExtResource("352_ay4eh")]
+position = Vector2(442, 233)
+
+[node name="Enemy4" parent="." instance=ExtResource("352_ay4eh")]
+position = Vector2(413, 402)
+
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
-[connection signal="area_entered" from="ShootToStart" to="ShootToStart" method="_on_area_entered"]
 [connection signal="child_entered_tree" from="EnemyManager" to="EnemyManager" method="_on_child_entered_tree"]
 [connection signal="button_down" from="CanvasLayer/Control/Button" to="." method="_on_button_button_down"]
 [connection signal="button_up" from="CanvasLayer/Control/Button" to="." method="_on_button_button_up"]

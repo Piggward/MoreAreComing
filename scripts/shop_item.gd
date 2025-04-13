@@ -36,9 +36,6 @@ func open_door():
 	door_on_hover_panel.visible = false
 	open_door_sound.play()
 
-func knock():
-	knock_door_sound.play()
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if disappear:

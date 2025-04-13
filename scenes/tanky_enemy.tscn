@@ -1,14 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://bd06iieu368q7"]
+[gd_scene load_steps=4 format=3 uid="uid://bd06iieu368q7"]
 
 [ext_resource type="PackedScene" uid="uid://7nk3om0x8xav" path="res://scenes/enemy.tscn" id="1_i8mfi"]
+[ext_resource type="Shader" path="res://vfx/color_swap.gdshader" id="2_pd75b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p05tb"]
+shader = ExtResource("2_pd75b")
+shader_parameter/color_count = 4
+shader_parameter/target_colors = PackedColorArray(0.396078, 0.45098, 0.54902, 1, 0.466667, 0.360784, 0.309804, 1, 0.309804, 0.321569, 0.466667, 1, 0.231373, 0.129412, 0.215686, 1)
+shader_parameter/replace_colors = PackedColorArray(0.52549, 0.443137, 0.321569, 1, 0.262745, 0.317647, 0.360784, 1, 0.105882, 0.168627, 0.137255, 1, 0.105882, 0.168627, 0.137255, 1)
+shader_parameter/tolerance = 0.01
 
 [node name="Enemy" instance=ExtResource("1_i8mfi")]
 scale = Vector2(0.959784, 0.959784)
 
 [node name="AnimatedSprite2D" parent="." index="0"]
-self_modulate = Color(1, 1, 0.415686, 1)
+material = SubResource("ShaderMaterial_p05tb")
 
 [node name="Node2D" parent="." index="5"]
 scale = Vector2(0.959784, 0.959784)
 
 [node name="TANK" type="Node" parent="." index="6"]
+
+[node name="Polygon2D" parent="Eyes" index="0"]
+position = Vector2(13.1334, 1.04919)
+color = Color(1, 0, 0, 1)
+
+[node name="Polygon2D2" parent="Eyes" index="1"]
+position = Vector2(13.1334, 1.04919)
+color = Color(1, 0, 0, 1)

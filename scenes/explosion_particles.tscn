@@ -43,11 +43,13 @@ color_ramp = SubResource("GradientTexture1D_7q733")
 
 [node name="ExplosionParticles" type="GPUParticles2D"]
 process_mode = 3
+modulate = Color(1.5, 1.5, 1.5, 1)
 material = SubResource("CanvasItemMaterial_m2d2m")
 emitting = false
 amount = 30
 process_material = SubResource("ParticleProcessMaterial_nfp0e")
 texture = ExtResource("1_bgp3x")
+lifetime = 0.75
 one_shot = true
 speed_scale = 1.2
 explosiveness = 1.0

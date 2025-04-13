@@ -14,9 +14,10 @@ var turret: Turret
 @export var pierce: int = 0
 @onready var power_up = $PowerUp
 @export var health: int
-@onready var sprite_2d_2 = $"../Sprite2D2"
-var has_automatic_reload = false
-var has_automatic_shooting = false
+@export var colors: Array[Color]
+var primary_color: Color
+var has_automatic_reload = true
+var has_automatic_shooting = true
 @onready var shop = $"../CanvasLayer/Shop"
 @onready var health_label = $"../CanvasLayer/ProgressBar/HealthLabel"
 @onready var progress_bar = $"../CanvasLayer/ProgressBar"
@@ -24,15 +25,28 @@ var has_automatic_shooting = false
 @export var level_progression: Array[int] = []
 var current_level = 0
 signal attributes_updated
+@onready var turret_sprite = $"../Turret/TurretSprite"
 
 func _ready():
 	progress_bar.max_value = health
 	progress_bar.value = self.health
 	health_label.text = str(health) + " / " + str(health)
+	if not turret_sprite.ready:
+		await turret_sprite.is_node_ready()
+	primary_color = turret_sprite.material.get_shader_parameter("primary_color")
 	turret = get_tree().get_first_node_in_group("turret")
-
-func _physics_process(delta: float) -> void:
 	
+func change_color(color):
+	turret_sprite.material.set("shader_param/new_primary_color", color) 
+	turret_sprite.material.set("shader_param/tolerance", 0.15)
+	primary_color = color
+	
+func next_color():
+	var color = colors.pop_front()
+	colors.push_back(color)
+	change_color(color)
+	
+func _physics_process(delta: float) -> void:
 	if shop.visible:
 		return
 	

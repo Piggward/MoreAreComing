@@ -1,15 +1,51 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctw144b1mvk8f"]
+[gd_scene load_steps=10 format=3 uid="uid://ctw144b1mvk8f"]
 
 [ext_resource type="PackedScene" uid="uid://7nk3om0x8xav" path="res://scenes/enemy.tscn" id="1_q1frx"]
+[ext_resource type="Shader" path="res://vfx/color_swap.gdshader" id="2_vnww5"]
+[ext_resource type="Texture2D" uid="uid://dm85jmuycd2jr" path="res://art/enemy2.png" id="3_pfsx4"]
+[ext_resource type="Texture2D" uid="uid://5ruhyx5o1vwg" path="res://art/enemy3.png" id="4_5ohvx"]
+[ext_resource type="Texture2D" uid="uid://cqfv4hfew32qf" path="res://art/enemy4.png" id="5_24fi1"]
+[ext_resource type="Texture2D" uid="uid://b4dpalgrej3wh" path="res://art/enemy5.png" id="6_k4i4v"]
+[ext_resource type="Texture2D" uid="uid://iklq3onauy0v" path="res://art/enemy.png" id="7_nv5xr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gc2ua"]
+shader = ExtResource("2_vnww5")
+shader_parameter/color_count = 4
+shader_parameter/target_colors = PackedColorArray(0.231373, 0.129412, 0.215686, 1, 0.309804, 0.321569, 0.466667, 1, 0.466667, 0.360784, 0.309804, 1, 0.396078, 0.45098, 0.54902, 1)
+shader_parameter/replace_colors = PackedColorArray(0.105882, 0.168627, 0.137255, 1, 0.105882, 0.168627, 0.137255, 1, 0.466667, 0.52549, 0.368627, 1, 0.654902, 0.858824, 0.317647, 1)
+shader_parameter/tolerance = 0.01
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cv7ly"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_pfsx4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_5ohvx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_24fi1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_k4i4v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_nv5xr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [node name="Enemy" instance=ExtResource("1_q1frx")]
+modulate = Color(0.697761, 0.904761, 0.541413, 1)
 scale = Vector2(0.19, 0.19)
 
 [node name="AnimatedSprite2D" parent="." index="0"]
-self_modulate = Color(0.105882, 1, 0.560784, 1)
-
-[node name="CollisionShape2D" parent="." index="1"]
-visible = false
+material = SubResource("ShaderMaterial_gc2ua")
+sprite_frames = SubResource("SpriteFrames_cv7ly")
+frame_progress = 0.0
 
 [node name="Node2D" parent="." index="5"]
 scale = Vector2(0.19, 0.19)

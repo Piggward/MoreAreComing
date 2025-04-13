@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cp762k8rwshe2"]
+
+[ext_resource type="Shader" path="res://scenes/alt_art/teststs.gdshader" id="1_ye1jq"]
+[ext_resource type="Texture2D" uid="uid://318kuti2tkud" path="res://art/towerDefense_tile250.png" id="2_l1rvh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_shm7x"]
+shader = ExtResource("1_ye1jq")
+shader_parameter/primary_color = Color(0.905882, 0.298039, 0.235294, 1)
+shader_parameter/secondary_color = Color(0.823529, 0.270588, 0.211765, 1)
+shader_parameter/accent_color = Color(0.686275, 0.223529, 0.176471, 1)
+shader_parameter/accent_2_color = Color(0.588235, 0.380392, 0.356863, 1)
+shader_parameter/new_primary_color = Color(0.905882, 0.298039, 0.235294, 1)
+shader_parameter/tolerance = 0.15
+
+[node name="Sprite2D" type="Sprite2D"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_shm7x")
+position = Vector2(69, -1.00025)
+texture = ExtResource("2_l1rvh")

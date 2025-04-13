@@ -6,6 +6,7 @@ extends Area2D
 @export var damage: int
 @export var pierce: int
 @export var knock_back: float
+@export var player_color: Color
 @onready var shoot_polygon: Polygon2D = $ShootPolygon
 @onready var audio_stream_player_2d = $AudioStreamPlayer2D
 var has_hit = false
@@ -18,6 +19,7 @@ var enemies: Array[Enemy]
 @onready var sprite_2d = $Sprite2D
 @onready var collision_shape_2d = $CollisionShape2D
 @onready var polygon_2d = $Polygon2D
+@onready var polygon_2d_2 = $Polygon2D2
 
 
 # Called when the node enters the scene tree for the first time.
@@ -26,8 +28,7 @@ func _ready() -> void:
 	particles.rotation = direction - deg_to_rad(90)
 	sprite_2d.rotation = direction + deg_to_rad(180)
 	point_light_2d.rotation += direction - deg_to_rad(90)
-	await get_tree().create_timer(10).timeout
-	self.queue_free()
+	polygon_2d.color = player_color
 	pass # Replace with function body.
 
 
@@ -47,6 +48,7 @@ func terminate_self():
 	point_light_2d.visible = false
 	sprite_2d.visible = false
 	polygon_2d.visible = false
+	polygon_2d_2.visible = false
 	for child in particles.get_children():
 		if child.name != "Trail":
 			child.visible = false

@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://h5tspryhv1ig"]
+
+[ext_resource type="Shader" path="res://vfx/color_swap.gdshader" id="1_eyy1i"]
+[ext_resource type="Texture2D" uid="uid://318kuti2tkud" path="res://art/towerDefense_tile250.png" id="2_p3l6r"]
+[ext_resource type="PackedScene" uid="uid://cp762k8rwshe2" path="res://scenes/turret_sprite.tscn" id="3_i1mmx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0g4fl"]
+shader = ExtResource("1_eyy1i")
+shader_parameter/color_count = 4
+shader_parameter/target_colors = PackedColorArray(0.905882, 0.298039, 0.235294, 1, 0.823529, 0.270588, 0.211765, 1, 0.686275, 0.223529, 0.176471, 1, 0.588235, 0.380392, 0.356863, 1)
+shader_parameter/replace_colors = PackedColorArray(0, 0.721569, 0, 1, 0, 0.411765, 0, 1, 0, 0.294118, 0, 1, 0, 0.294118, 0, 1)
+shader_parameter/tolerance = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q0xra"]
+shader = ExtResource("1_eyy1i")
+shader_parameter/color_count = 1
+shader_parameter/target_colors = PackedColorArray(0.905882, 0.298039, 0.235294, 1)
+shader_parameter/replace_colors = PackedColorArray(0.594282, 0.241158, 0.416393, 1)
+shader_parameter/tolerance = 0.134
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iq7mk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_p3l6r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Sprite2D" type="Sprite2D"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_0g4fl")
+rotation = 1.5708
+texture = ExtResource("2_p3l6r")
+
+[node name="Sprite2D" parent="." instance=ExtResource("3_i1mmx")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_q0xra")
+position = Vector2(6.00043, 119)
+sprite_frames = SubResource("SpriteFrames_iq7mk")

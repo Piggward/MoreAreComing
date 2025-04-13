@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://7nk3om0x8xav"]
+[gd_scene load_steps=14 format=3 uid="uid://7nk3om0x8xav"]
 
 [ext_resource type="Script" path="res://scenes/enemy.gd" id="1_hir0y"]
+[ext_resource type="Shader" path="res://vfx/color_swap.gdshader" id="2_1c04e"]
 [ext_resource type="Texture2D" uid="uid://iklq3onauy0v" path="res://art/enemy.png" id="2_l5g7g"]
 [ext_resource type="Texture2D" uid="uid://dm85jmuycd2jr" path="res://art/enemy2.png" id="3_jjiyb"]
 [ext_resource type="Texture2D" uid="uid://5ruhyx5o1vwg" path="res://art/enemy3.png" id="4_jywlc"]
@@ -9,6 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://cietdm4cyiak" path="res://scenes/enemy_light.tscn" id="7_8tklk"]
 [ext_resource type="AudioStream" uid="uid://bcjvnd1mehaap" path="res://sfx/bulldozer_moving.mp3" id="8_84sdw"]
 [ext_resource type="PackedScene" uid="uid://b5hlr5dl4mtg3" path="res://scenes/health_bar.tscn" id="9_i2xrf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a7enf"]
+shader = ExtResource("2_1c04e")
+shader_parameter/color_count = 4
+shader_parameter/target_colors = PackedColorArray(0.231373, 0.129412, 0.215686, 1, 0.309804, 0.321569, 0.466667, 1, 0.466667, 0.360784, 0.309804, 1, 0.396078, 0.45098, 0.54902, 1)
+shader_parameter/replace_colors = PackedColorArray(0.106573, 0.167296, 0.13718, 1, 0.105882, 0.168627, 0.137255, 1, 0.262745, 0.317647, 0.360784, 1, 0.298039, 0.427451, 0.52549, 1)
+shader_parameter/tolerance = 0.01
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ggr7f"]
 animations = [{
@@ -37,6 +45,8 @@ animations = [{
 size = Vector2(433.333, 426.667)
 
 [node name="Enemy" type="Area2D"]
+process_mode = 1
+rotation = 1.5708
 scale = Vector2(0.3, 0.3)
 collision_layer = 2
 collision_mask = 5
@@ -49,6 +59,8 @@ wheel_color_2 = Color(0.329412, 0.329412, 0.329412, 1)
 accent_color = Color(0.309804, 0.321569, 0.466667, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_a7enf")
 sprite_frames = SubResource("SpriteFrames_ggr7f")
 autoplay = "default"
 frame_progress = 0.0979066
@@ -60,6 +72,7 @@ scale = Vector2(0.449095, 0.449095)
 shape = SubResource("RectangleShape2D_pwanm")
 
 [node name="PointLight2D" parent="." instance=ExtResource("7_8tklk")]
+energy = 0.5
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_84sdw")
@@ -72,5 +85,20 @@ update_rotation = false
 
 [node name="Node2D" parent="." instance=ExtResource("9_i2xrf")]
 position = Vector2(0, 0)
+
+[node name="Eyes" type="Node2D" parent="."]
+modulate = Color(1.8, 1.8, 1.8, 1)
+
+[node name="Polygon2D" type="Polygon2D" parent="Eyes"]
+position = Vector2(13.3333, -5.82818e-07)
+scale = Vector2(0.779, -0.712)
+color = Color(0.605674, 1.66051e-06, 3.85046e-07, 1)
+polygon = PackedVector2Array(29.9529, 46.8165, 42.7899, 18.7266, 55.6269, 4.68165, 55.6269, 28.0899)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Eyes"]
+position = Vector2(13.3333, -5.82818e-07)
+scale = Vector2(0.779, 0.712)
+color = Color(0.605674, 1.66051e-06, 3.85046e-07, 1)
+polygon = PackedVector2Array(29.9529, 46.8165, 42.7899, 18.7266, 55.6269, 4.68165, 55.6269, 28.0899)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

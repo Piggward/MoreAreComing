@@ -15,16 +15,16 @@ var custom_amount: int
 func _ready():
 	match junktype:
 		self.JUNKTYPE.SCREW:
-			custom_amount = randi_range(5, 8)
+			custom_amount = randi_range(1, 3)
 			self.texture = SCREWS
 			print("SPAWNING " + str(amount) + " SCREWS")
 		self.JUNKTYPE.ROUND:
-			custom_amount = randi_range(3, 5)
+			custom_amount = randi_range(1, 3)
 			self.scale *= 1
 			self.texture = ROUNDSCREW
 			print("SPAWNING " + str(amount) + " ROUNDSCREW")
 		self.JUNKTYPE.NAIL:
-			custom_amount = randi_range(5, 8)
+			custom_amount = randi_range(1, 3)
 			self.texture = NAILS
 			print("SPAWNING " + str(amount) + " NAILS")
 		self.JUNKTYPE.PLATE:
@@ -34,6 +34,8 @@ func _ready():
 			print("SPAWNING " + str(amount) + " PLATES")
 	self.amount = custom_amount
 	self.emitting = true
+	await get_tree().create_timer(self.lifetime).timeout
+	self.queue_free()
 	pass # Replace with function body.
 
 

@@ -21,6 +21,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func spawn_batch(batch: int, wave: Wave):
+	positions.shuffle()
 	for i in batch:
 		var sp = randf_range(0.0, 1.0)
 		var ps = 0 if sp > wave.special_factor else 1 if sp > wave.special_factor / 2 else 2
@@ -29,7 +30,7 @@ func spawn_batch(batch: int, wave: Wave):
 	batch_spawned.emit()
 	
 func spawn_enemy(wave: Wave, special: int):
-	var random = positions[(randi_range(0, positions.size()-1))]
+	var random = positions.pop_front()
 	var random_offset_x = randi_range(-5, 5)
 	var random_offset_y = randi_range(-5, 5)
 	var e = ENEMY.instantiate() if special == 0 else SPEEDY_ENEMY.instantiate() if special == 1 else TANKY_ENEMY.instantiate()
@@ -39,6 +40,7 @@ func spawn_enemy(wave: Wave, special: int):
 	e.max_health = wave.health
 	e.died.connect(_on_enemy_died)
 	random.add_child(e)
+	positions.push_back(random)
 	
 func _on_enemy_died():
 	enemies_killed += 1

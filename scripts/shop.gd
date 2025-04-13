@@ -61,18 +61,15 @@ func _on_door_opened(si: ShopItem):
 	if opening_door:
 		return
 	opening_door = true
-	si.knock()
 	for child in get_children():
 		if child != si:
-			child.disappear = true
+			child.visible = false
 			
-	await get_tree().create_timer(1.1).timeout
 	si.open_door()
 	for i in power_ups.size():
 		if power_ups[i].powerups.any(func(a): return a.title == si.power_up.title):
 			power_ups[i].powerups.pop_front()
-			
-	await get_tree().create_timer(0.85).timeout
+
 	power_up_description.text = si.power_up.power_up_description
 	animation_player.play("show_powerup")
 	si.power_up.apply(get_tree().get_first_node_in_group("player"))

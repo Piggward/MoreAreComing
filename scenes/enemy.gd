@@ -39,8 +39,9 @@ func find_bonus():
 			self.max_health *= 4
 			self.damage = 20
 		if child.name == "SPEED":
-			self.speed += clamp(self.speed * 1.5, 0.1, 1) 
+			self.speed *= 2.5
 			self.damage = 5
+			self.max_health *= 0.75
 
 func take_damage(damage: int, knock_back: float):
 	current_health -= damage
@@ -53,14 +54,13 @@ func take_damage(damage: int, knock_back: float):
 	animated_sprite_2d.self_modulate = normal_color
 	
 func die():
-	spawn_all_particles()
+	#spawn_all_particles()
 	died.emit()
 	self.queue_free()
 	
 func spawn_all_particles():
 	spawn_particles(EXPLOSION_2.instantiate())
 	spawn_junk()
-	spawn_particles(SCREWSPARTICLES.instantiate())
 	
 func spawn_junk():
 	var x = NAILSPARTICLES.instantiate()

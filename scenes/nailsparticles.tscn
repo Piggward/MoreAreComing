@@ -1,7 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://82xpxln405yd"]
+[gd_scene load_steps=12 format=3 uid="uid://82xpxln405yd"]
 
 [ext_resource type="Texture2D" uid="uid://dw78yxksvopid" path="res://art/genericItem_color_019.png" id="1_rrvfv"]
 [ext_resource type="Script" path="res://scripts/junkparticles.gd" id="2_ve28f"]
+
+[sub_resource type="Curve" id="Curve_yho7e"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.866667, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_wc806"]
+curve = SubResource("Curve_yho7e")
 
 [sub_resource type="Curve" id="Curve_4t1et"]
 min_value = -360.0
@@ -32,23 +39,26 @@ particle_flag_disable_z = true
 angle_min = 1.07288e-05
 angle_max = 360.0
 spread = 180.0
-initial_velocity_max = 120.0
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
 angular_velocity_curve = SubResource("CurveTexture_vo272")
 gravity = Vector3(0, 0, 0)
-damping_min = 90.0
-damping_max = 100.0
+damping_min = 2.0
+damping_max = 5.0
 damping_curve = SubResource("CurveTexture_1bbjp")
 scale_min = 0.15
 scale_max = 0.15
 color_ramp = SubResource("GradientTexture1D_8kesg")
+alpha_curve = SubResource("CurveTexture_wc806")
 
 [node name="GPUParticles2D" type="GPUParticles2D"]
 z_index = -1
 emitting = false
-amount = 1
+amount = 15
 process_material = SubResource("ParticleProcessMaterial_x6m33")
 texture = ExtResource("1_rrvfv")
-lifetime = 120.0
+lifetime = 6.0
+one_shot = true
 explosiveness = 1.0
 randomness = 1.0
 local_coords = true

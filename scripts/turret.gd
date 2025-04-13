@@ -15,6 +15,7 @@ var original_pitch2: float
 @onready var progress_bar = $"../CanvasLayer/UI/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/ProgressBar"
 var og_pos: Vector2
 @onready var reload_reminder = $"../CanvasLayer/ReloadReminder"
+@onready var shot_container = $"../ShotContainer"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -44,7 +45,8 @@ func shoot():
 	s.pierce = player.pierce
 	s.knock_back = player.knock_back
 	s.scale *= player.shot_scale
-	get_parent().add_child(s)
+	s.player_color = player.primary_color
+	shot_container.add_child(s)
 	shots_left -= 1
 	if shots_left == 0:
 		reload_reminder.visible = true

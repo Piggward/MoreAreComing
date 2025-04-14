@@ -6,13 +6,13 @@ var turret: Turret
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
 	turret = get_tree().get_first_node_in_group("turret")
-	turret.shot_fired.connect(_on_shot_fired)
-	player.attributes_updated.connect(_on_shot_fired)
-	_on_shot_fired()
+	turret.ammo_updated.connect(update_text)
+	player.attributes_updated.connect(update_text)
+	update_text(turret.shots_left, player.stats.mag_size)
 	pass # Replace with function body.
 
-func _on_shot_fired():
-	self.text = str(turret.shots_left) + " / " + str(player.mag_size)
+func update_text(shots, mag):
+	self.text = str(shots) + " / " + str(mag)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

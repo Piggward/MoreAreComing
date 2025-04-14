@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://b2bucpdxbelgu"]
 
 [ext_resource type="PackedScene" uid="uid://dskynthchdy5p" path="res://scenes/explosion_particles.tscn" id="1_hsvov"]
-[ext_resource type="Script" path="res://scripts/load_resources.gd" id="1_idwnb"]
-[ext_resource type="Script" path="res://scripts/load_particle.gd" id="2_h86pe"]
+[ext_resource type="Script" uid="uid://00irmnjmfig8" path="res://scripts/load_resources.gd" id="1_idwnb"]
+[ext_resource type="Script" uid="uid://cwnlkp2bhpy0" path="res://scripts/load_particle.gd" id="2_h86pe"]
 [ext_resource type="PackedScene" uid="uid://c137k3r5rd0os" path="res://scenes/shoot_area.tscn" id="3_hci4l"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jwj08"]

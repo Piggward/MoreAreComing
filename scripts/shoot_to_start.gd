@@ -1,11 +1,13 @@
 extends Area2D
 
-signal start_game
 const EXPLOSION_PARTICLES = preload("res://scenes/explosion_particles.tscn")
-@onready var audio_stream_player_2d = $AudioStreamPlayer2D
+
 @export var type: TYPE
-enum TYPE { START_GAME, CHANGE_COLOR, RANDOM_COLOR }
+
+@onready var audio_stream_player_2d = $AudioStreamPlayer2D
 @onready var label = $PanelContainer/MarginContainer/Label
+
+enum TYPE { START_GAME, CHANGE_COLOR, RANDOM_COLOR }
 var player: Player
 
 # Called when the node enters the scene tree for the first time.
@@ -19,6 +21,7 @@ func _ready():
 			label.text = "Random color"
 	
 	player = get_tree().get_first_node_in_group("player")
+	EventManager.start_game.connect(func(): self.queue_free())
 	pass # Replace with function body.
 
 
@@ -41,16 +44,16 @@ func start_game_area_enter(area):
 	get_parent().add_child(particles)
 	audio_stream_player_2d.play()
 	audio_stream_player_2d.reparent(get_parent())
-	start_game.emit()
+	EventManager.start_game.emit()
 
 func change_color_area_enter(area):
 	area.queue_free()
-	player.next_color()
+	EventManager.next_color_requested.emit()
 	
 func random_color_area_enter(area):
 	area.queue_free()
 	var rand_color = Color(randf_range(0, 1), randf_range(0, 1), randf_range(0, 1))
-	player.change_color(rand_color)
+	EventManager.change_color_requested.emit(rand_color)
 
 func _on_area_entered(area):
 	match type:

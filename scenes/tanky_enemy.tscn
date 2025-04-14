@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bd06iieu368q7"]
 
 [ext_resource type="PackedScene" uid="uid://7nk3om0x8xav" path="res://scenes/enemy.tscn" id="1_i8mfi"]
-[ext_resource type="Shader" path="res://vfx/color_swap.gdshader" id="2_pd75b"]
+[ext_resource type="Shader" uid="uid://o0iivpms5ae2" path="res://vfx/color_swap.gdshader" id="2_pd75b"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p05tb"]
 shader = ExtResource("2_pd75b")

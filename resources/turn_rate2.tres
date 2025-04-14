@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://cv56pmgknhl0a"]
 
-[ext_resource type="Script" path="res://scripts/power_up.gd" id="1_lhcus"]
+[ext_resource type="Script" uid="uid://cfns6322r31jo" path="res://scripts/power_up.gd" id="1_lhcus"]
 
 [resource]
 script = ExtResource("1_lhcus")
@@ -8,6 +8,7 @@ title = "MORE GREASE"
 title_color = Color(0, 0.411765, 1, 1)
 power_up_description = "TURN RATE INCREASED"
 shoot_speed = 1.0
+shot_scale = 1.0
 damage = 1.0
 shoot_cd = 1.0
 turn_rate = 1.3

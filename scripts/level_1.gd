@@ -1,59 +1,54 @@
 class_name Level
 extends Node2D
 
+const GAME_OVER_SCREEN = preload("res://scenes/game_over_screen.tscn")
+const TANKS_SONG = preload("res://sfx/tanks_song.wav")
+const GOODJOB = preload("res://sfx/Goodjob.mp3")
+const ENEMY_EXP_FACTOR = 5
+
 @export var waves: Array[Wave]
-var camera: Camera
+
 @onready var enemy_manager: Node2D = $EnemyManager
-var current_wave: Wave
-var current_wave_number = 0
 @onready var control = $CanvasLayer/Control
-@onready var turret = $Turret
 @onready var wave_cleared = $WaveCleared
 @onready var wave_start = $WaveStart
 @onready var shop = $CanvasLayer/Shop
 @onready var wave_label = $CanvasLayer/UI/PanelContainer2/Wave_label
-const GAME_OVER_SCREEN = preload("res://scenes/game_over_screen.tscn")
 @onready var canvas_layer = $CanvasLayer
-@onready var ui = $CanvasLayer/UI
-@onready var progress_bar = $CanvasLayer/ProgressBar
 @onready var music = $Music
-@onready var reload_reminder = $CanvasLayer/ReloadReminder
-const TANKS_SONG = preload("res://sfx/tanks_song.wav")
-const GOODJOB = preload("res://sfx/Goodjob.mp3")
-var player: Player
 @onready var timer = $Timer
 @onready var exp_progress_bar = $CanvasLayer/UI/ProgressBar
-var current_batch = 0
-signal spawn_batch_requested(amount: int, wave: Wave)
-@onready var shoot_to_start = $ShootToStart
 @onready var exp_manager = $ExpManager
+
+var player: Player
+var current_wave: Wave
+var current_wave_number = 0
+var current_batch = 0
 var current_enemies_killed = 0
-const ENEMY_EXP_FACTOR = 5
+
+signal spawn_batch_requested(amount: int, wave: Wave)
 
 func should_drop_exp():
 	var rand = randf_range(0.0, 1.0)
 	var should_drop = float(current_enemies_killed) / float(ENEMY_EXP_FACTOR) > rand
 	if should_drop:
 		current_enemies_killed = 0
-	return float(current_enemies_killed) / float(ENEMY_EXP_FACTOR) > rand
+	return should_drop
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	EventManager.exp_pickup.connect(_on_exp_pickup)
 	current_wave = waves[0]
-	progress_bar.visible = false
-	ui.visible = false
 	player = get_tree().get_first_node_in_group("player")
-	camera = get_tree().get_first_node_in_group("camera")
-	exp_progress_bar.max_value = player.level_progression[player.current_level]
-	exp_progress_bar.value = 0
-	wave_label.text = "STAGE LEVEL 1"
-	shoot_to_start.start_game.connect(start_game)
+	player.health_updated.connect(_on_player_health_updated)
+	EventManager.start_game.connect(start_game)
 	self.process_mode = Node.PROCESS_MODE_INHERIT
 	enemy_manager.enemy_killed.connect(_on_enemy_killed)
 	get_tree().paused = false
-	#music["parameters/switch_to_clip"] = "Silence"
-	pass # Replace with function body.
+
+func _on_player_health_updated(health: int, max_health: int):
+	if health <= 0:
+		game_over(false)
 	
 func _on_enemy_killed(enemy: Enemy):
 	current_enemies_killed += 1
@@ -62,16 +57,12 @@ func _on_enemy_killed(enemy: Enemy):
 		current_enemies_killed = 0
 	
 func start_game():
-	for node in get_tree().get_nodes_in_group("remove_at_start_game"):
-		node.queue_free()
-	camera.play_intro()
 	music.play()
-	progress_bar.visible = true
-	ui.visible = true
 	spawn_wave()
 	
 func _on_exp_pickup(value: int):
 	player.exp += value
+	EventManager.experience_added.emit(player.exp)
 	if player.current_level + 1 >= player.level_progression.size():
 		return
 	exp_progress_bar.value = player.exp
@@ -86,10 +77,8 @@ func on_level_up():
 	timer.set_paused(true)
 	get_tree().paused = true
 	shop.provide_powerups()
-	#for node in get_tree().get_nodes_in_group("projectile"):
-		#node.queue_free()
-	exp_progress_bar.max_value = player.level_progression[player.current_level]
-	exp_progress_bar.value = 0
+	
+	EventManager.experience_updated.emit(0, player.level_progression[player.current_level])
 	
 func game_over(won: bool):
 	var s = GAME_OVER_SCREEN.instantiate()
@@ -117,7 +106,7 @@ func increase_wave():
 		return
 	current_wave = waves[current_wave_number]
 	current_batch = 0
-	wave_label.text = "STAGE LEVEL " + str(current_wave_number + 1)
+	EventManager.next_wave.emit(current_wave_number + 1)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -125,13 +114,6 @@ func _process(delta: float) -> void:
 
 
 func _on_button_button_up():
-	shop.leave_shop()
-	control.visible = false
+	EventManager.exit_shop.emit()
 	next_wave()
-	pass # Replace with function body.
-
-
-func _on_child_entered_tree(node):
-	if node is AudioStreamPlayer2D:
-		node.play()
 	pass # Replace with function body.

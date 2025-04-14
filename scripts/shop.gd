@@ -22,7 +22,9 @@ func _ready():
 		for n in power_ups:
 			arr.append(n.duplicate(true))
 			Global.saving_tree  = arr
+	EventManager.exit_shop.connect(leave_shop)
 	pass # Replace with function body.
+
 
 func provide_powerups():
 	self.visible = true

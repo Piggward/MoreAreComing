@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://82xpxln405yd"]
 
 [ext_resource type="Texture2D" uid="uid://dw78yxksvopid" path="res://art/genericItem_color_019.png" id="1_rrvfv"]
-[ext_resource type="Script" path="res://scripts/junkparticles.gd" id="2_ve28f"]
+[ext_resource type="Script" uid="uid://u5en2mkfw03h" path="res://scripts/junkparticles.gd" id="2_ve28f"]
 
 [sub_resource type="Curve" id="Curve_yho7e"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.866667, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -11,8 +11,7 @@ point_count = 3
 curve = SubResource("Curve_yho7e")
 
 [sub_resource type="Curve" id="Curve_4t1et"]
-min_value = -360.0
-max_value = 360.0
+_limits = [-360.0, 360.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
@@ -27,7 +26,7 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 gradient = SubResource("Gradient_sjg3w")
 
 [sub_resource type="Curve" id="Curve_we2c4"]
-max_value = 100.0
+_limits = [0.0, 100.0, 0.0, 1.0]
 _data = [Vector2(0, 0.701477), 0.0, 0.0, 0, 0, Vector2(0.0146138, 100), 0.0, 0.0, 0, 0]
 point_count = 2
 

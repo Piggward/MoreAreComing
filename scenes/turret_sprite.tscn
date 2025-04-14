@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cp762k8rwshe2"]
+[gd_scene load_steps=5 format=3 uid="uid://cp762k8rwshe2"]
 
-[ext_resource type="Shader" path="res://scenes/alt_art/teststs.gdshader" id="1_ye1jq"]
+[ext_resource type="Shader" uid="uid://kqk5imerxgcl" path="res://scenes/alt_art/teststs.gdshader" id="1_ye1jq"]
 [ext_resource type="Texture2D" uid="uid://318kuti2tkud" path="res://art/towerDefense_tile250.png" id="2_l1rvh"]
+[ext_resource type="Script" uid="uid://cvy0t234abrva" path="res://scripts/turret_sprite.gd" id="3_hwdqk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_shm7x"]
 shader = ExtResource("1_ye1jq")
@@ -15,5 +16,6 @@ shader_parameter/tolerance = 0.15
 [node name="Sprite2D" type="Sprite2D"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_shm7x")
-position = Vector2(69, -1.00025)
 texture = ExtResource("2_l1rvh")
+script = ExtResource("3_hwdqk")
+colors = Array[Color]([Color(0, 0.756863, 0, 1), Color(0, 0, 0.729412, 1), Color(0.835294, 0.737255, 0.152941, 1), Color(0.772549, 0.2, 0.796078, 1), Color(0.905882, 0.298039, 0.235294, 1)])

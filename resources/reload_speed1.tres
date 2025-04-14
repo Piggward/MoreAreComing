@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://brs0gvkp08rbm"]
 
-[ext_resource type="Script" path="res://scripts/power_up.gd" id="1_6jtny"]
+[ext_resource type="Script" uid="uid://cfns6322r31jo" path="res://scripts/power_up.gd" id="1_6jtny"]
 
 [resource]
 script = ExtResource("1_6jtny")
@@ -8,6 +8,7 @@ title = "FINESSE"
 title_color = Color(1, 1, 1, 1)
 power_up_description = "RELOAD SPEED INCREASED"
 shoot_speed = 1.0
+shot_scale = 1.0
 damage = 1.0
 shoot_cd = 1.0
 turn_rate = 1.0

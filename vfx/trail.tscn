@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cfnchjpjoqysp"]
 
 [ext_resource type="Texture2D" uid="uid://d1vyj2r4bywm1" path="res://art/smoke_07.png" id="1_n50s6"]
-[ext_resource type="Script" path="res://scripts/trail.gd" id="2_f0edv"]
+[ext_resource type="Script" uid="uid://do5corfrsdhk3" path="res://scripts/trail.gd" id="2_f0edv"]
 
 [sub_resource type="Gradient" id="Gradient_hd7pd"]
 offsets = PackedFloat32Array(0.00443459, 0.0620843, 0.603104)
@@ -11,7 +11,7 @@ colors = PackedColorArray(1, 1, 1, 0.498039, 1, 1, 1, 1, 1, 1, 1, 0)
 gradient = SubResource("Gradient_hd7pd")
 
 [sub_resource type="Curve" id="Curve_fxavy"]
-max_value = 50.0
+_limits = [0.0, 50.0, 0.0, 1.0]
 _data = [Vector2(0, 0.508574), 0.0, 0.0, 0, 0, Vector2(1, 2.12393), 0.0, 0.0, 0, 0]
 point_count = 2
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://h5tspryhv1ig"]
 
-[ext_resource type="Shader" path="res://vfx/color_swap.gdshader" id="1_eyy1i"]
+[ext_resource type="Shader" uid="uid://o0iivpms5ae2" path="res://vfx/color_swap.gdshader" id="1_eyy1i"]
 [ext_resource type="Texture2D" uid="uid://318kuti2tkud" path="res://art/towerDefense_tile250.png" id="2_p3l6r"]
 [ext_resource type="PackedScene" uid="uid://cp762k8rwshe2" path="res://scenes/turret_sprite.tscn" id="3_i1mmx"]
 

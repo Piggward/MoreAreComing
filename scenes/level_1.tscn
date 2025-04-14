@@ -1,4 +1,4 @@
-[gd_scene load_steps=698 format=4 uid="uid://do804sfv5x0tt"]
+[gd_scene load_steps=700 format=4 uid="uid://do804sfv5x0tt"]
 
 [ext_resource type="Script" path="res://scripts/level_1.gd" id="1_3ju04"]
 [ext_resource type="Script" path="res://scripts/turret.gd" id="1_iom35"]
@@ -353,11 +353,13 @@
 [ext_resource type="Script" path="res://scripts/enemies_killed.gd" id="345_7gdhx"]
 [ext_resource type="AudioStream" uid="uid://dba3b1hwbe16s" path="res://sfx/tanks_song_intro.mp3" id="347_cirr1"]
 [ext_resource type="AudioStream" uid="uid://dlvon3tc8ks6n" path="res://sfx/tanks_song_main.mp3" id="348_3fsji"]
+[ext_resource type="Script" path="res://scripts/experience_bar.gd" id="349_m0e1v"]
 [ext_resource type="Script" path="res://scripts/shoot_bounds_area.gd" id="351_xsr3h"]
+[ext_resource type="Script" path="res://scripts/exp_manager.gd" id="356_ountv"]
 
 [sub_resource type="Resource" id="Resource_iaqbb"]
 script = ExtResource("2_5rwbk")
-batches = 1
+batches = 2
 enemies = 5
 special_factor = 0.0
 batch_cd = 6.5
@@ -367,7 +369,7 @@ health = 10
 
 [sub_resource type="Resource" id="Resource_qkdxg"]
 script = ExtResource("2_5rwbk")
-batches = 3
+batches = 5
 enemies = 6
 special_factor = 0.1
 batch_cd = 7.0
@@ -377,7 +379,7 @@ health = 15
 
 [sub_resource type="Resource" id="Resource_2gj2k"]
 script = ExtResource("2_5rwbk")
-batches = 3
+batches = 5
 enemies = 10
 special_factor = 0.1
 batch_cd = 8.0
@@ -6258,7 +6260,7 @@ corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0pq74"]
-bg_color = Color(0.117647, 0.6, 0.6, 0.482353)
+bg_color = Color(0, 2, 2, 1)
 corner_radius_top_left = 15
 corner_radius_top_right = 15
 corner_radius_bottom_right = 15
@@ -6367,13 +6369,11 @@ collision_mask = 2
 script = ExtResource("2_sf0d6")
 shoot_speed = 300.0
 knock_back = 10.0
-damage = 50.0
-turn_rate = 8.0
-mag_size = 100
-reload_speed = 0.1
-shoot_cd = 0.1
-shot_scale = 5.0
-pierce = 100
+damage = 10.0
+turn_rate = 4.0
+mag_size = 10
+reload_speed = 1.0
+shoot_cd = 0.4
 health = 100
 colors = Array[Color]([Color(5.96821e-06, 0, 0.941457, 1), Color(0, 0.798343, 3.85046e-07, 1), Color(0.862745, 0.796078, 0, 1), Color(0.930597, 8.22073e-05, 0.726536, 1), Color(0.905882, 0.298039, 0.235294, 1)])
 level_progression = Array[int]([10, 10, 10, 10, 12, 14, 16, 18, 20, 20, 22, 22, 24, 24, 26, 28, 30, 30, 40, 42, 44, 46, 48, 50, 52, 54])
@@ -6541,10 +6541,10 @@ power_ups = Array[ExtResource("316_wvrm0")]([SubResource("Resource_6fcxt"), SubR
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
 visible = false
-offset_left = 404.0
-offset_top = 404.0
-offset_right = 759.0
-offset_bottom = 447.0
+offset_left = 556.0
+offset_top = 304.0
+offset_right = 557.0
+offset_bottom = 347.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ip24r")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer"]
@@ -6699,7 +6699,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("345_7gdhx")
 
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/UI"]
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/UI" groups=["experience_bar"]]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.862
@@ -6713,6 +6713,7 @@ offset_bottom = 730.0
 theme_override_styles/background = SubResource("StyleBoxFlat_0ur24")
 theme_override_styles/fill = SubResource("StyleBoxFlat_0pq74")
 show_percentage = false
+script = ExtResource("349_m0e1v")
 
 [node name="Label" type="Label" parent="CanvasLayer/UI/ProgressBar"]
 layout_mode = 1
@@ -6783,6 +6784,13 @@ shape = SubResource("CircleShape2D_eudq3")
 
 [node name="ShotContainer" type="Node2D" parent="."]
 process_mode = 1
+
+[node name="ExpManager" type="Node2D" parent="."]
+position = Vector2(576, 324)
+script = ExtResource("356_ountv")
+exp_wait_time = 1.0
+
+[node name="Timer" type="Timer" parent="ExpManager"]
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="child_entered_tree" from="EnemyManager" to="EnemyManager" method="_on_child_entered_tree"]

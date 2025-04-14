@@ -23,6 +23,7 @@ var has_automatic_shooting = true
 @onready var progress_bar = $"../CanvasLayer/ProgressBar"
 @onready var level_1 = $".."
 @export var level_progression: Array[int] = []
+var exp = 0
 var current_level = 0
 signal attributes_updated
 @onready var turret_sprite = $"../Turret/TurretSprite"

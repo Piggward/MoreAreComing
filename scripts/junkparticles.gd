@@ -17,21 +17,17 @@ func _ready():
 		self.JUNKTYPE.SCREW:
 			custom_amount = randi_range(1, 3)
 			self.texture = SCREWS
-			print("SPAWNING " + str(amount) + " SCREWS")
 		self.JUNKTYPE.ROUND:
 			custom_amount = randi_range(1, 3)
 			self.scale *= 1
 			self.texture = ROUNDSCREW
-			print("SPAWNING " + str(amount) + " ROUNDSCREW")
 		self.JUNKTYPE.NAIL:
 			custom_amount = randi_range(1, 3)
 			self.texture = NAILS
-			print("SPAWNING " + str(amount) + " NAILS")
 		self.JUNKTYPE.PLATE:
 			self.scale *= 2.5
 			self.texture = PLATES
 			self.amount = randi_range(0, 1)
-			print("SPAWNING " + str(amount) + " PLATES")
 	self.amount = custom_amount
 	self.emitting = true
 	await get_tree().create_timer(self.lifetime).timeout

@@ -18,8 +18,8 @@ emission_shape_offset = Vector3(-1.5, 0, 0)
 angle_min = -90.0
 angle_max = -90.0
 gravity = Vector3(0, 0, 0)
-scale_min = 0.15
-scale_max = 0.15
+scale_min = 0.09
+scale_max = 0.09
 scale_curve = SubResource("CurveTexture_eoixx")
 color = Color(1, 1, 1, 0.309804)
 
@@ -58,7 +58,7 @@ fill_to = Vector2(0.8, 0.8)
 [sub_resource type="CircleShape2D" id="CircleShape2D_e7kxt"]
 
 [node name="ShootArea" type="Area2D" groups=["pauseable", "projectile"]]
-modulate = Color(3.5, 3.5, 3.5, 1)
+modulate = Color(2, 2, 2, 1)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_u46cq")
@@ -72,14 +72,12 @@ color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-8, 0, -6, -5, -3, -7, 0, -8, 4, -7, 6, -5, 8, -2, 8, 0, 7, 4, 5, 6, 2, 8, 0, 8, -4, 7, -6, 5, -7, 3, -8, 1, -8, 0)
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(0.905882, 0.298039, 0.235294, 1)
 polygon = PackedVector2Array(-8, 0, -6, -5, -3, -7, 0, -8, 4, -7, 6, -5, 8, -2, 8, 0, 7, 4, 5, 6, 2, 8, 0, 8, -4, 7, -6, 5, -7, 3, -8, 1, -8, 0)
 
 [node name="Particles" type="Node2D" parent="."]
 modulate = Color(1, 1, 1, 0.222)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Particles"]
-position = Vector2(2, 0)
 amount = 1
 process_material = SubResource("ParticleProcessMaterial_6lmhe")
 texture = ExtResource("4_tdjhk")
@@ -88,7 +86,7 @@ local_coords = true
 
 [node name="SpeedLines2" type="GPUParticles2D" parent="Particles"]
 process_mode = 3
-position = Vector2(-4, -14)
+position = Vector2(-4, -13)
 amount = 15
 process_material = SubResource("ParticleProcessMaterial_odwe6")
 texture = ExtResource("5_dsovy")
@@ -97,7 +95,7 @@ local_coords = true
 
 [node name="SpeedLines3" type="GPUParticles2D" parent="Particles"]
 process_mode = 3
-position = Vector2(-5, 13)
+position = Vector2(-5, 12)
 amount = 15
 process_material = SubResource("ParticleProcessMaterial_odwe6")
 texture = ExtResource("5_dsovy")

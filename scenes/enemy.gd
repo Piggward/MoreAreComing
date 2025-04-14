@@ -54,7 +54,7 @@ func take_damage(damage: int, knock_back: float):
 	animated_sprite_2d.self_modulate = normal_color
 	
 func die():
-	#spawn_all_particles()
+	spawn_all_particles()
 	died.emit()
 	self.queue_free()
 	

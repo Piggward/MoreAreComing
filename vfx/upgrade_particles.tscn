@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://fmrdsxy6ig5r"]
+
+[ext_resource type="Texture2D" uid="uid://b1ainxd7ihvyv" path="res://art/particles/scorch_01.png" id="1_g7xsf"]
+
+[sub_resource type="Curve" id="Curve_fy3cn"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.641667, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_s43qs"]
+curve = SubResource("Curve_fy3cn")
+
+[sub_resource type="Curve" id="Curve_5su7a"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.258333, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_braud"]
+curve = SubResource("Curve_5su7a")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_46us4"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 25.0
+angle_min = -720.0
+angle_max = 720.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.6
+scale_curve = SubResource("CurveTexture_braud")
+color = Color(0.0156863, 1, 1, 1)
+alpha_curve = SubResource("CurveTexture_s43qs")
+hue_variation_min = -0.01
+hue_variation_max = 0.03
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+texture_filter = 1
+scale = Vector2(0.228885, 0.228885)
+process_material = SubResource("ParticleProcessMaterial_46us4")
+texture = ExtResource("1_g7xsf")
+lifetime = 6.0
+local_coords = true

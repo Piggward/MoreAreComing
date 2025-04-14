@@ -26,12 +26,13 @@ var player: Player
 var current_batch = 0
 signal spawn_batch_requested(amount: int, wave: Wave)
 @onready var shoot_to_start = $ShootToStart
+@onready var exp_manager = $ExpManager
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	enemy_manager.enemy_killed.connect(_on_enemy_killed)
-	current_wave = waves[5]
+	EventManager.exp_pickup.connect(_on_exp_pickup)
+	current_wave = waves[0]
 	progress_bar.visible = false
 	ui.visible = false
 	player = get_tree().get_first_node_in_group("player")
@@ -41,9 +42,15 @@ func _ready() -> void:
 	wave_label.text = "STAGE LEVEL 1"
 	shoot_to_start.start_game.connect(start_game)
 	self.process_mode = Node.PROCESS_MODE_INHERIT
+	enemy_manager.enemy_killed.connect(_on_enemy_killed)
 	get_tree().paused = false
 	#music["parameters/switch_to_clip"] = "Silence"
 	pass # Replace with function body.
+	
+func _on_enemy_killed():
+	if enemy_manager.enemies_killed >= 5:
+		exp_manager._spawn_exp()
+		enemy_manager.enemies_killed = 0
 	
 func start_game():
 	for node in get_tree().get_nodes_in_group("remove_at_start_game"):
@@ -54,16 +61,18 @@ func start_game():
 	ui.visible = true
 	spawn_wave()
 	
-func _on_enemy_killed():
+func _on_exp_pickup():
+	player.exp += 3
 	if player.current_level + 1 >= player.level_progression.size():
 		return
-	exp_progress_bar.value = enemy_manager.enemies_killed
-	if enemy_manager.enemies_killed >= player.level_progression[player.current_level]:
+	exp_progress_bar.value = player.exp
+	if player.exp >= player.level_progression[player.current_level]:
 		player.current_level += 1
 		on_level_up()
 		
 func on_level_up():
 	wave_cleared.play()
+	player.exp = 0
 	enemy_manager.enemies_killed = 0
 	timer.set_paused(true)
 	get_tree().paused = true
@@ -77,13 +86,11 @@ func game_over(won: bool):
 	var s = GAME_OVER_SCREEN.instantiate()
 	s.won = won
 	canvas_layer.add_child(s)
-	self.process_mode = Node.PROCESS_MODE_DISABLED
+	get_tree().paused = true
 	
 func next_wave():
-	print("next wave!")
 	get_tree().paused = false
 	timer.set_paused(false)
-	print("next wave finish!")
 
 func spawn_wave():
 	spawn_batch_requested.emit(current_wave.enemies, current_wave)
@@ -109,7 +116,6 @@ func _process(delta: float) -> void:
 
 
 func _on_button_button_up():
-	print("button press!")
 	shop.leave_shop()
 	control.visible = false
 	next_wave()
@@ -119,5 +125,4 @@ func _on_button_button_up():
 func _on_child_entered_tree(node):
 	if node is AudioStreamPlayer2D:
 		node.play()
-		print("play")
 	pass # Replace with function body.

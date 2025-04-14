@@ -13,6 +13,5 @@ func _process(delta: float) -> void:
 
 func _on_area_exited(area: Area2D) -> void:
 	if not area.dead:
-		print("REMOVING")
 		area.queue_free()
 	pass # Replace with function body.

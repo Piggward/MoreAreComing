@@ -17,7 +17,6 @@ shape = SubResource("CircleShape2D_23d85")
 
 [node name="GPUParticles2D" parent="." instance=ExtResource("2_ktsiv")]
 modulate = Color(2, 2, 2, 1)
-preprocess = 2.0
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

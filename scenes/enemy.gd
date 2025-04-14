@@ -8,7 +8,7 @@ var player: Player
 var level: Level
 var current_health: int
 var normal_scale = 0.3
-signal died
+signal died(enemy: Enemy)
 @onready var progress_bar = $Node2D/ProgressBar
 @onready var animated_sprite_2d = $AnimatedSprite2D
 var normal_color: Color
@@ -20,6 +20,8 @@ const EXPLOSION_PARTICLES = preload("res://scenes/explosion_particles.tscn")
 @export var wheel_color_1: Color
 @export var wheel_color_2: Color
 @export var accent_color: Color
+@export var drops_exp: bool
+@onready var gpu_particles_2d = $GPUParticles2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -30,6 +32,7 @@ func _ready() -> void:
 	current_health = max_health
 	progress_bar.value = current_health
 	normal_color = animated_sprite_2d.self_modulate
+	gpu_particles_2d.emitting = drops_exp
 	pass # Replace with function body.
 	
 func find_bonus():
@@ -55,7 +58,7 @@ func take_damage(damage: int, knock_back: float):
 	
 func die():
 	spawn_all_particles()
-	died.emit()
+	died.emit(self)
 	self.queue_free()
 	
 func spawn_all_particles():

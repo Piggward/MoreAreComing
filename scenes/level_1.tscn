@@ -359,11 +359,11 @@
 
 [sub_resource type="Resource" id="Resource_iaqbb"]
 script = ExtResource("2_5rwbk")
-batches = 2
+batches = 3
 enemies = 5
 special_factor = 0.0
-batch_cd = 6.5
-speed = 55.0
+batch_cd = 8.0
+speed = 50.0
 damage = 10
 health = 10
 
@@ -372,7 +372,7 @@ script = ExtResource("2_5rwbk")
 batches = 5
 enemies = 6
 special_factor = 0.1
-batch_cd = 7.0
+batch_cd = 10.0
 speed = 55.0
 damage = 10
 health = 15

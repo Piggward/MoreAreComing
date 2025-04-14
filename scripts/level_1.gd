@@ -27,7 +27,15 @@ var current_batch = 0
 signal spawn_batch_requested(amount: int, wave: Wave)
 @onready var shoot_to_start = $ShootToStart
 @onready var exp_manager = $ExpManager
+var current_enemies_killed = 0
+const ENEMY_EXP_FACTOR = 5
 
+func should_drop_exp():
+	var rand = randf_range(0.0, 1.0)
+	var should_drop = float(current_enemies_killed) / float(ENEMY_EXP_FACTOR) > rand
+	if should_drop:
+		current_enemies_killed = 0
+	return float(current_enemies_killed) / float(ENEMY_EXP_FACTOR) > rand
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -47,10 +55,11 @@ func _ready() -> void:
 	#music["parameters/switch_to_clip"] = "Silence"
 	pass # Replace with function body.
 	
-func _on_enemy_killed():
-	if enemy_manager.enemies_killed >= 5:
-		exp_manager._spawn_exp()
-		enemy_manager.enemies_killed = 0
+func _on_enemy_killed(enemy: Enemy):
+	current_enemies_killed += 1
+	if enemy.drops_exp:
+		exp_manager._spawn_exp(enemy.global_position, current_enemies_killed)
+		current_enemies_killed = 0
 	
 func start_game():
 	for node in get_tree().get_nodes_in_group("remove_at_start_game"):
@@ -61,8 +70,8 @@ func start_game():
 	ui.visible = true
 	spawn_wave()
 	
-func _on_exp_pickup():
-	player.exp += 3
+func _on_exp_pickup(value: int):
+	player.exp += value
 	if player.current_level + 1 >= player.level_progression.size():
 		return
 	exp_progress_bar.value = player.exp

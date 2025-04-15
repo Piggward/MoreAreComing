@@ -81,33 +81,34 @@ scale_curve = SubResource("CurveTexture_rax5s")
 alpha_curve = SubResource("CurveTexture_16u6y")
 
 [node name="GPUParticles2D" type="GPUParticles2D"]
+process_mode = 3
 modulate = Color(2, 2, 2, 1)
 emitting = false
 amount = 2
-process_material = SubResource("ParticleProcessMaterial_l7rf8")
 texture = ExtResource("1_i4g7l")
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_l7rf8")
 script = ExtResource("2_c5nhc")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
 amount = 1
-process_material = SubResource("ParticleProcessMaterial_8suxy")
 texture = ExtResource("3_2a6k2")
 lifetime = 1.5
 one_shot = true
 explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_8suxy")
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
 z_index = -1
 emitting = false
 amount = 1
-process_material = SubResource("ParticleProcessMaterial_crvyf")
 texture = ExtResource("4_6juhy")
 lifetime = 0.6
 one_shot = true
+process_material = SubResource("ParticleProcessMaterial_crvyf")
 
 [node name="ExplosionParticles" parent="." instance=ExtResource("5_8hnsl")]
 

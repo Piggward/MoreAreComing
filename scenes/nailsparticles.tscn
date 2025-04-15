@@ -51,14 +51,15 @@ color_ramp = SubResource("GradientTexture1D_8kesg")
 alpha_curve = SubResource("CurveTexture_wc806")
 
 [node name="GPUParticles2D" type="GPUParticles2D"]
+process_mode = 3
 z_index = -1
 emitting = false
 amount = 15
-process_material = SubResource("ParticleProcessMaterial_x6m33")
 texture = ExtResource("1_rrvfv")
 lifetime = 6.0
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
 local_coords = true
+process_material = SubResource("ParticleProcessMaterial_x6m33")
 script = ExtResource("2_ve28f")

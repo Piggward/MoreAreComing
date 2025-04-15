@@ -43,12 +43,13 @@ color = Color(0.533038, 0.533036, 0.533037, 1)
 color_ramp = SubResource("GradientTexture1D_8kesg")
 
 [node name="GPUParticles2D" type="GPUParticles2D"]
+process_mode = 3
 z_index = -1
 emitting = false
 amount = 10
-process_material = SubResource("ParticleProcessMaterial_x6m33")
 texture = ExtResource("1_87hht")
 lifetime = 120.0
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_x6m33")

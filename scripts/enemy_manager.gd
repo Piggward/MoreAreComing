@@ -1,17 +1,21 @@
+class_name EnemyManager
 extends Node2D
 
 const ENEMY = preload("res://scenes/enemy.tscn")
+const SPEEDY_ENEMY = preload("res://scenes/speedy_enemy.tscn")
+const TANKY_ENEMY = preload("res://scenes/tanky_enemy.tscn")
+@onready var level_1 = $".."
+
 @export var damage: int
 @export var speed: float
+
 var positions: Array[Node]
 var min_enemy_time = 0.1
 var enemies_killed = 0
 var total_enemies_killed = 0
+
 signal batch_spawned
 signal enemy_killed(enemy: Enemy)
-const SPEEDY_ENEMY = preload("res://scenes/speedy_enemy.tscn")
-const TANKY_ENEMY = preload("res://scenes/tanky_enemy.tscn")
-@onready var level_1 = $".."
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -37,7 +41,6 @@ func spawn_enemy(wave: Wave, special: int):
 	e.speed = wave.speed
 	e.damage = wave.damage
 	e.max_health = wave.health
-	e.drops_exp = level_1.should_drop_exp()
 	e.died.connect(_on_enemy_died)
 	random.add_child(e)
 	positions.push_back(random)
@@ -45,11 +48,3 @@ func spawn_enemy(wave: Wave, special: int):
 func _on_enemy_died(enemy: Enemy):
 	enemies_killed += 1
 	enemy_killed.emit(enemy)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
-func _on_child_entered_tree(node):
-	pass # Replace with function body.

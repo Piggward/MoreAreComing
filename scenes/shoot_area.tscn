@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://c137k3r5rd0os"]
+[gd_scene load_steps=13 format=3 uid="uid://c137k3r5rd0os"]
 
 [ext_resource type="Script" uid="uid://bucbhgg3aka77" path="res://scripts/shoot_area.gd" id="1_u46cq"]
+[ext_resource type="Script" uid="uid://pfwsatqi5k62" path="res://scripts/ball_polygon.gd" id="2_nmfh1"]
 [ext_resource type="Texture2D" uid="uid://b63phd1s6qt0r" path="res://art/slash_02.png" id="4_tdjhk"]
 [ext_resource type="Texture2D" uid="uid://cbdp7nrn3odv4" path="res://art/trace_01.png" id="5_dsovy"]
 [ext_resource type="AudioStream" uid="uid://bwamlv2otq8la" path="res://sfx/muffled_explosion.mp3" id="8_aa30y"]
@@ -44,17 +45,6 @@ scale_max = 0.1
 color = Color(1, 1, 1, 0.151)
 color_ramp = SubResource("GradientTexture1D_64k8x")
 
-[sub_resource type="Gradient" id="Gradient_rkdtb"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_r864m"]
-gradient = SubResource("Gradient_rkdtb")
-width = 35
-height = 35
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.8, 0.8)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_e7kxt"]
 
 [node name="ShootArea" type="Area2D" groups=["pauseable", "projectile"]]
@@ -63,21 +53,23 @@ collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_u46cq")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="ShootSprite" type="Sprite2D" parent="."]
 
-[node name="Polygon2D2" type="Polygon2D" parent="."]
+[node name="OutlinePolygon" type="Polygon2D" parent="."]
 self_modulate = Color(2, 2, 2, 1)
 scale = Vector2(1.06829, 1.06829)
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-8, 0, -6, -5, -3, -7, 0, -8, 4, -7, 6, -5, 8, -2, 8, 0, 7, 4, 5, 6, 2, 8, 0, 8, -4, 7, -6, 5, -7, 3, -8, 1, -8, 0)
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
+[node name="BallPolygon" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-8, 0, -6, -5, -3, -7, 0, -8, 4, -7, 6, -5, 8, -2, 8, 0, 7, 4, 5, 6, 2, 8, 0, 8, -4, 7, -6, 5, -7, 3, -8, 1, -8, 0)
+script = ExtResource("2_nmfh1")
 
 [node name="Particles" type="Node2D" parent="."]
 modulate = Color(1, 1, 1, 0.222)
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Particles"]
+[node name="SpeedHead" type="GPUParticles2D" parent="Particles"]
+process_mode = 3
 amount = 1
 texture = ExtResource("4_tdjhk")
 lifetime = 2.0
@@ -93,7 +85,7 @@ lifetime = 1.5
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_odwe6")
 
-[node name="SpeedLines3" type="GPUParticles2D" parent="Particles"]
+[node name="SpeedLines1" type="GPUParticles2D" parent="Particles"]
 process_mode = 3
 position = Vector2(-5, 12)
 amount = 15
@@ -102,11 +94,7 @@ lifetime = 1.5
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_odwe6")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
-texture = SubResource("GradientTexture2D_r864m")
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_aa30y")
 volume_db = 24.0
 

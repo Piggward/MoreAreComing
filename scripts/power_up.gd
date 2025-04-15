@@ -28,8 +28,8 @@ func apply(player: Player):
 	player.stats.reload_speed *= reload_speed
 	player.stats.pierce += pierce
 	player.stats.knock_back += knock_back
-	player.stats.has_automatic_reload = has_automatic_reload || player.has_automatic_reload
-	player.stats.has_automatic_shooting = has_automatic_shooting || player.has_automatic_shooting
+	player.stats.has_automatic_reload = has_automatic_reload || player.stats.has_automatic_reload
+	player.stats.has_automatic_shooting = has_automatic_shooting || player.stats.has_automatic_shooting
 	player.stats.shot_scale *= shot_scale
 	if damage > 1:
 		var turret = player.get_tree().get_first_node_in_group("turret")

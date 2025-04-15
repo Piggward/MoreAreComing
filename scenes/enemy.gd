@@ -1,27 +1,31 @@
 class_name Enemy
 extends Area2D
 
-@export var speed: float
-@export var damage: float
-@export var max_health: int
-var player: Player
-var level: Level
-var current_health: int
-var normal_scale = 0.3
-signal died(enemy: Enemy)
-@onready var progress_bar = $Node2D/ProgressBar
-@onready var animated_sprite_2d = $AnimatedSprite2D
-var normal_color: Color
 const NAILSPARTICLES = preload("res://scenes/nailsparticles.tscn")
 const SCREWSPARTICLES = preload("res://scenes/screwsparticles.tscn")
 const EXPLOSION_2 = preload("res://scenes/explosion2.tscn")
 const EXPLOSION_PARTICLES = preload("res://scenes/explosion_particles.tscn")
+
+@export var speed: float
+@export var damage: float
+@export var max_health: int
 @export var main_color: Color
 @export var wheel_color_1: Color
 @export var wheel_color_2: Color
 @export var accent_color: Color
-@export var drops_exp: bool
-@onready var gpu_particles_2d = $GPUParticles2D
+@export var exp: int = 1
+
+@onready var progress_bar = $Node2D/ProgressBar
+@onready var animated_sprite_2d = $AnimatedSprite2D
+
+var player: Player
+var level: Level
+var current_health: int
+var normal_scale = 0.3
+var normal_color: Color
+var dead: bool = false
+
+signal died(enemy: Enemy)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -32,7 +36,6 @@ func _ready() -> void:
 	current_health = max_health
 	progress_bar.value = current_health
 	normal_color = animated_sprite_2d.self_modulate
-	gpu_particles_2d.emitting = drops_exp
 	pass # Replace with function body.
 	
 func find_bonus():
@@ -46,10 +49,10 @@ func find_bonus():
 			self.damage = 5
 			self.max_health *= 0.75
 
-func take_damage(damage: int, knock_back: float):
+func take_damage(damage: int):
 	current_health -= damage
 	progress_bar.value = current_health
-	self.position -= Vector2(0, knock_back).rotated(self.rotation - deg_to_rad(90))
+	self.position -= Vector2(0, 10).rotated(self.rotation - deg_to_rad(90))
 	if current_health <= 0:
 		die()
 	animated_sprite_2d.self_modulate = Color.RED
@@ -57,6 +60,7 @@ func take_damage(damage: int, knock_back: float):
 	animated_sprite_2d.self_modulate = normal_color
 	
 func die():
+	dead = true
 	spawn_all_particles()
 	died.emit(self)
 	self.queue_free()
@@ -75,17 +79,9 @@ func spawn_junk():
 	var z = NAILSPARTICLES.instantiate()
 	z.junktype = Junk.JUNKTYPE.ROUND
 	z.self_modulate = wheel_color_1
-	#var u = NAILSPARTICLES.instantiate()
-	#u.junktype = Junk.JUNKTYPE.PLATE
-	#u.self_modulate = main_color
-	#var v = NAILSPARTICLES.instantiate()
-	#v.junktype = Junk.JUNKTYPE.WHEEL
-	#v.self_modulate = accent_color
 	spawn_particles(x)
 	spawn_particles(y)
 	spawn_particles(z)
-	#spawn_particles(u)
-	#spawn_particles(v)
 	
 func spawn_particles(obj:GPUParticles2D):
 	obj.global_position = self.global_position

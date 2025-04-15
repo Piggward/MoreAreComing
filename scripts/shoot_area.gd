@@ -1,71 +1,55 @@
-class_name Shoot
+class_name ShootArea
 extends Area2D
 
 @export var direction: float
-@export var speed: int
-@export var damage: int
-@export var pierce: int
-@export var knock_back: float
+@export var power: Power
 @export var player_color: Color
-@onready var shoot_polygon: Polygon2D = $ShootPolygon
-@onready var audio_stream_player_2d = $AudioStreamPlayer2D
-var has_hit = false
-var camera: Camera
-var dead = false
-var enemies: Array[Enemy]
-@onready var point_light_2d = $PointLight2D
-@onready var particles = $Particles
-@onready var trail = $Particles/Trail
-@onready var sprite_2d = $Sprite2D
-@onready var collision_shape_2d = $CollisionShape2D
-@onready var polygon_2d = $Polygon2D
-@onready var polygon_2d_2 = $Polygon2D2
+@onready var hit_sound: AudioStreamPlayer2D = $HitSound
+@onready var particles: Node2D = $Particles
 
+var dead = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	camera = get_tree().get_first_node_in_group("camera")
-	particles.rotation = direction - deg_to_rad(90)
-	sprite_2d.rotation = direction + deg_to_rad(180)
-	point_light_2d.rotation += direction - deg_to_rad(90)
-	polygon_2d.color = player_color
+	self.rotation = direction - deg_to_rad(90)
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if not dead:
-		self.position += Vector2(0, speed * delta).rotated(direction)
+		power.travel(self, delta)
 	pass
 
 func terminate_self():
-	audio_stream_player_2d.pitch_scale += randf_range(0, 0.04)
-	audio_stream_player_2d.play()
-	if pierce >= 0:
-		return
+	self.monitoring = false
+	hit_sound.pitch_scale += randf_range(0, 0.04)
+	hit_sound.play()
 	dead = true
-	collision_shape_2d.queue_free()
-	point_light_2d.visible = false
-	sprite_2d.visible = false
-	polygon_2d.visible = false
-	polygon_2d_2.visible = false
+	for child in get_children():
+		child.visible = false
+	particles.visible = true
 	for child in particles.get_children():
-		if child.name != "Trail":
-			child.visible = false
-		else:
-			child.enabled = false
 		child.emitting = false
-	await audio_stream_player_2d.finished
-	await get_tree().create_timer(4).timeout
+		if child.name == "Trail":
+			child.enabled = false
+		else:
+			child.queue_free()
+	await hit_sound.finished
+	await get_tree().create_timer(1).timeout
 	self.queue_free()
 	
 
 func _on_area_entered(area: Area2D) -> void:
-	if area is Enemy and (not has_hit or pierce >= 0) and not enemies.has(area):
-		has_hit = true
-		pierce -= 1
-		enemies.append(area)
-		camera.add_trauma(3)
-		area.take_damage(damage, knock_back)
-		terminate_self()
+	if area is Enemy:
+		power.on_hit(self, area)
 	pass # Replace with function body.
+	
+func on_hit(enemy: Enemy):
+	EventManager.request_camera_shake.emit(3)
+	enemy.take_damage(power.damage)
+	terminate_self()
+	
+func get_instance():
+	pass
+	

@@ -6,12 +6,14 @@ const SHOP_ITEM = preload("res://scenes/shop_item.tscn")
 @onready var animation_player = $"../AnimationPlayer"
 @onready var panel_container = $"../PanelContainer"
 @onready var power_up_description = $"../PanelContainer/MarginContainer/PowerUpDescription"
-@onready var control = $"../Control"
 @onready var power_up = $"../../Turret/CharacterBody2D/PowerUp"
-
+@onready var exit_shop_button: Button = $"../ExitShopButton"
 
 var opening_door = false
 var current: Array[PowerUp] = []
+
+signal exit_shop
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.visible = false
@@ -22,9 +24,7 @@ func _ready():
 		for n in power_ups:
 			arr.append(n.duplicate(true))
 			Global.saving_tree  = arr
-	EventManager.exit_shop.connect(leave_shop)
 	pass # Replace with function body.
-
 
 func provide_powerups():
 	self.visible = true
@@ -76,7 +76,7 @@ func _on_door_opened(si: ShopItem):
 	animation_player.play("show_powerup")
 	si.power_up.apply(get_tree().get_first_node_in_group("player"))
 	await animation_player.animation_finished
-	control.visible = true
+	exit_shop_button.visible = true
 	opening_door = false
 	
 func leave_shop():
@@ -84,6 +84,7 @@ func leave_shop():
 	for child in get_children():
 		child.queue_free()
 	self.visible = false
+	exit_shop_button.visible = false
 	
 func add_powerup():
 	var p = SHOP_ITEM.instantiate()
@@ -98,3 +99,8 @@ func add_powerup():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func _on_exit_shop_button_button_up() -> void:
+	exit_shop.emit()
+	leave_shop()
+	pass # Replace with function body.

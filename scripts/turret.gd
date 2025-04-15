@@ -2,6 +2,7 @@ class_name Turret
 extends Node2D
 
 const SHOOT_AREA = preload("res://scenes/shoot_area.tscn")
+const ROCKET = preload("res://scenes/rocket.tscn")
 
 @onready var nozzle: Marker2D = $Nozzle
 @onready var rotating_pipe: AudioStreamPlayer = $RotatingPipe
@@ -38,11 +39,11 @@ func reset():
 	shots_left = player.stats.mag_size
 	ammo_updated.emit(self.shots_left, player.stats.mag_size)
 
-func shoot():
+func shoot(power: Power):
 	if not shoot_ready or shots_left == 0 or reloading:
 		return
 	shoot_ready = false
-	add_shot_to_scene()
+	spawn_power(power)
 	update_ammo()
 	shoot_effects()
 	if player.stats.has_automatic_reload and shots_left == 0:
@@ -72,6 +73,14 @@ func add_shot_to_scene():
 	s.scale *= player.stats.shot_scale
 	s.player_color = player.primary_color
 	shot_container.add_child(s)
+	
+func spawn_power(p: Power):
+	var scene: ShootArea = p.get_shot_instance()
+	scene.direction = self.rotation - deg_to_rad(90)
+	scene.player_color = player.primary_color
+	scene.global_position = nozzle.global_position
+	shot_container.add_child(scene)
+	shoot_effects()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

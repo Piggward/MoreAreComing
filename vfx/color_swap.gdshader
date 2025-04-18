@@ -16,6 +16,7 @@ void fragment() {
             break; // Replace only once
         }
     }
-
-    COLOR = tex_color;
+    // Combine with modulate color more gently
+    COLOR.rgb = tex_color.rgb;
+    COLOR.a = tex_color.a * COLOR.a;       // modulate alpha
 }

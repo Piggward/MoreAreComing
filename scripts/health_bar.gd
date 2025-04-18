@@ -5,6 +5,7 @@ var player: Player
 
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
+	player.health_updated.connect(update_health)
 	self.max_value = player.health
 	update_health(player.health, player.health)
 	

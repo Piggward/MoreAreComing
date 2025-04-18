@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://btst8eaan47f4"]
+
+[ext_resource type="Texture2D" uid="uid://bblxxku0whmhe" path="res://art/particles/circle_01.png" id="1_tsahi"]
+[ext_resource type="Script" path="res://scripts/force_area.gd" id="1_vj68m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7b7bt"]
+radius = 9.0
+
+[node name="ForceArea" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_vj68m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7b7bt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(2, 1, 2, 0.612)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("1_tsahi")

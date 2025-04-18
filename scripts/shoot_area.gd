@@ -8,11 +8,15 @@ extends Area2D
 @onready var particles: Node2D = $Particles
 
 var dead = false
+var enemies_hit: Array[Enemy] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	self.rotation = direction - deg_to_rad(90)
+	self_rotate()
 	pass # Replace with function body.
+	
+func self_rotate():
+	self.rotation = direction - deg_to_rad(90)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,14 +45,13 @@ func terminate_self():
 	
 
 func _on_area_entered(area: Area2D) -> void:
-	if area is Enemy:
-		power.on_hit(self, area)
+	if area is Enemy and not dead:
+		on_hit(area)
+		enemies_hit.append(area)
 	pass # Replace with function body.
 	
 func on_hit(enemy: Enemy):
-	EventManager.request_camera_shake.emit(3)
-	enemy.take_damage(power.damage)
-	terminate_self()
+	power.on_hit(self, enemy)
 	
 func get_instance():
 	pass

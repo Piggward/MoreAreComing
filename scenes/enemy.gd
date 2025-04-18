@@ -52,11 +52,13 @@ func find_bonus():
 func take_damage(damage: int):
 	current_health -= damage
 	progress_bar.value = current_health
-	self.position -= Vector2(0, 10).rotated(self.rotation - deg_to_rad(90))
 	if current_health <= 0:
 		die()
+	var m = animated_sprite_2d.material 
+	animated_sprite_2d.material = null
 	animated_sprite_2d.self_modulate = Color.RED
 	await get_tree().create_timer(0.1).timeout
+	animated_sprite_2d.material = m
 	animated_sprite_2d.self_modulate = normal_color
 	
 func die():

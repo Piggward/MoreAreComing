@@ -1,11 +1,12 @@
 class_name Player
 extends CharacterBody2D
 
-@export var stats: PowerUp
+@export var stats: TurretStats
 @export var max_health: int
 @export var level_progression: Array[int] = []
 @export var powers: Array[Power]
-@export var basic_power: Power
+@export var basic_power: BasicPower
+@export var scene: PackedScene
 
 var power_timers = { }
 var primary_color: Color
@@ -14,6 +15,7 @@ var turret: Turret
 var enemy_manager: EnemyManager
 var exp = 0
 var current_level = 0
+var shoot_ready = true
 
 signal attributes_updated
 signal health_updated(health: int, max_health: int)
@@ -26,9 +28,17 @@ func _ready():
 	enemy_manager.enemy_killed.connect(_on_enemy_killed)
 	health = max_health
 	EventManager.primary_color_change.connect(func(a): self.primary_color = a)
+	EventManager.start_game.connect(_on_game_start)
+	connect_basic_power_timer()
+	
+func _on_game_start():
 	for p in powers:
 		connect_power_timer(p)
-		
+	
+func connect_basic_power_timer():
+	basic_power.create_timer()
+	add_child(basic_power.timer)
+	
 func connect_power_timer(p: Power):
 	p.timer = Timer.new()
 	power_timers[p.timer] = p
@@ -45,13 +55,19 @@ func power_time(timer: Timer):
 func _physics_process(delta: float) -> void:
 	if stats.has_automatic_shooting:
 		if Input.is_action_pressed("left_click"):
-			turret.shoot(basic_power)
+			shoot()
 	else:
 		if Input.is_action_just_pressed("left_click"):
-			turret.shoot(basic_power)
+			shoot()
 	
 	if Input.is_action_just_pressed("right_click"):
 		turret.reload()
+		
+func shoot():
+	if not basic_power.can_shoot() or turret.reloading:
+		return
+	basic_power.on_shoot()
+	turret.shoot(basic_power)
 		
 func _on_exp_pickup(value: int):
 	exp += value

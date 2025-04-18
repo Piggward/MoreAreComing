@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://clvipcnijc7sm"]
+
+[ext_resource type="Script" path="res://scripts/shoot_area.gd" id="1_6lg2p"]
+[ext_resource type="AudioStream" uid="uid://bwamlv2otq8la" path="res://sfx/muffled_explosion.mp3" id="2_wjh8n"]
+
+[node name="ShootArea" type="Area2D" groups=["pauseable", "projectile"]]
+modulate = Color(2, 2, 2, 1)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_6lg2p")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_wjh8n")
+volume_db = 24.0
+bus = &"SFX - Enemy Dead"
+
+[node name="Particles" type="Node2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -38,6 +38,7 @@ func travel(sa: ShootArea, delta: float):
 		for child in sa.get_children():
 			if child is ForceArea:
 				start_radius = child.real_radius()
-	sa.scale *= Vector2(1.01, 1.01)
+				
+	sa.scale += sa.scale * delta
 	if sa.scale.x * start_radius >= radius:
 		sa.terminate_self()

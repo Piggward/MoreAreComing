@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="PowerTree" load_steps=7 format=3 uid="uid://du218vnpfiaqo"]
+
+[ext_resource type="Script" path="res://scripts/powers/power_up.gd" id="1_awlgl"]
+[ext_resource type="Script" path="res://scripts/powers/basic_bullet.gd" id="2_gut4w"]
+[ext_resource type="Script" path="res://scripts/powers/power_tree.gd" id="2_nurn4"]
+
+[sub_resource type="Resource" id="Resource_sqph4"]
+script = ExtResource("2_gut4w")
+mag_size = 0
+has_automatic_shooting = false
+has_automatic_reload = false
+title = "Basic Bullet"
+title_color = Color(1, 1, 1, 1)
+power_up_description = "Increase Damage"
+shoot_speed = 0.0
+damage = 5.0
+shoot_cd = 0.0
+
+[sub_resource type="Resource" id="Resource_q4bai"]
+script = ExtResource("2_gut4w")
+mag_size = 10
+has_automatic_shooting = false
+has_automatic_reload = false
+title = "Basic Bullet"
+title_color = Color(1, 1, 1, 1)
+power_up_description = "Increase mag size"
+shoot_speed = 0.0
+damage = 0.0
+shoot_cd = 0.0
+
+[sub_resource type="Resource" id="Resource_jnvik"]
+script = ExtResource("2_gut4w")
+mag_size = 0
+has_automatic_shooting = false
+has_automatic_reload = false
+title = "Basic Bullet"
+title_color = Color(1, 1, 1, 1)
+power_up_description = "Increase rate of fire"
+shoot_speed = 0.0
+damage = 0.0
+shoot_cd = 0.1
+
+[resource]
+script = ExtResource("2_nurn4")
+powerups = Array[ExtResource("1_awlgl")]([SubResource("Resource_sqph4"), SubResource("Resource_q4bai"), SubResource("Resource_jnvik")])

@@ -6,6 +6,7 @@ const SHOOT_AREA = preload("res://scenes/shoot_area.tscn")
 @export var cool_down: float
 @export var speed: float
 @export var instances: int = 1
+@export var power_name: String
 var timer: Timer
 
 func get_shot_instances():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=716 format=4 uid="uid://do804sfv5x0tt"]
+[gd_scene load_steps=679 format=4 uid="uid://do804sfv5x0tt"]
 
 [ext_resource type="Script" path="res://scripts/level_1.gd" id="1_3ju04"]
 [ext_resource type="Script" path="res://scripts/turret.gd" id="1_iom35"]
@@ -321,43 +321,17 @@
 [ext_resource type="Texture2D" uid="uid://g3c7vjladm6n" path="res://art/Default size/towerDefense_tile100.png" id="301_54igc"]
 [ext_resource type="Script" path="res://scripts/camera_paner.gd" id="308_7j1gf"]
 [ext_resource type="Script" path="res://resources/turret/turret_stats.gd" id="310_8levr"]
-[ext_resource type="Script" path="res://scripts/power.gd" id="311_2t0ur"]
-[ext_resource type="Script" path="res://resources/powers/rocket.gd" id="312_k6f1f"]
-[ext_resource type="Script" path="res://resources/powers/bounce.gd" id="313_cywo2"]
-[ext_resource type="Script" path="res://resources/powers/force.gd" id="314_7cjyx"]
 [ext_resource type="PackedScene" uid="uid://cp762k8rwshe2" path="res://scenes/turret_sprite.tscn" id="314_byfxm"]
-[ext_resource type="Script" path="res://resources/powers/pierce.gd" id="315_yqq6b"]
 [ext_resource type="Texture2D" uid="uid://qsps8vybv2u8" path="res://art/muzzle_02.png" id="316_2j2a1"]
 [ext_resource type="Script" path="res://resources/powers/basic_power.gd" id="316_7gufk"]
-[ext_resource type="Script" path="res://scripts/PowerUpTree.gd" id="316_wvrm0"]
-[ext_resource type="Script" path="res://scripts/power_up.gd" id="317_lba3g"]
-[ext_resource type="Resource" uid="uid://c6k3d0bq8vyic" path="res://resources/power_ups/ammo1.tres" id="318_85q7f"]
 [ext_resource type="Script" path="res://scripts/reload_reminder.gd" id="318_y64pl"]
 [ext_resource type="Script" path="res://scripts/canvas_layer.gd" id="319_31ilp"]
-[ext_resource type="Resource" uid="uid://bldgq00scngn0" path="res://resources/power_ups/ammo2.tres" id="319_xtay8"]
-[ext_resource type="Resource" uid="uid://cqm117r3n4cgl" path="res://resources/power_ups/ammo3.tres" id="320_ugbhw"]
-[ext_resource type="Resource" uid="uid://5gdvg0qh7opv" path="res://resources/power_ups/burst1.tres" id="321_ldysd"]
-[ext_resource type="Resource" uid="uid://bdaq5wy46ohgn" path="res://resources/power_ups/burst2.tres" id="322_3xn6c"]
-[ext_resource type="Resource" uid="uid://x84oswjc0nho" path="res://resources/power_ups/burst3.tres" id="323_fjpg0"]
-[ext_resource type="Resource" uid="uid://cywtyfgbfxicf" path="res://resources/power_ups/damage1.tres" id="324_d2ngo"]
-[ext_resource type="Resource" uid="uid://hbwpyk4ubrsb" path="res://resources/power_ups/damage2.tres" id="325_t50af"]
-[ext_resource type="Resource" uid="uid://blf30gy2ja3uk" path="res://resources/power_ups/damage3.tres" id="326_vudpf"]
+[ext_resource type="Script" path="res://scripts/powers/power_tree.gd" id="322_t76av"]
+[ext_resource type="Resource" uid="uid://du218vnpfiaqo" path="res://resources/power_trees/basic_bullet_tree.tres" id="323_4rdh8"]
+[ext_resource type="Resource" uid="uid://dymwddgg2dj67" path="res://resources/power_trees/bounce_tree.tres" id="324_xiww4"]
+[ext_resource type="Resource" uid="uid://b06dfk6wqa6aa" path="res://resources/power_trees/rocket_tree.tres" id="325_3vun2"]
 [ext_resource type="Script" path="res://scripts/camera_2d.gd" id="328_u2vmf"]
-[ext_resource type="Resource" uid="uid://jvctkojgyusg" path="res://resources/power_ups/pierce1.tres" id="330_v76us"]
-[ext_resource type="Resource" uid="uid://dg3tfdf5uhjpp" path="res://resources/power_ups/pierce2.tres" id="331_vibkg"]
-[ext_resource type="Resource" uid="uid://cn1qii6k60ih1" path="res://resources/power_ups/pierce3.tres" id="332_6f8yy"]
 [ext_resource type="Script" path="res://scripts/wave_label.gd" id="332_513re"]
-[ext_resource type="Resource" uid="uid://brs0gvkp08rbm" path="res://resources/power_ups/reload_speed1.tres" id="333_da2tg"]
-[ext_resource type="Resource" uid="uid://bs5tris4qwh1h" path="res://resources/power_ups/reload_speed2.tres" id="334_v8hh4"]
-[ext_resource type="Resource" uid="uid://cseqciiallrdo" path="res://resources/power_ups/reload_speed3.tres" id="335_ac1wv"]
-[ext_resource type="Resource" uid="uid://b80fugswh35wj" path="res://resources/power_ups/shoot_speed1.tres" id="336_oowne"]
-[ext_resource type="Resource" uid="uid://dfan8sq81o5c" path="res://resources/power_ups/shoot_speed2.tres" id="337_tlx7t"]
-[ext_resource type="Resource" uid="uid://drtva5ojgxs1q" path="res://resources/power_ups/shoot_speed3.tres" id="338_pkigc"]
-[ext_resource type="Resource" uid="uid://ca0lmqmywbw7b" path="res://resources/power_ups/turn_rate1.tres" id="339_pxaff"]
-[ext_resource type="Resource" uid="uid://cv56pmgknhl0a" path="res://resources/power_ups/turn_rate2.tres" id="340_wgbx0"]
-[ext_resource type="Resource" uid="uid://7hcyqcsnu2ph" path="res://resources/power_ups/turn_rate3.tres" id="341_ou2mn"]
-[ext_resource type="Resource" uid="uid://cifkpiqfs53nj" path="res://resources/power_ups/automatic_reload.tres" id="342_k21d5"]
-[ext_resource type="Resource" uid="uid://capa1imfppbk6" path="res://resources/power_ups/automatic_shooting.tres" id="343_ouygx"]
 [ext_resource type="Script" path="res://scripts/enemies_killed.gd" id="345_7gdhx"]
 [ext_resource type="AudioStream" uid="uid://dba3b1hwbe16s" path="res://sfx/tanks_song_intro.mp3" id="347_cirr1"]
 [ext_resource type="AudioStream" uid="uid://dlvon3tc8ks6n" path="res://sfx/tanks_song_main.mp3" id="348_3fsji"]
@@ -365,17 +339,18 @@
 [ext_resource type="Script" path="res://scripts/health_bar.gd" id="350_mr3tt"]
 [ext_resource type="Script" path="res://scripts/shoot_bounds_area.gd" id="351_xsr3h"]
 [ext_resource type="Script" path="res://scripts/exp_manager.gd" id="356_ountv"]
+[ext_resource type="Script" path="res://scripts/fps_label.gd" id="359_8aym7"]
 [ext_resource type="PackedScene" uid="uid://7nk3om0x8xav" path="res://scenes/enemy.tscn" id="363_togvf"]
 
 [sub_resource type="Resource" id="Resource_iaqbb"]
 script = ExtResource("2_5rwbk")
-batches = 3
-enemies = 55
+batches = 10
+enemies = 4
 special_factor = 0.0
 batch_cd = 8.0
 speed = 35.0
 damage = 10
-health = 100
+health = 10
 
 [sub_resource type="Resource" id="Resource_qkdxg"]
 script = ExtResource("2_5rwbk")
@@ -6093,40 +6068,6 @@ reload_speed = 1.0
 has_automatic_shooting = false
 has_automatic_reload = false
 
-[sub_resource type="Resource" id="Resource_4xdec"]
-script = ExtResource("312_k6f1f")
-radius = 100.0
-damage = 10
-cool_down = 15.0
-speed = 500.0
-instances = 1
-metadata/_custom_type_script = "uid://rnq4llm4txhe"
-
-[sub_resource type="Resource" id="Resource_1f3pc"]
-script = ExtResource("313_cywo2")
-bounces = 2
-damage = 10
-cool_down = 15.0
-speed = 100.0
-instances = 1
-
-[sub_resource type="Resource" id="Resource_1ts30"]
-script = ExtResource("314_7cjyx")
-knock_back = 100.0
-radius = 500.0
-damage = 1
-cool_down = 5.0
-speed = 50.0
-instances = 1
-
-[sub_resource type="Resource" id="Resource_gyng4"]
-script = ExtResource("315_yqq6b")
-pierce = 3
-damage = 10
-cool_down = 20.0
-speed = 450.0
-instances = 4
-
 [sub_resource type="Resource" id="Resource_n2qve"]
 script = ExtResource("316_7gufk")
 shoot_ready = true
@@ -6138,6 +6079,7 @@ damage = 10
 cool_down = 0.4
 speed = 300.0
 instances = 1
+power_name = ""
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fblkm"]
 size = Vector2(72, 76)
@@ -6161,38 +6103,6 @@ height = 200
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.132)
-
-[sub_resource type="Resource" id="Resource_6fcxt"]
-script = ExtResource("316_wvrm0")
-powerups = Array[ExtResource("317_lba3g")]([ExtResource("318_85q7f"), ExtResource("319_xtay8"), ExtResource("320_ugbhw")])
-
-[sub_resource type="Resource" id="Resource_ja0rh"]
-script = ExtResource("316_wvrm0")
-powerups = Array[ExtResource("317_lba3g")]([ExtResource("321_ldysd"), ExtResource("322_3xn6c"), ExtResource("323_fjpg0")])
-
-[sub_resource type="Resource" id="Resource_prxpu"]
-script = ExtResource("316_wvrm0")
-powerups = Array[ExtResource("317_lba3g")]([ExtResource("324_d2ngo"), ExtResource("325_t50af"), ExtResource("326_vudpf")])
-
-[sub_resource type="Resource" id="Resource_x0aja"]
-script = ExtResource("316_wvrm0")
-powerups = Array[ExtResource("317_lba3g")]([ExtResource("330_v76us"), ExtResource("331_vibkg"), ExtResource("332_6f8yy")])
-
-[sub_resource type="Resource" id="Resource_wbeea"]
-script = ExtResource("316_wvrm0")
-powerups = Array[ExtResource("317_lba3g")]([ExtResource("333_da2tg"), ExtResource("334_v8hh4"), ExtResource("335_ac1wv")])
-
-[sub_resource type="Resource" id="Resource_tbbta"]
-script = ExtResource("316_wvrm0")
-powerups = Array[ExtResource("317_lba3g")]([ExtResource("336_oowne"), ExtResource("337_tlx7t"), ExtResource("338_pkigc")])
-
-[sub_resource type="Resource" id="Resource_gduxd"]
-script = ExtResource("316_wvrm0")
-powerups = Array[ExtResource("317_lba3g")]([ExtResource("342_k21d5"), ExtResource("343_ouygx")])
-
-[sub_resource type="Resource" id="Resource_kj75j"]
-script = ExtResource("316_wvrm0")
-powerups = Array[ExtResource("317_lba3g")]([ExtResource("339_pxaff"), ExtResource("340_wgbx0"), ExtResource("341_ou2mn")])
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ip24r"]
 bg_color = Color(0.627451, 0.72549, 0.729412, 1)
@@ -6441,8 +6351,7 @@ collision_mask = 2
 script = ExtResource("2_sf0d6")
 stats = SubResource("Resource_a8456")
 max_health = 100
-level_progression = Array[int]([100, 1, 10, 10, 12, 14, 16, 18, 20, 20, 22, 22, 24, 24, 26, 28, 30, 30, 40, 42, 44, 46, 48, 50, 52, 54])
-powers = Array[ExtResource("311_2t0ur")]([SubResource("Resource_4xdec"), SubResource("Resource_1f3pc"), SubResource("Resource_1ts30"), SubResource("Resource_gyng4")])
+level_progression = Array[int]([1, 3, 5, 10, 12, 14, 16, 18, 20, 20, 22, 22, 24, 24, 26, 28, 30, 30, 40, 42, 44, 46, 48, 50, 52, 54])
 basic_power = SubResource("Resource_n2qve")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
@@ -6597,7 +6506,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("8_y74hh")
-power_ups = Array[ExtResource("316_wvrm0")]([SubResource("Resource_6fcxt"), SubResource("Resource_ja0rh"), SubResource("Resource_prxpu"), SubResource("Resource_x0aja"), SubResource("Resource_wbeea"), SubResource("Resource_tbbta"), SubResource("Resource_gduxd"), SubResource("Resource_kj75j")])
+power_ups = Array[ExtResource("322_t76av")]([ExtResource("323_4rdh8"), ExtResource("324_xiww4"), ExtResource("325_3vun2")])
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/ShopControlNode"]
 visible = false
@@ -6839,6 +6748,19 @@ grow_vertical = 2
 text = "100 / 100"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.164
+anchor_top = 0.046
+anchor_right = 0.343
+anchor_bottom = 0.15
+offset_left = -0.928009
+offset_top = -2.8
+offset_right = 3.86398
+offset_bottom = 4.99999
+text = "FPS: "
+script = ExtResource("359_8aym7")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 process_mode = 3

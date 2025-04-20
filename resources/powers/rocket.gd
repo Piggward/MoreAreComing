@@ -1,14 +1,15 @@
 class_name Rocket
 extends Power
 
-const ROCKET = preload("res://scenes/rocket.tscn")
 const AOE = preload("res://scenes/aoe.tscn")
+const ROCKET = preload("res://scenes/rocket_shoot.tscn")
 
 @export var radius: float = 5
 
 func get_shot_instances():
 	var rocket = ROCKET.instantiate()
-	rocket.power = self
+	var p: Rocket = self.duplicate()
+	rocket.power = p
 	var aoe = AOE.instantiate()
 	aoe.radius = radius
 	rocket.add_child(aoe)

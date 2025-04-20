@@ -2,7 +2,7 @@ class_name Shop
 extends HBoxContainer
 
 const SHOP_ITEM = preload("res://scenes/shop_item.tscn")
-@export var power_ups: Array[PowerUpTree]
+@export var power_ups: Array[PowerTree]
 @onready var animation_player = $"../AnimationPlayer"
 @onready var panel_container = $"../PanelContainer"
 @onready var power_up_description = $"../PanelContainer/MarginContainer/PowerUpDescription"
@@ -20,7 +20,7 @@ func _ready():
 	if Global.has_reloaded:
 		power_ups = Global.saving_tree
 	else:
-		var arr: Array[PowerUpTree] = []
+		var arr: Array[PowerTree] = []
 		for n in power_ups:
 			arr.append(n.duplicate(true))
 			Global.saving_tree  = arr
@@ -29,7 +29,7 @@ func _ready():
 func provide_powerups():
 	self.visible = true
 	current = []
-	var eras: Array[PowerUpTree] = []
+	var eras: Array[PowerTree] = []
 	for p in power_ups:
 		if p.powerups.is_empty():
 			eras.append(p)

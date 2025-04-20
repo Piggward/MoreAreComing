@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://cg64tmq3prhxb"]
+
+[ext_resource type="Texture2D" uid="uid://d1vyj2r4bywm1" path="res://art/smoke_07.png" id="1_bei47"]
+[ext_resource type="Script" path="res://scripts/trail.gd" id="2_s8p45"]
+
+[sub_resource type="Curve" id="Curve_fxavy"]
+_data = [Vector2(0, 0.508574), 0.0, 0.0, 0, 0, Vector2(1, 2.12393), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3k8ni"]
+curve = SubResource("Curve_fxavy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7n6kb"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(1, 1, 0)
+angle_min = -128.6
+angle_max = 81.1
+gravity = Vector3(0, 0, 0)
+damping_min = 364.078
+damping_max = 914.563
+scale_min = 0.06
+scale_max = 0.06
+scale_curve = SubResource("CurveTexture_3k8ni")
+color = Color(5, 5, 5, 1)
+
+[node name="Trail" type="GPUParticles2D"]
+process_mode = 3
+modulate = Color(1, 1, 1, 0.0117647)
+position = Vector2(23, 0)
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_7n6kb")
+texture = ExtResource("1_bei47")
+lifetime = 1.5
+visibility_rect = Rect2(-500, -500, 1000, 1000)
+script = ExtResource("2_s8p45")
+min_scale = 0.06

@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://c28hqjfs5eesp"]
+
+[ext_resource type="Script" path="res://scripts/shoot_area.gd" id="1_4dxce"]
+[ext_resource type="AudioStream" uid="uid://bwamlv2otq8la" path="res://sfx/muffled_explosion.mp3" id="4_is4ii"]
+[ext_resource type="Texture2D" uid="uid://c1rlco0offocq" path="res://art/Default size/towerDefense_tile251.png" id="5_hk2af"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y0h6m"]
+size = Vector2(45.732, 20)
+
+[node name="ShootArea" type="Area2D" groups=["pauseable", "projectile"]]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_4dxce")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_is4ii")
+volume_db = 24.0
+bus = &"SFX - Enemy Dead"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(10.0819, 0)
+scale = Vector2(0.783611, 0.783611)
+shape = SubResource("RectangleShape2D_y0h6m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(10, 0)
+rotation = -1.5708
+texture = ExtResource("5_hk2af")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

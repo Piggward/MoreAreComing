@@ -6,7 +6,6 @@ extends CharacterBody2D
 @export var level_progression: Array[int] = []
 @export var powers: Array[Power]
 @export var basic_power: BasicPower
-@export var scene: PackedScene
 
 var power_timers = { }
 var primary_color: Color
@@ -38,6 +37,10 @@ func _on_game_start():
 func connect_basic_power_timer():
 	basic_power.create_timer()
 	add_child(basic_power.timer)
+	
+func add_power(power: Power):
+	powers.append(power)
+	connect_power_timer(power)
 	
 func connect_power_timer(p: Power):
 	p.timer = Timer.new()

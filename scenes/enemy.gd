@@ -24,6 +24,7 @@ var current_health: int
 var normal_scale = 0.3
 var normal_color: Color
 var dead: bool = false
+var taking_damage: bool = false
 
 signal died(enemy: Enemy)
 
@@ -54,12 +55,16 @@ func take_damage(damage: int):
 	progress_bar.value = current_health
 	if current_health <= 0:
 		die()
-	var m = animated_sprite_2d.material 
+	if taking_damage:
+		return
+	taking_damage = true
+	var m = animated_sprite_2d.material.duplicate(true)
 	animated_sprite_2d.material = null
 	animated_sprite_2d.self_modulate = Color.RED
 	await get_tree().create_timer(0.1).timeout
 	animated_sprite_2d.material = m
 	animated_sprite_2d.self_modulate = normal_color
+	taking_damage = false
 	
 func die():
 	dead = true

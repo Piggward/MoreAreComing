@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Bounce" load_steps=2 format=3 uid="uid://bcovho5lbdklv"]
+
+[ext_resource type="Script" path="res://resources/powers/bounce.gd" id="1_eiabs"]
+
+[resource]
+script = ExtResource("1_eiabs")
+bounces = 2
+damage = 5
+cool_down = 5.0
+speed = 150.0
+instances = 1
+power_name = "BOUNCE"

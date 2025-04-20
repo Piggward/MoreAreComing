@@ -4,47 +4,59 @@ extends Node2D
 const ENEMY = preload("res://scenes/enemy.tscn")
 const SPEEDY_ENEMY = preload("res://scenes/speedy_enemy.tscn")
 const TANKY_ENEMY = preload("res://scenes/tanky_enemy.tscn")
-@onready var level_1 = $".."
+const ENEMIES_PER_RING = 8  # Can vary per ring if you want
+const RING_DISTANCE = 50    # Distance between rings (can be your D)
+const JITTER_AMOUNT = 25  # Max pixels to jitter
+const SPAWN_RADIUS = 700
 
-@export var damage: int
-@export var speed: float
+var first = true
 
-var positions: Array[Node]
-var min_enemy_time = 0.1
-var enemies_killed = 0
-var total_enemies_killed = 0
-
-signal batch_spawned
 signal enemy_killed(enemy: Enemy)
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	positions = get_children()
-	level_1.spawn_batch_requested.connect(spawn_batch)
-	pass # Replace with function body.
+func spawn_horde(player_pos, wave, amount):
+	var D = 75
+	# Step 1: Pick random direction and find horde center
+	var angle = randf() * TAU
+	var horde_center = player_pos + Vector2(SPAWN_RADIUS, 0).rotated(angle)
+	if first:
+		horde_center = player_pos + Vector2(420, 0).rotated(angle)
+		first = false
 
-func spawn_batch(batch: int, wave: Wave):
-	positions.shuffle()
-	for i in batch:
-		var sp = randf_range(0.0, 1.0)
-		var ps = 0 if sp > wave.special_factor else 1 if sp > wave.special_factor / 2 else 2
-		spawn_enemy(wave, ps)
-		await get_tree().create_timer(0.1).timeout
-	batch_spawned.emit()
-	
-func spawn_enemy(wave: Wave, special: int):
-	var random = positions.pop_front()
-	var random_offset_x = randi_range(-5, 5)
-	var random_offset_y = randi_range(-5, 5)
-	var e = ENEMY.instantiate() if special == 0 else SPEEDY_ENEMY.instantiate() if special == 1 else TANKY_ENEMY.instantiate()
-	e.position = Vector2(random_offset_x, random_offset_y)
-	e.speed = wave.speed
-	e.damage = wave.damage
-	e.max_health = wave.health
-	e.died.connect(_on_enemy_died)
-	random.add_child(e)
-	positions.push_back(random)
+	var spawned = 0
+	var ring = 1
+	while spawned < amount:
+		var enemies_in_ring = min(ENEMIES_PER_RING * ring, amount - spawned)
+		for i in range(enemies_in_ring):
+			var ring_angle = TAU * i / enemies_in_ring
+			var radius = ring * D
+			var offset = Vector2(radius, 0).rotated(ring_angle)
+
+			# Add jitter: random Vector2 with small x/y offsets
+			var jitter = Vector2(randf_range(-JITTER_AMOUNT, JITTER_AMOUNT),
+								 randf_range(-JITTER_AMOUNT, JITTER_AMOUNT))
+			var enemy_pos = horde_center + offset + jitter
+			spawn_enemy(wave, enemy_pos)
+
+			spawned += 1
+			if spawned >= amount:
+				break
+		ring += 1
+		
+func spawn_random_enemy(player_pos, wave):
+	var angle = randf() * TAU
+	var random_pos = player_pos + Vector2(SPAWN_RADIUS, 0).rotated(angle)
+	var jitter = Vector2(randf_range(-JITTER_AMOUNT, JITTER_AMOUNT),
+					 randf_range(-JITTER_AMOUNT, JITTER_AMOUNT))
+	spawn_enemy(wave, random_pos + jitter)
+		
+func spawn_enemy(wave, pos):
+	var enemy = ENEMY.instantiate()
+	enemy.speed = wave.speed
+	enemy.damage = wave.damage
+	enemy.max_health = wave.health
+	enemy.died.connect(_on_enemy_died)
+	enemy.position = pos
+	add_child(enemy)
 	
 func _on_enemy_died(enemy: Enemy):
-	enemies_killed += 1
 	enemy_killed.emit(enemy)

@@ -19,7 +19,7 @@ func get_shot_instances():
 func on_hit(sa: ShootArea, enemy: Enemy):
 	if sa.enemies_hit.has(enemy):
 		return
-	enemy.position -= Vector2(0, 10).rotated(enemy.rotation - deg_to_rad(90))
+	enemy.position -= Vector2(0, 3).rotated(enemy.rotation - deg_to_rad(90))
 	enemy.take_damage(damage)
 	sa.terminate_self()
 	sa.enemies_hit.append(enemy)

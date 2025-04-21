@@ -6,8 +6,8 @@ const TANKS_SONG = preload("res://sfx/tanks_song.wav")
 const GOODJOB = preload("res://sfx/Goodjob.mp3")
 const ENEMY_EXP_FACTOR = 5
 const ENEMY = preload("res://scenes/enemy.tscn")
-@export var waves: Array[Wave]
 
+@export var waves: Array[Wave]
 @onready var enemy_manager: Node2D = $EnemyManager
 @onready var control = $CanvasLayer/Control
 @onready var wave_cleared = $WaveCleared
@@ -26,7 +26,7 @@ var current_wave: Wave
 var current_wave_number = 0
 var current_batch = 0
 
-signal spawn_batch_requested(amount: int, wave: Wave)
+signal new_wave(wave: Wave)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -46,24 +46,10 @@ func _on_player_health_updated(health: int, max_health: int):
 	
 func start_game():
 	music.play()
-	spawn_hordes()
-	spawn_random_enemies()
 	
 func resume_game():
 	get_tree().paused = false
 	timer.set_paused(false)
-	
-func spawn_hordes():
-	enemy_manager.spawn_horde(player.position, current_wave, 15)
-	var rand = randf_range(30.0, 35.0)
-	await get_tree().create_timer(rand).timeout
-	spawn_hordes()
-	
-func spawn_random_enemies():
-	enemy_manager.spawn_random_enemy(player.position, current_wave)
-	var rand = randf_range(1, 2)
-	await get_tree().create_timer(rand).timeout
-	spawn_random_enemies()
 		
 func on_level_up(new_level):
 	wave_cleared.play()

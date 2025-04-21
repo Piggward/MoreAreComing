@@ -14,6 +14,7 @@ const EXPLOSION_PARTICLES = preload("res://scenes/explosion_particles.tscn")
 @export var wheel_color_2: Color
 @export var accent_color: Color
 @export var exp: int = 1
+@export var part_of_horde: bool
 
 @onready var progress_bar = $Node2D/ProgressBar
 @onready var animated_sprite_2d = $AnimatedSprite2D

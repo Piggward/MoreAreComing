@@ -3,6 +3,7 @@ extends Power
 
 const AOE = preload("res://scenes/aoe.tscn")
 const ROCKET = preload("res://scenes/rocket_shoot.tscn")
+const EXPLOSION = preload("res://scenes/explosion2.tscn")
 
 @export var radius: float = 5
 
@@ -19,6 +20,11 @@ func get_shot_instances():
 	
 func on_hit(sa: ShootArea, enemy: Enemy):
 	var aoe: Area2D
+	var explosion = EXPLOSION.instantiate()
+	explosion.emitting = true
+	explosion.radius = radius
+	explosion.global_position = sa.global_position
+	sa.get_tree().root.add_child(explosion)
 	for child in sa.get_children():
 		if child is Aoe:
 			aoe = child
@@ -32,7 +38,7 @@ func on_hit(sa: ShootArea, enemy: Enemy):
 	sa.terminate_self()
 	
 func get_direction(turret: Turret):
-	return turret.rotation + deg_to_rad(90)
+	return turret.rotation - deg_to_rad(90)
 	
 func get_position(nozzle):
 	return -nozzle.position - nozzle.position

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://1g7r7fu3k5pd"]
 
-[ext_resource type="Script" path="res://scripts/shoot_area.gd" id="1_qxs5t"]
+[ext_resource type="Script" uid="uid://bucbhgg3aka77" path="res://scripts/shoot_area.gd" id="1_qxs5t"]
 [ext_resource type="Texture2D" uid="uid://c1rlco0offocq" path="res://art/Default size/towerDefense_tile251.png" id="2_tv3u8"]
 [ext_resource type="Texture2D" uid="uid://cbdp7nrn3odv4" path="res://art/trace_01.png" id="3_3fu2n"]
 [ext_resource type="AudioStream" uid="uid://bwamlv2otq8la" path="res://sfx/muffled_explosion.mp3" id="4_chp26"]
@@ -43,19 +43,19 @@ modulate = Color(1, 1, 1, 0.222)
 process_mode = 3
 position = Vector2(-4, -13)
 amount = 15
-process_material = SubResource("ParticleProcessMaterial_odwe6")
 texture = ExtResource("3_3fu2n")
 lifetime = 1.5
 local_coords = true
+process_material = SubResource("ParticleProcessMaterial_odwe6")
 
 [node name="SpeedLines1" type="GPUParticles2D" parent="Particles"]
 process_mode = 3
 position = Vector2(-5, 12)
 amount = 15
-process_material = SubResource("ParticleProcessMaterial_odwe6")
 texture = ExtResource("3_3fu2n")
 lifetime = 1.5
 local_coords = true
+process_material = SubResource("ParticleProcessMaterial_odwe6")
 
 [node name="HitSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_chp26")
@@ -63,7 +63,6 @@ volume_db = 24.0
 bus = &"SFX - Enemy Dead"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 scale = Vector2(0.783611, 0.783611)
 shape = SubResource("CircleShape2D_e7kxt")
 

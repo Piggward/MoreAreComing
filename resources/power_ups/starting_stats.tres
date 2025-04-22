@@ -1,22 +1,4 @@
-[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://dgmhcqay1w51n"]
-
-[ext_resource type="Script" uid="uid://cfns6322r31jo" path="res://scripts/power_up.gd" id="1_moilt"]
+[gd_resource type="Resource" format=3 uid="uid://dgmhcqay1w51n"]
 
 [resource]
-script = ExtResource("1_moilt")
-title = ""
-title_color = Color(1, 1, 1, 1)
-power_up_description = ""
-shoot_speed = 300.0
-shot_scale = 1.0
-damage = 10.0
-shoot_cd = 0.4
-turn_rate = 4.0
-mag_size = 10
-reload_speed = 1.0
-aoe = 0.0
-pierce = 0
-knock_back = 10.0
-has_automatic_shooting = false
-has_automatic_reload = false
 metadata/_custom_type_script = "uid://cfns6322r31jo"

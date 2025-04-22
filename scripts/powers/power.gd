@@ -28,6 +28,9 @@ func travel(sa: ShootArea, delta: float):
 	sa.position += Vector2(0, speed * delta).rotated(sa.direction)
 	pass
 	
+func on_out_of_bounds(sa: ShootArea):
+	sa.queue_free()
+	
 func get_direction(turret):
 	return turret.rotation - deg_to_rad(90)
 	

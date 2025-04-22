@@ -1,21 +1,3 @@
-[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://5gdvg0qh7opv"]
-
-[ext_resource type="Script" uid="uid://cfns6322r31jo" path="res://scripts/power_up.gd" id="1_iehs7"]
+[gd_resource type="Resource" format=3 uid="uid://5gdvg0qh7opv"]
 
 [resource]
-script = ExtResource("1_iehs7")
-title = "BURST"
-title_color = Color(1, 1, 1, 1)
-power_up_description = "RATE OF FIRE INCREASED"
-shoot_speed = 1.0
-shot_scale = 1.0
-damage = 1.0
-shoot_cd = 0.7
-turn_rate = 1.0
-mag_size = 0
-reload_speed = 1.0
-aoe = 1.0
-pierce = 0
-knock_back = 0.0
-has_automatic_shooting = false
-has_automatic_reload = false

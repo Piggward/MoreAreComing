@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Bounce" load_steps=2 format=3 uid="uid://bcovho5lbdklv"]
 
-[ext_resource type="Script" path="res://resources/powers/bounce.gd" id="1_eiabs"]
+[ext_resource type="Script" uid="uid://8lv3w7p2vxxd" path="res://resources/powers/bounce.gd" id="1_eiabs"]
 
 [resource]
 script = ExtResource("1_eiabs")

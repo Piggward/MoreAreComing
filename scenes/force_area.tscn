@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://btst8eaan47f4"]
 
 [ext_resource type="Texture2D" uid="uid://bblxxku0whmhe" path="res://art/particles/circle_01.png" id="1_tsahi"]
-[ext_resource type="Script" path="res://scripts/force_area.gd" id="1_vj68m"]
+[ext_resource type="Script" uid="uid://jm4uvaqnrkln" path="res://scripts/force_area.gd" id="1_vj68m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7b7bt"]
 radius = 9.0

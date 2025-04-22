@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="PowerTree" load_steps=8 format=3 uid="uid://dymwddgg2dj67"]
 
-[ext_resource type="Script" path="res://scripts/powers/power_up.gd" id="1_c5l1j"]
-[ext_resource type="Script" path="res://scripts/powers/bounce_power_up.gd" id="2_s1tiy"]
-[ext_resource type="Script" path="res://scripts/powers/power_tree.gd" id="2_vy4aa"]
+[ext_resource type="Script" uid="uid://djnvkn0g1qg2g" path="res://scripts/powers/power_up.gd" id="1_c5l1j"]
+[ext_resource type="Script" uid="uid://dgva3uoiqddw5" path="res://scripts/powers/bounce_power_up.gd" id="2_s1tiy"]
+[ext_resource type="Script" uid="uid://dcerv5yg58km7" path="res://scripts/powers/power_tree.gd" id="2_vy4aa"]
 
 [sub_resource type="Resource" id="Resource_td4h7"]
 script = ExtResource("2_s1tiy")

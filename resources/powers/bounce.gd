@@ -18,14 +18,6 @@ func get_shot_instances():
 	
 func on_hit(sa: ShootArea, enemy: Enemy):
 	enemy.take_damage(damage)
-	if bounces_left > 0:
-		bounces_left -= 1 
-		#sa.direction = sa.get_global_mouse_position()
-		var mouse = sa.get_global_mouse_position()
-		sa.direction = sa.rotation + sa.get_angle_to(mouse) - deg_to_rad(90)
-		sa.self_rotate()
-	else:
-		sa.terminate_self()
 	
 func get_direction(turret):
 	var mouse = turret.get_global_mouse_position()
@@ -33,3 +25,15 @@ func get_direction(turret):
 	
 func get_position(nozzle):
 	return -nozzle.position - nozzle.position
+	
+func on_out_of_bounds(sa: ShootArea):
+	if bounces_left == 0:
+		sa.terminate_self()
+		return
+	bounces_left -= 1 
+	#sa.direction = sa.get_global_mouse_position()
+	#var mouse = sa.get_global_mouse_position()
+	var rand_angle = randf_range(-45, 45)
+	var new_angle = deg_to_rad(180 + rand_angle)
+	sa.direction += new_angle
+	sa.self_rotate()

@@ -18,7 +18,6 @@ func _ready() -> void:
 func self_rotate():
 	self.rotation = direction - deg_to_rad(90)
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if not dead:
@@ -43,7 +42,9 @@ func terminate_self():
 	await get_tree().create_timer(1).timeout
 	self.queue_free()
 	
-
+func on_out_of_bounds():
+	power.on_out_of_bounds(self)
+	
 func _on_area_entered(area: Area2D) -> void:
 	if area is Enemy and not dead:
 		on_hit(area)

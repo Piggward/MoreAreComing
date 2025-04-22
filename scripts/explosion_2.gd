@@ -1,8 +1,12 @@
 extends GPUParticles2D
 
+const BASE_RADIUS = 40
+
+@export var radius: float = 25
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	self.scale *= radius / BASE_RADIUS
 	var highest_life_time = self.lifetime
 	self.emitting = true
 	for child in get_children():

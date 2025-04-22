@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Rocket" load_steps=2 format=3 uid="uid://d1ulh4ba4oc7n"]
 
-[ext_resource type="Script" path="res://resources/powers/rocket.gd" id="1_iv3cf"]
+[ext_resource type="Script" uid="uid://rnq4llm4txhe" path="res://resources/powers/rocket.gd" id="1_iv3cf"]
 
 [resource]
 script = ExtResource("1_iv3cf")

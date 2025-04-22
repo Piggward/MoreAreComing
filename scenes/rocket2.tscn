@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c28hqjfs5eesp"]
 
-[ext_resource type="Script" path="res://scripts/shoot_area.gd" id="1_4dxce"]
+[ext_resource type="Script" uid="uid://bucbhgg3aka77" path="res://scripts/shoot_area.gd" id="1_4dxce"]
 [ext_resource type="AudioStream" uid="uid://bwamlv2otq8la" path="res://sfx/muffled_explosion.mp3" id="4_is4ii"]
 [ext_resource type="Texture2D" uid="uid://c1rlco0offocq" path="res://art/Default size/towerDefense_tile251.png" id="5_hk2af"]
 

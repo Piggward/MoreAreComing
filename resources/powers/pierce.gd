@@ -27,10 +27,10 @@ func on_hit(sa: ShootArea, enemy: Enemy):
 		sa.enemies_hit.append(enemy)
 	
 func get_position(nozzle):
-	return nozzle.position.rotated(deg_to_rad(90 * number) - 45)
+	return nozzle.position.rotated(deg_to_rad(360 / instances * number) - 45)
 	
 func get_direction(turret):
-	return turret.rotation + deg_to_rad((90 * (number - 1)) - 45 )
+	return turret.rotation + deg_to_rad((360 / instances * (number - 1)) - 45 )
 	
 #func travel(sa: ShootArea, delta: float):
 	#if start_radius == -1:

@@ -8,6 +8,7 @@ extends Resource
 @export var shoot_speed: float = 0
 @export var damage: float = 0
 @export var shoot_cd: float = 0
+@export var instances: float = 0
 
 var starting_power: Power
 var power: Power
@@ -22,3 +23,4 @@ func apply(player: Player):
 	power.speed += shoot_speed
 	power.damage += damage
 	power.cool_down -= shoot_cd
+	power.instances += instances

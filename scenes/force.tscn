@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://clvipcnijc7sm"]
 
-[ext_resource type="Script" uid="uid://bucbhgg3aka77" path="res://scripts/shoot_area.gd" id="1_6lg2p"]
+[ext_resource type="Script" path="res://scripts/shoot_area.gd" id="1_6lg2p"]
 [ext_resource type="AudioStream" uid="uid://bwamlv2otq8la" path="res://sfx/muffled_explosion.mp3" id="2_wjh8n"]
 
 [node name="ShootArea" type="Area2D" groups=["pauseable", "projectile"]]

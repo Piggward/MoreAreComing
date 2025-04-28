@@ -1,5 +1,5 @@
-class_name RumbleNode
-extends Node2D
+class_name RumbleArea
+extends Area2D
 
 # Parameters to control the rumble effect
 @export var rumble_duration: float = 0.5      # How long the rumble should go on
@@ -13,9 +13,11 @@ var _is_rumbling := false
 var pickup = false
 var exp_bar: ExperienceBar
 
+signal exp_pickup
+
 func _ready():
 	_original_position = position
-	#exp_bar = get_tree().get_first_node_in_group("experience_bar")
+	exp_bar = get_tree().get_first_node_in_group("experience_bar")
 
 func start_rumble():
 	_elapsed_time = 0.0
@@ -41,22 +43,22 @@ func _process(delta):
 		if _elapsed_time >= rumble_duration:
 			stop_rumble()
 			pickup = true
-			EventManager.exp_pickup.emit(exp_worth)
 			
 	elif pickup:
 		var c_local_to_n_global = get_canvas_transform().affine_inverse() * exp_bar.get_global_transform_with_canvas()
 		var n_target_global_position: Vector2 = c_local_to_n_global * (exp_bar.size / 2)
 		if (global_position - n_target_global_position).length() < 30: 
+			EventManager.exp_pickup.emit(exp_worth)
 			self.queue_free()
-		global_position = lerp(global_position, n_target_global_position, 0.04)
+		global_position = lerp(global_position, n_target_global_position, 0.05)
 
-func _on_area_2d_mouse_entered():
+func _on_mouse_entered():
 	if not _is_rumbling and not pickup and not get_tree().paused:
 		start_rumble()
 	pass # Replace with function body.
 
 
-func _on_area_2d_mouse_exited():
+func _on_mouse_exited():
 	if _is_rumbling and not pickup:
 		stop_rumble()
 	pass # Replace with function body.

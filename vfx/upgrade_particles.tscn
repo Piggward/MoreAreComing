@@ -1,13 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://fmrdsxy6ig5r"]
+[gd_scene load_steps=13 format=3 uid="uid://fmrdsxy6ig5r"]
 
 [ext_resource type="Texture2D" uid="uid://b1ainxd7ihvyv" path="res://art/particles/scorch_01.png" id="1_g7xsf"]
+[ext_resource type="Texture2D" uid="uid://bq25ewhaqcn0w" path="res://art/circle_05.png" id="2_aptpy"]
 
 [sub_resource type="Curve" id="Curve_fy3cn"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.641667, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.502481, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_s43qs"]
 curve = SubResource("Curve_fy3cn")
+
+[sub_resource type="Curve" id="Curve_w3o7t"]
+max_value = 360.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 7.55304), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_uolml"]
+curve = SubResource("Curve_w3o7t")
 
 [sub_resource type="Curve" id="Curve_5su7a"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.258333, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -20,20 +29,51 @@ curve = SubResource("Curve_5su7a")
 particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 25.0
-angle_min = -720.0
-angle_max = 720.0
+angle_min = -9.99999
+angle_max = 18.0
+angle_curve = SubResource("CurveTexture_uolml")
 gravity = Vector3(0, 0, 0)
 scale_min = 0.6
 scale_curve = SubResource("CurveTexture_braud")
-color = Color(0.0156863, 1, 1, 1)
+color = Color(0.032, 2, 2, 1)
 alpha_curve = SubResource("CurveTexture_s43qs")
 hue_variation_min = -0.01
 hue_variation_max = 0.03
 
+[sub_resource type="Curve" id="Curve_xujha"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.66129, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_nj8hr"]
+curve = SubResource("Curve_xujha")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cpreh"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 123.51
+initial_velocity_max = 149.64
+gravity = Vector3(0, 0, 0)
+scale_min = 0.03
+scale_max = 0.05
+color = Color(0, 2, 2, 1)
+alpha_curve = SubResource("CurveTexture_nj8hr")
+
 [node name="GPUParticles2D" type="GPUParticles2D"]
 texture_filter = 1
 scale = Vector2(0.228885, 0.228885)
+amount = 15
 process_material = SubResource("ParticleProcessMaterial_46us4")
 texture = ExtResource("1_g7xsf")
 lifetime = 6.0
+preprocess = 2.0
+randomness = 1.0
+local_coords = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+show_behind_parent = true
+scale = Vector2(1.06911, 1.06911)
+amount = 25
+process_material = SubResource("ParticleProcessMaterial_cpreh")
+texture = ExtResource("2_aptpy")
+explosiveness = 0.4
 local_coords = true

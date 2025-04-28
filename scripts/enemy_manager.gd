@@ -7,7 +7,9 @@ const TANKY_ENEMY = preload("res://scenes/tanky_enemy.tscn")
 const ENEMIES_PER_RING = 8  # Can vary per ring if you want
 const RING_DISTANCE = 50    # Distance between rings (can be your D)
 const JITTER_AMOUNT = 25  # Max pixels to jitter
-const SPAWN_RADIUS = 600
+const SPAWN_RADIUS = 800
+const SPAWN_RADIUS_SPREAD = 0.3
+const RUMBLE_AREA = preload("res://scenes/rumble_area.tscn")
 
 var alive_enemies: Array[Enemy] = []
 var current_wave: Wave
@@ -36,16 +38,29 @@ func _ready():
 func game_start():
 	_on_horde_timer_timeout()
 	_on_random_enemy_timer_timeout()
+	spawn_initial_enemies()
+	
+func spawn_initial_enemies():
+	for i in 6:
+		var angle = randf() * TAU
+		var random_pos = player_pos + Vector2(random_spawn_radius() / 2, 0).rotated(angle)
+		var jitter = Vector2(randf_range(-JITTER_AMOUNT, JITTER_AMOUNT),
+						 randf_range(-JITTER_AMOUNT, JITTER_AMOUNT))
+		spawn_enemy(random_pos + jitter, false)
 	
 func _on_random_enemy_timer_timeout():
 	spawn_random_enemy()
+	var timer = Timer.new()
 	for i in current_wave.target_random_enemies_amount - alive_random_enemies():
-		var rand_time = randf_range(0.5, 2.0)
-		await get_tree().create_timer(rand_time).timeout
-		print("spawning random enemy " + str(i))
+		var rand_time = randf_range(0.5, 1.0)
+		add_child(timer)
+		timer.start(rand_time)
+		await timer.timeout
+		#print("spawning random enemy " + str(i))
 		spawn_random_enemy()
 	var offset = current_wave.random_enemy_spawn_cd * 0.15
 	var rand = randf_range(current_wave.random_enemy_spawn_cd - offset, current_wave.random_enemy_spawn_cd + offset)
+	timer.queue_free()
 	random_enemy_timer.start(rand)
 	pass
 	
@@ -63,13 +78,19 @@ func _on_horde_timer_timeout():
 	pass
 	
 func _on_new_wave(wave: Wave):
+	print("new wave")
 	current_wave = wave
+	
+func random_spawn_radius():
+	var rand = 1 - randf_range(-SPAWN_RADIUS_SPREAD, SPAWN_RADIUS_SPREAD)
+	return SPAWN_RADIUS * rand
 
 func spawn_horde():
+	print("spawning horde")
 	var D = 75
 	# Step 1: Pick random direction and find horde center
 	var angle = randf() * TAU
-	var horde_center = player_pos + Vector2(SPAWN_RADIUS, 0).rotated(angle)
+	var horde_center = player_pos + Vector2(random_spawn_radius(), 0).rotated(angle)
 	var spawned = 0
 	var ring = 1
 	while spawned < current_wave.horde_amount:
@@ -92,7 +113,7 @@ func spawn_horde():
 		
 func spawn_random_enemy():
 	var angle = randf() * TAU
-	var random_pos = player_pos + Vector2(SPAWN_RADIUS, 0).rotated(angle)
+	var random_pos = player_pos + Vector2(random_spawn_radius(), 0).rotated(angle)
 	var jitter = Vector2(randf_range(-JITTER_AMOUNT, JITTER_AMOUNT),
 					 randf_range(-JITTER_AMOUNT, JITTER_AMOUNT))
 	spawn_enemy(random_pos + jitter, false)
@@ -108,24 +129,36 @@ func spawn_enemy(pos, part_of_horde):
 	enemy.position = pos
 	enemy.part_of_horde = part_of_horde
 	alive_enemies.append(enemy)
-	print("spawning enemy")
+	#print("target random enemies: " + str(current_wave.target_random_enemies_amount))
+	#print("random enemies: " + str(alive_random_enemies()))
+	#print("horde enemies: " + str(alive_horde_enemies()))
+	#print("total enemies: " + str(alive_enemies.size()))
 	add_child(enemy)
 	
 func _on_enemy_died(enemy: Enemy):
 	alive_enemies.erase(enemy)
 	enemy_killed.emit(enemy)
+	_spawn_exp(enemy)
 	if enemy.part_of_horde:
 		horde_enemy_died()
+		
+func _spawn_exp(enemy: Enemy):
+	var rand = randf_range(0.0, 1.0)
+	if enemy.exp <= 0 or enemy.exp_chance < rand:
+		return
+	var rn = RUMBLE_AREA.instantiate()
+	rn.exp_worth = enemy.exp
+	rn.position = enemy.global_position - self.global_position
+	add_child(rn)
 	
 func horde_enemy_died():
 	var alive = alive_horde_enemies()
-	if spawning_horde or alive < (current_wave.horde_amount * current_wave.target_horde_amount) * 0.2:
+	var threshold = float((current_wave.horde_amount * current_wave.target_hordes)) * 0.2
+	if spawning_horde or alive > threshold:
 		return
 	spawning_horde = true
 	
-	print("horde enemy died")
 	horde_timer.stop()
-	print("spawning horde")
 	
 	var rand_time = randf_range(0.5, 2.0)
 	await get_tree().create_timer(rand_time).timeout
@@ -133,16 +166,4 @@ func horde_enemy_died():
 		
 	horde_timer.start(current_wave.horde_spawn_cd)
 	spawning_horde = false
-	
-#func enemy_died():
-	#if spawning_enemies:
-		#return
-	#spawning_enemies = true
-	#print("random enemy died")
-	#for i in current_wave.target_random_enemies_amount - alive_random_enemies():
-		#var rand_time = randf_range(0.5, 2.0)
-		#await get_tree().create_timer(rand_time).timeout
-		#print("spawning random enemy " + str(i))
-		#spawn_random_enemy()
-	#spawning_enemies = false
 		

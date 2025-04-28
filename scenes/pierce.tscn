@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dgnvfpe3q16tw"]
 
-[ext_resource type="Script" uid="uid://bucbhgg3aka77" path="res://scripts/shoot_area.gd" id="1_pn3ag"]
-[ext_resource type="Script" uid="uid://pfwsatqi5k62" path="res://scripts/ball_polygon.gd" id="2_atjgj"]
+[ext_resource type="Script" path="res://scripts/shoot_area.gd" id="1_pn3ag"]
+[ext_resource type="Script" path="res://scripts/ball_polygon.gd" id="2_atjgj"]
 [ext_resource type="AudioStream" uid="uid://bwamlv2otq8la" path="res://sfx/muffled_explosion.mp3" id="3_8n6t1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hfyi7"]

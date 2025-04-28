@@ -6,6 +6,7 @@ const TANKS_SONG = preload("res://sfx/tanks_song.wav")
 const GOODJOB = preload("res://sfx/Goodjob.mp3")
 const ENEMY_EXP_FACTOR = 5
 const ENEMY = preload("res://scenes/enemy.tscn")
+const TIME_BETWEEN_WAVES = 60
 
 @export var waves: Array[Wave]
 @onready var enemy_manager: Node2D = $EnemyManager
@@ -19,7 +20,7 @@ const ENEMY = preload("res://scenes/enemy.tscn")
 @onready var exp_progress_bar = $CanvasLayer/UI/ProgressBar
 @onready var exp_manager = $ExpManager
 
-
+var wave_timer: Timer
 var shop: Shop
 var player: Player
 var current_wave: Wave
@@ -30,7 +31,7 @@ signal new_wave(wave: Wave)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	current_wave = waves[0]
+	current_wave = waves[current_wave_number]
 	player = get_tree().get_first_node_in_group("player")
 	shop = get_tree().get_first_node_in_group("shop")
 	shop.exit_shop.connect(resume_game)
@@ -39,6 +40,16 @@ func _ready() -> void:
 	EventManager.start_game.connect(start_game)
 	self.process_mode = Node.PROCESS_MODE_INHERIT
 	get_tree().paused = false
+	wave_timer = Timer.new()
+	wave_timer.timeout.connect(_next_wave)
+	add_child(wave_timer)
+	wave_timer.start(TIME_BETWEEN_WAVES)
+	
+func _next_wave():
+	current_wave_number += 1
+	current_wave = waves[current_wave_number]
+	new_wave.emit(current_wave)
+	wave_timer.start(TIME_BETWEEN_WAVES)
 
 func _on_player_health_updated(health: int, max_health: int):
 	if health <= 0:

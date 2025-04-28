@@ -11,7 +11,6 @@ func get_shot_instances():
 	var p: Bounce = self.duplicate()
 	p.bounces_left = bounces
 	bounce.power = p
-	print(bounce.power.bounces_left)
 	var arr: Array[ShootArea] = []
 	arr.append(bounce)
 	return arr

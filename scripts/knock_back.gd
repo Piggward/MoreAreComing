@@ -18,8 +18,6 @@ func end_knockback():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if timer:
-		print(timer.time_left)
 	var enemy = get_parent()
 	enemy.position += direction * knock_back_speed * delta
 	pass

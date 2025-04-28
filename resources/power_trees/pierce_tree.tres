@@ -1,0 +1,64 @@
+[gd_resource type="Resource" script_class="PowerTree" load_steps=9 format=3 uid="uid://c7o50smomorlp"]
+
+[ext_resource type="Script" path="res://scripts/powers/power_up.gd" id="1_is1cp"]
+[ext_resource type="Script" path="res://scripts/powers/pierce_power_up.gd" id="2_pmuru"]
+[ext_resource type="Script" path="res://scripts/powers/power_tree.gd" id="2_uhde0"]
+
+[sub_resource type="Resource" id="Resource_kucbr"]
+script = ExtResource("2_pmuru")
+pierce = 0
+title = "PIERCING SHOT"
+title_color = Color(1, 1, 1, 1)
+power_up_description = "Rapid sharp projectiles"
+shoot_speed = 0.0
+damage = 0.0
+shoot_cd = 0.0
+instances = 0.0
+
+[sub_resource type="Resource" id="Resource_r3yyh"]
+script = ExtResource("2_pmuru")
+pierce = 0
+title = "PIERCING SHOT"
+title_color = Color(1, 1, 1, 1)
+power_up_description = "More instances"
+shoot_speed = 0.0
+damage = 0.0
+shoot_cd = 0.0
+instances = 2.0
+
+[sub_resource type="Resource" id="Resource_4bhxc"]
+script = ExtResource("2_pmuru")
+pierce = 1
+title = "PIERCING SHOT"
+title_color = Color(1, 1, 1, 1)
+power_up_description = "More Pierce"
+shoot_speed = 0.0
+damage = 0.0
+shoot_cd = 0.0
+instances = 0.0
+
+[sub_resource type="Resource" id="Resource_juiw5"]
+script = ExtResource("2_pmuru")
+pierce = 0
+title = "PIERCING SHOT"
+title_color = Color(1, 1, 1, 1)
+power_up_description = "More damage"
+shoot_speed = 0.0
+damage = 1.0
+shoot_cd = 0.0
+instances = 0.0
+
+[sub_resource type="Resource" id="Resource_djm8j"]
+script = ExtResource("2_pmuru")
+pierce = 0
+title = "PIERCING SHOT"
+title_color = Color(1, 1, 1, 1)
+power_up_description = "Cd decreased"
+shoot_speed = 0.0
+damage = 0.0
+shoot_cd = 1.0
+instances = 0.0
+
+[resource]
+script = ExtResource("2_uhde0")
+powerups = Array[ExtResource("1_is1cp")]([SubResource("Resource_kucbr"), SubResource("Resource_r3yyh"), SubResource("Resource_4bhxc"), SubResource("Resource_juiw5"), SubResource("Resource_djm8j")])

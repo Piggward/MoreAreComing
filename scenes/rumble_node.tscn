@@ -1,22 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfsoakqld1n6s"]
+[gd_scene load_steps=3 format=3 uid="uid://cfsoakqld1n6s"]
 
-[ext_resource type="Script" uid="uid://be7to215ht0h" path="res://scripts/rumble_node.gd" id="1_0aif6"]
-[ext_resource type="PackedScene" uid="uid://fmrdsxy6ig5r" path="res://vfx/upgrade_particles.tscn" id="2_ktsiv"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_23d85"]
+[ext_resource type="Script" path="res://scripts/rumble_node.gd" id="1_0aif6"]
+[ext_resource type="PackedScene" uid="uid://cxusqo0ha6e0" path="res://scenes/rumble_area.tscn" id="2_65lw7"]
 
 [node name="RumbleNode" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_0aif6")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" parent="." instance=ExtResource("2_65lw7")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-scale = Vector2(2.18695, 2.18695)
-shape = SubResource("CircleShape2D_23d85")
-
-[node name="GPUParticles2D" parent="." instance=ExtResource("2_ktsiv")]
-modulate = Color(2, 2, 2, 1)
-
-[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[editable path="Area2D"]

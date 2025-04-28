@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://7nk3om0x8xav"]
 
-[ext_resource type="Script" uid="uid://bhv67w0xw1kck" path="res://scenes/enemy.gd" id="1_hir0y"]
-[ext_resource type="Shader" uid="uid://o0iivpms5ae2" path="res://vfx/color_swap.gdshader" id="2_1c04e"]
+[ext_resource type="Script" path="res://scenes/enemy.gd" id="1_hir0y"]
+[ext_resource type="Shader" path="res://vfx/color_swap.gdshader" id="2_1c04e"]
 [ext_resource type="Texture2D" uid="uid://iklq3onauy0v" path="res://art/enemy.png" id="2_l5g7g"]
 [ext_resource type="Texture2D" uid="uid://dm85jmuycd2jr" path="res://art/enemy2.png" id="3_jjiyb"]
 [ext_resource type="Texture2D" uid="uid://5ruhyx5o1vwg" path="res://art/enemy3.png" id="4_jywlc"]
@@ -57,6 +57,7 @@ main_color = Color(0.396078, 0.45098, 0.54902, 1)
 wheel_color_1 = Color(0.27451, 0.27451, 0.27451, 1)
 wheel_color_2 = Color(0.329412, 0.329412, 0.329412, 1)
 accent_color = Color(0.309804, 0.321569, 0.466667, 1)
+exp_chance = 1.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

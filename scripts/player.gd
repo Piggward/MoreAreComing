@@ -11,7 +11,6 @@ var power_timers = { }
 var primary_color: Color
 var health: int
 var turret: Turret
-var enemy_manager: EnemyManager
 var exp = 0
 var current_level = 0
 var shoot_ready = true
@@ -23,8 +22,6 @@ signal level_up(level: int)
 func _ready():
 	EventManager.exp_pickup.connect(_on_exp_pickup)
 	turret = get_tree().get_first_node_in_group("turret")
-	enemy_manager = get_tree().get_first_node_in_group("enemy_manager")
-	enemy_manager.enemy_killed.connect(_on_enemy_killed)
 	health = max_health
 	EventManager.primary_color_change.connect(func(a): self.primary_color = a)
 	EventManager.start_game.connect(_on_game_start)
@@ -82,15 +79,10 @@ func _on_exp_pickup(value: int):
 		level_up.emit(current_level)
 		exp = 0
 		EventManager.experience_updated.emit(0, level_progression[current_level])
-		
-func _on_enemy_killed(enemy: Enemy):
-	_on_exp_pickup(enemy.exp)
 	
 func take_damage(damage: int):
 	self.health -= damage
 	health_updated.emit(self.health, self.max_health)
 	
 func update_attributes():
-	turret.scale.x = clamp(turret.scale.x, 1, 3)
-	turret.scale.y = clamp(turret.scale.y, 1, 3)
 	attributes_updated.emit()

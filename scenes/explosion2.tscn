@@ -1,7 +1,7 @@
 [gd_scene load_steps=22 format=3 uid="uid://d31i675g4xes"]
 
 [ext_resource type="Texture2D" uid="uid://bsq0vjs08aocx" path="res://art/star_07.png" id="1_i4g7l"]
-[ext_resource type="Script" uid="uid://cs0m38tpcysw2" path="res://scripts/explosion_2.gd" id="2_c5nhc"]
+[ext_resource type="Script" path="res://scripts/explosion_2.gd" id="2_c5nhc"]
 [ext_resource type="Texture2D" uid="uid://7vo4h4k7slgd" path="res://art/particles/smoke_07.png" id="3_2a6k2"]
 [ext_resource type="Texture2D" uid="uid://bd5ap062els7g" path="res://art/fireorsmth.png" id="4_6juhy"]
 [ext_resource type="PackedScene" uid="uid://dskynthchdy5p" path="res://scenes/explosion_particles.tscn" id="5_8hnsl"]
@@ -84,34 +84,34 @@ modulate = Color(2, 2, 2, 1)
 top_level = true
 emitting = false
 amount = 2
+process_material = SubResource("ParticleProcessMaterial_l7rf8")
 texture = ExtResource("1_i4g7l")
 lifetime = 0.3
 one_shot = true
 explosiveness = 1.0
 local_coords = true
-process_material = SubResource("ParticleProcessMaterial_l7rf8")
 script = ExtResource("2_c5nhc")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 show_behind_parent = true
 emitting = false
 amount = 1
+process_material = SubResource("ParticleProcessMaterial_8suxy")
 texture = ExtResource("3_2a6k2")
 one_shot = true
 explosiveness = 1.0
 local_coords = true
-process_material = SubResource("ParticleProcessMaterial_8suxy")
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
 show_behind_parent = true
 z_index = -1
 emitting = false
 amount = 1
+process_material = SubResource("ParticleProcessMaterial_crvyf")
 texture = ExtResource("4_6juhy")
 lifetime = 0.2
 one_shot = true
 local_coords = true
-process_material = SubResource("ParticleProcessMaterial_crvyf")
 
 [node name="ExplosionParticles" parent="." instance=ExtResource("5_8hnsl")]
 show_behind_parent = true

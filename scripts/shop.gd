@@ -1,4 +1,4 @@
-class_name Shop
+class_name Shop2
 extends HBoxContainer
 
 const SHOP_ITEM = preload("res://scenes/shop_item.tscn")

@@ -2,22 +2,25 @@ class_name RumbleArea
 extends Area2D
 
 # Parameters to control the rumble effect
-@export var rumble_duration: float = 0.5      # How long the rumble should go on
+@export var rumble_duration: float = 0.65   # How long the rumble should go on
 @export var max_intensity: float = 4       # Max shake intensity
 @export var ramp_speed: float = 1   
-@export var exp_worth: int
+@export var exp_worth: float = 1.0
+@export var min_split_amount: int = 5
+@export var max_split_amount: int = 25
+const EXP_PARTICLE_AREA = preload("res://scenes/exp_particle_area.tscn")
+@onready var gpu_particles_2d = $GPUParticles2D
 
 var _elapsed_time := 0.0
 var _original_position := Vector2.ZERO
 var _is_rumbling := false
-var pickup = false
-var exp_bar: ExperienceBar
-
-signal exp_pickup
+var split_amount: int 
+var camera_container: Node2D
 
 func _ready():
 	_original_position = position
-	exp_bar = get_tree().get_first_node_in_group("experience_bar")
+	split_amount = randi_range(min_split_amount, max_split_amount)
+	camera_container = get_tree().get_first_node_in_group("camera_container")
 
 func start_rumble():
 	_elapsed_time = 0.0
@@ -42,23 +45,21 @@ func _process(delta):
 
 		if _elapsed_time >= rumble_duration:
 			stop_rumble()
-			pickup = true
-			
-	elif pickup:
-		var c_local_to_n_global = get_canvas_transform().affine_inverse() * exp_bar.get_global_transform_with_canvas()
-		var n_target_global_position: Vector2 = c_local_to_n_global * (exp_bar.size / 2)
-		if (global_position - n_target_global_position).length() < 30: 
-			EventManager.exp_pickup.emit(exp_worth)
+			for x in split_amount:
+				var i = EXP_PARTICLE_AREA.instantiate()
+				i.exp_worth = exp_worth / split_amount
+				camera_container.add_child(i)
+				i.global_position = self.global_position
 			self.queue_free()
-		global_position = lerp(global_position, n_target_global_position, 0.05)
-
+				
+		
 func _on_mouse_entered():
-	if not _is_rumbling and not pickup and not get_tree().paused:
+	if not _is_rumbling and not get_tree().paused:
 		start_rumble()
 	pass # Replace with function body.
 
 
 func _on_mouse_exited():
-	if _is_rumbling and not pickup:
+	if _is_rumbling:
 		stop_rumble()
 	pass # Replace with function body.

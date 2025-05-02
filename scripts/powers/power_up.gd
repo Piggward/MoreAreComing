@@ -9,9 +9,11 @@ extends Resource
 @export var damage: float = 0
 @export var shoot_cd: float = 0
 @export var instances: float = 0
-
+const TOWER_DEFENSE_TILE_250 = preload("res://art/towerDefense_tile250.png")
 var starting_power: Power
 var power: Power
+var texture: Texture = TOWER_DEFENSE_TILE_250
+
 
 func apply(player: Player):
 	var find_power = player.powers.filter(func(a): return a.power_name == starting_power.power_name)

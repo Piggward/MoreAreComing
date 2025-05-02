@@ -58,19 +58,19 @@ scale = Vector2(1.16891, 1.16891)
 
 [node name="OutlinePolygon" type="Polygon2D" parent="."]
 self_modulate = Color(2, 2, 2, 1)
-scale = Vector2(1.24874, 1.24874)
+scale = Vector2(2.498, 2.498)
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-8, 0, -6, -5, -3, -7, 0, -8, 4, -7, 6, -5, 8, -2, 8, 0, 7, 4, 5, 6, 2, 8, 0, 8, -4, 7, -6, 5, -7, 3, -8, 1, -8, 0)
 
 [node name="BallPolygon" type="Polygon2D" parent="."]
 rotation = 0.00277402
-scale = Vector2(1.16891, 1.16891)
+scale = Vector2(2.338, 2.338)
 polygon = PackedVector2Array(-8, 0, -6, -5, -3, -7, 0, -8, 4, -7, 6, -5, 8, -2, 8, 0, 7, 4, 5, 6, 2, 8, 0, 8, -4, 7, -6, 5, -7, 3, -8, 1, -8, 0)
 script = ExtResource("2_8ltdv")
 
 [node name="Particles" type="Node2D" parent="."]
 modulate = Color(1, 1, 1, 0.222)
-scale = Vector2(1.16891, 1.16891)
+scale = Vector2(2.338, 2.338)
 
 [node name="SpeedHead" type="GPUParticles2D" parent="Particles"]
 process_mode = 3

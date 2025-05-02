@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://c42xe5fo8vwjt"]
+
+[ext_resource type="Script" path="res://scripts/new_shop/shop.gd" id="1_nsmgf"]
+[ext_resource type="PackedScene" uid="uid://c1dem4yovlxc8" path="res://scenes/shop_item2.tscn" id="2_65kn5"]
+[ext_resource type="Script" path="res://scripts/powers/force_power_up.gd" id="3_3vsby"]
+[ext_resource type="Script" path="res://scripts/powers/rocket_power_up.gd" id="4_ljp6v"]
+[ext_resource type="Script" path="res://scripts/powers/bounce_power_up.gd" id="5_g28pg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lvet4"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Resource" id="Resource_epml4"]
+script = ExtResource("3_3vsby")
+knock_back = 0.0
+title = "Force"
+title_color = Color(1, 1, 1, 1)
+power_up_description = "Pushes people away"
+shoot_speed = 0.0
+damage = 0.0
+shoot_cd = 0.0
+instances = 0.0
+
+[sub_resource type="Resource" id="Resource_vdcu7"]
+script = ExtResource("4_ljp6v")
+radius = 0.0
+title = "ae"
+title_color = Color(1, 1, 1, 1)
+power_up_description = "f"
+shoot_speed = 0.0
+damage = 0.0
+shoot_cd = 0.0
+instances = 0.0
+
+[sub_resource type="Resource" id="Resource_e6y6q"]
+script = ExtResource("5_g28pg")
+bounce = 0
+title = "wef"
+title_color = Color(1, 1, 1, 1)
+power_up_description = "wf"
+shoot_speed = 0.0
+damage = 0.0
+shoot_cd = 0.0
+instances = 0.0
+
+[node name="Shop" type="HBoxContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -179.0
+offset_right = 400.0
+offset_bottom = 179.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 25
+script = ExtResource("1_nsmgf")
+
+[node name="ItemContainer" parent="." instance=ExtResource("2_65kn5")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lvet4")
+power_up = SubResource("Resource_epml4")
+
+[node name="ItemContainer2" parent="." instance=ExtResource("2_65kn5")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lvet4")
+power_up = SubResource("Resource_vdcu7")
+
+[node name="ItemContainer3" parent="." instance=ExtResource("2_65kn5")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lvet4")
+power_up = SubResource("Resource_e6y6q")

@@ -6,15 +6,15 @@ var player: Player
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
 	self.max_value = player.level_progression[player.current_level]
-	self.value = 0
+	self.value = 0.0
 	EventManager.experience_updated.connect(update_values)
 	EventManager.experience_added.connect(update_value)
 	pass # Replace with function body.
 
-func update_values(v: int, max_v: int):
+func update_values(v: float, max_v: float):
 	value = v
 	max_value = max_v
 	
-func update_value(v: int):
+func update_value(v: float):
 	value = v
 	

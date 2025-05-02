@@ -66,7 +66,6 @@ func on_level_up(new_level):
 	wave_cleared.play()
 	timer.set_paused(true)
 	get_tree().paused = true
-	shop.provide_powerups()
 	
 func game_over(won: bool):
 	var s = GAME_OVER_SCREEN.instantiate()

@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3 uid="uid://c1dem4yovlxc8"]
+
+[ext_resource type="Script" path="res://scenes/shop_item_2.gd" id="1_x188j"]
+[ext_resource type="Texture2D" uid="uid://318kuti2tkud" path="res://art/towerDefense_tile250.png" id="1_y64ky"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lvet4"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fggfw"]
+bg_color = Color(0.37906, 0.648071, 0.706436, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uu8lw"]
+bg_color = Color(0.856879, 0.476737, 0.435678, 1)
+
+[node name="ItemContainer" type="PanelContainer"]
+custom_minimum_size = Vector2(250, 350)
+theme_override_styles/panel = SubResource("StyleBoxFlat_lvet4")
+script = ExtResource("1_x188j")
+
+[node name="OnHoverPanel" type="Panel" parent="."]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_fggfw")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Vbox" type="VBoxContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="TitleContainer" type="PanelContainer" parent="MarginContainer/PanelContainer/Vbox"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_uu8lw")
+
+[node name="Title" type="Label" parent="MarginContainer/PanelContainer/Vbox/TitleContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 35
+text = "Title"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Texture" type="TextureRect" parent="MarginContainer/PanelContainer/Vbox"]
+texture_filter = 1
+custom_minimum_size = Vector2(150, 200)
+layout_mode = 2
+texture = ExtResource("1_y64ky")
+
+[node name="DescriptionContainer" type="PanelContainer" parent="MarginContainer/PanelContainer/Vbox"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Description" type="Label" parent="MarginContainer/PanelContainer/Vbox/DescriptionContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/font_size = 25
+text = "Increase x with y % very good."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -19,11 +19,10 @@ func on_hit(sa: ShootArea, enemy: Enemy):
 	enemy.take_damage(damage)
 	
 func get_direction(turret):
-	var mouse = turret.get_global_mouse_position()
-	return turret.rotation + turret.get_angle_to(mouse) - deg_to_rad(90)
+	return randf_range(deg_to_rad(0), deg_to_rad(360))
 	
 func get_position(nozzle):
-	return -nozzle.position - nozzle.position
+	return Vector2.ZERO
 	
 func on_out_of_bounds(sa: ShootArea):
 	if bounces_left == 0:

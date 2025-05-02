@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_q7m0t")
-pierce = 1
+pierce = 0
 damage = 2
 cool_down = 2.0
-speed = 400.0
+speed = 500.0
 instances = 3
 power_name = "Pierce"

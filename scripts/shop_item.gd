@@ -1,4 +1,4 @@
-class_name ShopItem
+class_name ShopItem2
 extends VBoxContainer
 
 @export var power_up: PowerUp

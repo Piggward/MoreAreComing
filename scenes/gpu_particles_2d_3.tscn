@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxhrit7fyk061"]
+
+[ext_resource type="Texture2D" uid="uid://bq25ewhaqcn0w" path="res://art/circle_05.png" id="1_tygym"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wj0dw"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(0, 0, 1)
+spread = 180.0
+initial_velocity_min = 500.0
+initial_velocity_max = 500.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.01
+scale_max = 0.01
+
+[node name="GPUParticles2D3" type="GPUParticles2D"]
+position = Vector2(-415.056, 0)
+process_material = SubResource("ParticleProcessMaterial_wj0dw")
+texture = ExtResource("1_tygym")
+explosiveness = 1.0
+trail_enabled = true
+trail_lifetime = 0.6

@@ -1,4 +1,4 @@
-[gd_scene load_steps=680 format=4 uid="uid://do804sfv5x0tt"]
+[gd_scene load_steps=675 format=4 uid="uid://do804sfv5x0tt"]
 
 [ext_resource type="Script" path="res://scripts/level_1.gd" id="1_3ju04"]
 [ext_resource type="Script" path="res://scripts/turret.gd" id="1_iom35"]
@@ -19,7 +19,6 @@
 [ext_resource type="AudioStream" uid="uid://bfepe77dwo64u" path="res://sfx/guitarsliock.mp3" id="7_ucylw"]
 [ext_resource type="AudioStream" uid="uid://cbaam4pwdps0q" path="res://sfx/PipeMoving.mp3" id="8_o0y8h"]
 [ext_resource type="Texture2D" uid="uid://bprj7nlhyl3so" path="res://art/Default size/towerDefense_tile103.png" id="8_y8nji"]
-[ext_resource type="Script" path="res://scripts/shop.gd" id="8_y74hh"]
 [ext_resource type="Texture2D" uid="uid://cfylavpewfaml" path="res://art/Default size/towerDefense_tile104.png" id="9_idmji"]
 [ext_resource type="AudioStream" uid="uid://cw6o5bb8uihtt" path="res://sfx/shoot.ogg" id="9_iwjtq"]
 [ext_resource type="Texture2D" uid="uid://ct3tfm16tngun" path="res://art/Default size/towerDefense_tile105.png" id="10_t4fyq"]
@@ -326,14 +325,10 @@
 [ext_resource type="Script" path="res://resources/powers/basic_power.gd" id="316_7gufk"]
 [ext_resource type="Script" path="res://scripts/reload_reminder.gd" id="318_y64pl"]
 [ext_resource type="Script" path="res://scripts/canvas_layer.gd" id="319_31ilp"]
-[ext_resource type="Script" path="res://scripts/powers/power_tree.gd" id="322_t76av"]
-[ext_resource type="Resource" uid="uid://du218vnpfiaqo" path="res://resources/power_trees/basic_bullet_tree.tres" id="323_4rdh8"]
-[ext_resource type="Resource" uid="uid://dymwddgg2dj67" path="res://resources/power_trees/bounce_tree.tres" id="324_xiww4"]
-[ext_resource type="Resource" uid="uid://oovvbqnjvw8x" path="res://resources/power_trees/force_tree.tres" id="325_0hug8"]
-[ext_resource type="Resource" uid="uid://b06dfk6wqa6aa" path="res://resources/power_trees/rocket_tree.tres" id="325_3vun2"]
-[ext_resource type="Resource" uid="uid://c7o50smomorlp" path="res://resources/power_trees/pierce_tree.tres" id="325_i6vgu"]
+[ext_resource type="PackedScene" uid="uid://c42xe5fo8vwjt" path="res://scenes/shop/shop.tscn" id="321_oxdco"]
 [ext_resource type="Script" path="res://scripts/camera_2d.gd" id="328_u2vmf"]
 [ext_resource type="Script" path="res://scripts/wave_label.gd" id="332_513re"]
+[ext_resource type="PackedScene" uid="uid://cfsoakqld1n6s" path="res://scenes/rumble_node.tscn" id="343_kx7pq"]
 [ext_resource type="Script" path="res://scripts/enemies_killed.gd" id="345_7gdhx"]
 [ext_resource type="AudioStream" uid="uid://dba3b1hwbe16s" path="res://sfx/tanks_song_intro.mp3" id="347_cirr1"]
 [ext_resource type="AudioStream" uid="uid://dlvon3tc8ks6n" path="res://sfx/tanks_song_main.mp3" id="348_3fsji"]
@@ -6297,7 +6292,7 @@ type = 1
 position = Vector2(770, 357)
 type = 2
 
-[node name="CameraPaner" type="Node2D" parent="."]
+[node name="CameraPaner" type="Node2D" parent="." groups=["camera_container"]]
 process_mode = 1
 script = ExtResource("308_7j1gf")
 
@@ -6359,7 +6354,7 @@ collision_mask = 2
 script = ExtResource("2_sf0d6")
 stats = SubResource("Resource_a8456")
 max_health = 100
-level_progression = Array[int]([3, 5, 7, 9, 10, 18, 16, 18, 20, 20, 22, 22, 24, 24, 26, 28, 30, 30, 40, 42, 44, 46, 48, 50, 52, 54])
+level_progression = Array[float]([3.0, 5.0, 7.0, 9.0, 10.0, 18.0, 16.0, 18.0, 20.0, 20.0, 22.0, 22.0, 24.0, 24.0, 26.0, 28.0, 30.0, 30.0, 40.0, 42.0, 44.0, 46.0, 48.0, 50.0, 52.0, 54.0])
 basic_power = SubResource("Resource_n2qve")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
@@ -6499,21 +6494,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Shop" type="HBoxContainer" parent="CanvasLayer/ShopControlNode" groups=["shop"]]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("8_y74hh")
-power_ups = Array[ExtResource("322_t76av")]([ExtResource("324_xiww4"), ExtResource("325_3vun2"), ExtResource("325_0hug8"), ExtResource("323_4rdh8"), ExtResource("325_i6vgu")])
+[node name="Shop" parent="CanvasLayer/ShopControlNode" instance=ExtResource("321_oxdco")]
+layout_mode = 0
+anchors_preset = 0
+offset_top = -189.0
+offset_bottom = 189.0
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/ShopControlNode"]
 visible = false
@@ -6808,8 +6793,10 @@ exp_wait_time = 1.0
 
 [node name="Timer" type="Timer" parent="ExpManager"]
 
+[node name="RumbleNode" parent="." instance=ExtResource("343_kx7pq")]
+position = Vector2(505, 348)
+exp_worth = 1
+
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="child_entered_tree" from="EnemyManager" to="EnemyManager" method="_on_child_entered_tree"]
-[connection signal="button_down" from="CanvasLayer/ShopControlNode/ExitShopButton" to="CanvasLayer/ShopControlNode/Shop" method="_on_exit_shop_button_button_down"]
-[connection signal="button_up" from="CanvasLayer/ShopControlNode/ExitShopButton" to="CanvasLayer/ShopControlNode/Shop" method="_on_exit_shop_button_button_up"]
 [connection signal="area_exited" from="ShootBoundsArea" to="ShootBoundsArea" method="_on_area_exited"]

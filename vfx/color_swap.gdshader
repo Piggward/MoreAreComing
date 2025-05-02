@@ -8,7 +8,7 @@ uniform float tolerance : hint_range(0.0, 1.0);
 
 void fragment() {
     vec4 tex_color = texture(TEXTURE, UV);
-    
+
     for (int i = 0; i < color_count; i++) {
         float dist = distance(tex_color.rgb, target_colors[i].rgb);
         if (dist < tolerance) {

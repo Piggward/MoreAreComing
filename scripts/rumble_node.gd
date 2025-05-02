@@ -2,10 +2,11 @@ class_name RumbleNode
 extends Node2D
 
 # Parameters to control the rumble effect
-@export var rumble_duration: float = 0.5      # How long the rumble should go on
+@export var rumble_duration: float = 0.1      # How long the rumble should go on
 @export var max_intensity: float = 4       # Max shake intensity
 @export var ramp_speed: float = 1   
 @export var exp_worth: int
+const EXP_PARTICLE_AREA = preload("res://scenes/exp_particle_area.tscn")
 
 var _elapsed_time := 0.0
 var _original_position := Vector2.ZERO
@@ -40,7 +41,13 @@ func _process(delta):
 
 		if _elapsed_time >= rumble_duration:
 			stop_rumble()
-			pickup = true
+			for x in exp_worth:
+				var i = EXP_PARTICLE_AREA
+				var c_local_to_n_global = get_canvas_transform().affine_inverse() * exp_bar.get_global_transform_with_canvas()
+				var n_target_global_position: Vector2 = c_local_to_n_global * (exp_bar.size / 2)
+				i.target_position = n_target_global_position
+				add_child(i)
+			#pickup = true
 			EventManager.exp_pickup.emit(exp_worth)
 			
 	elif pickup:

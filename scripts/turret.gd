@@ -2,8 +2,6 @@ class_name Turret
 extends Node2D
 
 const SHOOT_AREA = preload("res://scenes/shoot_area.tscn")
-const ROCKET = preload("res://scenes/rocket.tscn")
-
 @onready var nozzle: Marker2D = $Nozzle
 @onready var rotating_pipe: AudioStreamPlayer = $RotatingPipe
 @onready var shoot_audio = $ShootAudio

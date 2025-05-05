@@ -14,6 +14,7 @@ var turret: Turret
 var exp: float = 0.0
 var current_level = 0
 var shoot_ready = true
+var t: float = 0.0
 
 signal attributes_updated
 signal health_updated(health: int, max_health: int)
@@ -24,12 +25,8 @@ func _ready():
 	turret = get_tree().get_first_node_in_group("turret")
 	health = max_health
 	EventManager.primary_color_change.connect(func(a): self.primary_color = a)
-	EventManager.start_game.connect(_on_game_start)
+	Global.player_color = self.primary_color
 	connect_basic_power_timer()
-	
-func _on_game_start():
-	for p in powers:
-		connect_power_timer(p)
 	
 func connect_basic_power_timer():
 	basic_power.create_timer()
@@ -48,13 +45,14 @@ func connect_power_timer(p: Power):
 	p.timer.start(p.cool_down)
 	
 func power_time(timer: Timer):
-	print("spawning!")
-	var power = power_timers[timer]
+	var power: Power = power_timers[timer]
 	turret.spawn_power(power)
 	timer.start(power.cool_down)
+	t = 0.0
 	pass
 	
 func _physics_process(delta: float) -> void:
+	t += delta
 	if stats.has_automatic_shooting:
 		if Input.is_action_pressed("left_click"):
 			shoot()
@@ -64,6 +62,7 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("right_click"):
 		turret.reload()
+		level_up.emit(2)
 		
 func shoot():
 	if not basic_power.can_shoot() or turret.reloading:
@@ -90,3 +89,15 @@ func take_damage(damage: int):
 	
 func update_attributes():
 	attributes_updated.emit()
+	
+func has_power(p: Power):
+	var find_power = powers.filter(func(a): return a.get_power_name() == p.get_power_name())
+	return find_power and not find_power.is_empty()
+	
+func get_power(power_name: String):
+	var find_power = powers.filter(func(a): return a.get_power_name() == power_name)
+	if not find_power or find_power.is_empty():
+		return null
+		
+	return find_power[0]
+		

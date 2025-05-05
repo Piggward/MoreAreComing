@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://ismtg0pf2nm3"]
+
+[ext_resource type="Shader" path="res://scenes/alt_art/teststs.gdshader" id="1_7j716"]
+[ext_resource type="Texture2D" uid="uid://be7puw4f17aog" path="res://resources/powers/pierce/spikes.png" id="2_i637v"]
+[ext_resource type="Script" path="res://scenes/shop/shop_image.gd" id="3_mpd7r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tlafh"]
+shader = ExtResource("1_7j716")
+shader_parameter/primary_color = Color(0.180392, 0.8, 0.443137, 1)
+shader_parameter/secondary_color = Color(0.160784, 0.721569, 0.4, 1)
+shader_parameter/accent_color = Color(0.133333, 0.611765, 0.337255, 1)
+shader_parameter/accent_2_color = null
+shader_parameter/new_primary_color = Color(0.180392, 0.8, 0.443137, 1)
+shader_parameter/tolerance = 0.1
+
+[node name="Texture" type="TextureRect"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_tlafh")
+custom_minimum_size = Vector2(150, 150)
+texture = ExtResource("2_i637v")
+script = ExtResource("3_mpd7r")
+tolerance = 0.1

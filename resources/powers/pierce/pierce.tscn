@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://dgnvfpe3q16tw"]
+
+[ext_resource type="Script" path="res://scripts/shoot_area.gd" id="1_0n3c5"]
+[ext_resource type="AudioStream" uid="uid://bwamlv2otq8la" path="res://sfx/muffled_explosion.mp3" id="3_w6dre"]
+[ext_resource type="Texture2D" uid="uid://bmwbxgwcylbve" path="res://resources/powers/pierce/pierce.png" id="4_fdf78"]
+[ext_resource type="Shader" path="res://scenes/alt_art/teststs.gdshader" id="4_ya1je"]
+[ext_resource type="Script" path="res://scripts/color_sprite.gd" id="5_3iysj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hfyi7"]
+size = Vector2(70.456, 18.7186)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ycvd"]
+shader = ExtResource("4_ya1je")
+shader_parameter/primary_color = Color(0.180392, 0.8, 0.443137, 1)
+shader_parameter/secondary_color = Color(0.160784, 0.721569, 0.4, 1)
+shader_parameter/accent_color = Color(0.133333, 0.611765, 0.337255, 1)
+shader_parameter/accent_2_color = Color(0.145098, 0.670588, 0.372549, 1)
+shader_parameter/new_primary_color = Color(0.67451, 0.631373, 0.647059, 1)
+shader_parameter/tolerance = 0.1
+
+[node name="ShootArea" type="Area2D" groups=["pauseable", "projectile"]]
+modulate = Color(2, 2, 2, 1)
+scale = Vector2(0.652055, 0.652055)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_0n3c5")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_w6dre")
+volume_db = 24.0
+bus = &"SFX - Enemy Dead"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4.60084, 0.334026)
+scale = Vector2(0.783611, 0.783611)
+shape = SubResource("RectangleShape2D_hfyi7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_3ycvd")
+position = Vector2(1.90735e-06, -2.38914e-11)
+rotation = -1.57079
+scale = Vector2(1, 1.85)
+texture = ExtResource("4_fdf78")
+script = ExtResource("5_3iysj")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

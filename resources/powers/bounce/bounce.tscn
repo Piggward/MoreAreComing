@@ -1,0 +1,122 @@
+[gd_scene load_steps=16 format=3 uid="uid://cptex57fkmfw4"]
+
+[ext_resource type="Script" path="res://scripts/shoot_area.gd" id="1_typhe"]
+[ext_resource type="Texture2D" uid="uid://b6071u8nfnkp5" path="res://resources/powers/bounce/powerball.png" id="2_rabxr"]
+[ext_resource type="Shader" path="res://scenes/alt_art/teststs.gdshader" id="3_hdqgf"]
+[ext_resource type="Script" path="res://scripts/color_sprite.gd" id="3_pjuby"]
+[ext_resource type="Texture2D" uid="uid://b63phd1s6qt0r" path="res://art/slash_02.png" id="4_cf8xr"]
+[ext_resource type="Texture2D" uid="uid://cbdp7nrn3odv4" path="res://art/trace_01.png" id="5_7wai5"]
+[ext_resource type="AudioStream" uid="uid://bwamlv2otq8la" path="res://sfx/muffled_explosion.mp3" id="6_ojc78"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5efbl"]
+shader = ExtResource("3_hdqgf")
+shader_parameter/primary_color = Color(0.988235, 0.988235, 0.988235, 1)
+shader_parameter/secondary_color = Color(0.952941, 0.952941, 0.952941, 1)
+shader_parameter/accent_color = Color(0.894118, 0.894118, 0.894118, 1)
+shader_parameter/accent_2_color = Color(0.815686, 0.815686, 0.815686, 1)
+shader_parameter/new_primary_color = Color(0.701961, 0, 0, 1)
+shader_parameter/tolerance = 0.13
+
+[sub_resource type="Curve" id="Curve_7oriw"]
+_data = [Vector2(0, 0.848013), 0.0, 0.0, 0, 0, Vector2(0.114823, 1), 0.0, 0.0, 0, 0, Vector2(0.250522, 0.868278), 0.0, 0.0, 0, 0, Vector2(0.386221, 1), 0.0, 0.0, 0, 0, Vector2(0.503132, 0.863211), 0.0, 0.0, 0, 0, Vector2(0.63048, 1), 0.0, 0.0, 0, 0, Vector2(0.753653, 0.853079), 0.0, 0.0, 0, 0, Vector2(0.878914, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.863211), 0.0, 0.0, 0, 0]
+point_count = 9
+
+[sub_resource type="CurveTexture" id="CurveTexture_eoixx"]
+curve = SubResource("Curve_7oriw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6lmhe"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(-1.5, 0, 0)
+angle_min = -90.0
+angle_max = -90.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.09
+scale_max = 0.09
+scale_curve = SubResource("CurveTexture_eoixx")
+color = Color(1, 1, 1, 0.309804)
+
+[sub_resource type="Gradient" id="Gradient_v2lsx"]
+offsets = PackedFloat32Array(0.00221729, 1)
+colors = PackedColorArray(1, 1, 1, 0.195, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_64k8x"]
+gradient = SubResource("Gradient_v2lsx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_odwe6"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(15, 0, 0)
+emission_shape_scale = Vector3(5, 5, 5)
+emission_shape = 3
+emission_box_extents = Vector3(0, 0, 0)
+angle_min = 90.0
+angle_max = 90.0
+gravity = Vector3(50, 0, 0)
+scale_min = 0.1
+scale_max = 0.1
+color = Color(1, 1, 1, 0.151)
+color_ramp = SubResource("GradientTexture1D_64k8x")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e7kxt"]
+
+[node name="ShootArea" type="Area2D" groups=["pauseable", "projectile"]]
+modulate = Color(2.5, 2.5, 2.5, 1)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_typhe")
+
+[node name="Ouline" type="Sprite2D" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+scale = Vector2(0.504071, 0.504071)
+texture = ExtResource("2_rabxr")
+
+[node name="Ball" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_5efbl")
+scale = Vector2(0.477144, 0.477144)
+texture = ExtResource("2_rabxr")
+script = ExtResource("3_pjuby")
+tolerance = 0.13
+
+[node name="Particles" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0.222)
+scale = Vector2(2.338, 2.338)
+
+[node name="SpeedHead" type="GPUParticles2D" parent="Particles"]
+process_mode = 3
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_6lmhe")
+texture = ExtResource("4_cf8xr")
+lifetime = 2.0
+local_coords = true
+
+[node name="SpeedLines2" type="GPUParticles2D" parent="Particles"]
+process_mode = 3
+position = Vector2(-4, -13)
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_odwe6")
+texture = ExtResource("5_7wai5")
+lifetime = 1.5
+local_coords = true
+
+[node name="SpeedLines1" type="GPUParticles2D" parent="Particles"]
+process_mode = 3
+position = Vector2(-5, 12)
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_odwe6")
+texture = ExtResource("5_7wai5")
+lifetime = 1.5
+local_coords = true
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+scale = Vector2(1.16891, 1.16891)
+stream = ExtResource("6_ojc78")
+volume_db = 24.0
+bus = &"SFX - Enemy Dead"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+scale = Vector2(0.915974, 0.915974)
+shape = SubResource("CircleShape2D_e7kxt")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

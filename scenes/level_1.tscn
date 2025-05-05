@@ -1,4 +1,4 @@
-[gd_scene load_steps=675 format=4 uid="uid://do804sfv5x0tt"]
+[gd_scene load_steps=695 format=4 uid="uid://do804sfv5x0tt"]
 
 [ext_resource type="Script" path="res://scripts/level_1.gd" id="1_3ju04"]
 [ext_resource type="Script" path="res://scripts/turret.gd" id="1_iom35"]
@@ -189,7 +189,7 @@
 [ext_resource type="Texture2D" uid="uid://dv5g54hrg0eqx" path="res://art/Default size/towerDefense_tile250.png" id="170_2uwly"]
 [ext_resource type="Texture2D" uid="uid://dk2h8tv5mv6fb" path="res://art/Default size/towerDefense_tile026.png" id="171_pevid"]
 [ext_resource type="Texture2D" uid="uid://c1rlco0offocq" path="res://art/Default size/towerDefense_tile251.png" id="172_r007s"]
-[ext_resource type="Texture2D" uid="uid://cbneuobcodpnf" path="res://art/Default size/towerDefense_tile252.png" id="173_bfj50"]
+[ext_resource type="Texture2D" uid="uid://cbneuobcodpnf" path="res://resources/powers/rocket/rocket.png" id="173_bfj50"]
 [ext_resource type="Texture2D" uid="uid://cgs2nv2hhe4c3" path="res://art/Default size/towerDefense_tile253.png" id="174_7vthm"]
 [ext_resource type="Texture2D" uid="uid://d0baewmngpcvn" path="res://art/Default size/towerDefense_tile254.png" id="175_nd7ho"]
 [ext_resource type="Texture2D" uid="uid://fe1xdqh0hhxk" path="res://art/Default size/towerDefense_tile255.png" id="176_8414k"]
@@ -322,12 +322,23 @@
 [ext_resource type="Script" path="res://resources/turret/turret_stats.gd" id="310_8levr"]
 [ext_resource type="PackedScene" uid="uid://cp762k8rwshe2" path="res://scenes/turret_sprite.tscn" id="314_byfxm"]
 [ext_resource type="Texture2D" uid="uid://qsps8vybv2u8" path="res://art/muzzle_02.png" id="316_2j2a1"]
-[ext_resource type="Script" path="res://resources/powers/basic_power.gd" id="316_7gufk"]
+[ext_resource type="Script" path="res://resources/powers/basic_power/basic_power.gd" id="316_7gufk"]
 [ext_resource type="Script" path="res://scripts/reload_reminder.gd" id="318_y64pl"]
 [ext_resource type="Script" path="res://scripts/canvas_layer.gd" id="319_31ilp"]
 [ext_resource type="PackedScene" uid="uid://c42xe5fo8vwjt" path="res://scenes/shop/shop.tscn" id="321_oxdco"]
+[ext_resource type="Script" path="res://resources/powers/power_tree.gd" id="322_t76av"]
+[ext_resource type="Script" path="res://resources/powers/power_up.gd" id="323_bsxh4"]
+[ext_resource type="Script" path="res://resources/power_up_scripts/damage_powerup.gd" id="325_6jutn"]
+[ext_resource type="Script" path="res://resources/power_up_scripts/cd_powerup.gd" id="326_0ui0b"]
+[ext_resource type="Resource" uid="uid://bcovho5lbdklv" path="res://resources/powers/bounce/bounce_starting.tres" id="327_dpeba"]
+[ext_resource type="Script" path="res://resources/power_up_scripts/bounce_powerup.gd" id="327_snudh"]
 [ext_resource type="Script" path="res://scripts/camera_2d.gd" id="328_u2vmf"]
+[ext_resource type="Script" path="res://resources/power_up_scripts/aoe_powerup.gd" id="329_74p4v"]
+[ext_resource type="Resource" uid="uid://dddctnxc343yt" path="res://resources/powers/rocket/rocket_starting.tres" id="329_i504w"]
+[ext_resource type="Resource" uid="uid://d31s3mo50ttv3" path="res://resources/powers/force/force_starting.tres" id="331_edgun"]
+[ext_resource type="Script" path="res://resources/power_up_scripts/instance_powerup.gd" id="331_hi5my"]
 [ext_resource type="Script" path="res://scripts/wave_label.gd" id="332_513re"]
+[ext_resource type="Resource" uid="uid://dw3imwapuh3xa" path="res://resources/powers/pierce/pierce_starting.tres" id="332_sf1iw"]
 [ext_resource type="PackedScene" uid="uid://cfsoakqld1n6s" path="res://scenes/rumble_node.tscn" id="343_kx7pq"]
 [ext_resource type="Script" path="res://scripts/enemies_killed.gd" id="345_7gdhx"]
 [ext_resource type="AudioStream" uid="uid://dba3b1hwbe16s" path="res://sfx/tanks_song_intro.mp3" id="347_cirr1"]
@@ -6065,7 +6076,7 @@ shoot_range = 400.0
 shot_scale = 1.0
 base_damage = 1.0
 base_cd = 1.0
-turn_rate = 4.0
+turn_rate = 8.0
 mag_size = 10
 reload_speed = 1.0
 has_automatic_shooting = false
@@ -6078,11 +6089,10 @@ shots_left = 10
 automatic_reload = false
 automatic_shooting = false
 mag_size = 10
-damage = 5
+damage = 15
 cool_down = 0.4
 speed = 300.0
 instances = 1
-power_name = ""
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fblkm"]
 size = Vector2(72, 76)
@@ -6107,112 +6117,65 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.132)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ip24r"]
-bg_color = Color(0.627451, 0.72549, 0.729412, 1)
+[sub_resource type="Resource" id="Resource_6gcyg"]
+script = ExtResource("325_6jutn")
+damage_multiplier = 1.2
 
-[sub_resource type="Animation" id="Animation_ypwv8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ShopControlNode/PanelContainer:size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 43)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ShopControlNode/PanelContainer:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(556, 304)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("ShopControlNode/PanelContainer:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
+[sub_resource type="Resource" id="Resource_7fxqf"]
+script = ExtResource("326_0ui0b")
+cd_multiplier = 0.8
 
-[sub_resource type="Animation" id="Animation_7h7od"]
-resource_name = "show_powerup"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ShopControlNode/PanelContainer:size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.5, 0.866667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 43), Vector2(428, 26), Vector2(428, 26), Vector2(355, 26)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ShopControlNode/PanelContainer:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.5, 0.866667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(556, 394), Vector2(577, 404), Vector2(652, 404), Vector2(404, 404)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("ShopControlNode/PanelContainer:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../Player/PowerUp")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.833333),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [0.0],
-"method": &"play"
-}, {
-"args": [],
-"method": &"stop"
-}]
-}
+[sub_resource type="Resource" id="Resource_s1qok"]
+script = ExtResource("327_snudh")
+bounces = 1
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_221h7"]
-_data = {
-"RESET": SubResource("Animation_ypwv8"),
-"show_powerup": SubResource("Animation_7h7od")
-}
+[sub_resource type="Resource" id="Resource_6i3aj"]
+script = ExtResource("322_t76av")
+powerups = Array[ExtResource("323_bsxh4")]([SubResource("Resource_6gcyg"), SubResource("Resource_7fxqf"), SubResource("Resource_s1qok")])
+starting_power = ExtResource("327_dpeba")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t6inf"]
-bg_color = Color(0.396078, 0.45098, 0.54902, 1)
+[sub_resource type="Resource" id="Resource_vwwgj"]
+script = ExtResource("325_6jutn")
+damage_multiplier = 1.2
+
+[sub_resource type="Resource" id="Resource_rsqvc"]
+script = ExtResource("326_0ui0b")
+cd_multiplier = 0.8
+
+[sub_resource type="Resource" id="Resource_rax6v"]
+script = ExtResource("329_74p4v")
+aoe_multiplier = 1.2
+
+[sub_resource type="Resource" id="Resource_pvcba"]
+script = ExtResource("322_t76av")
+powerups = Array[ExtResource("323_bsxh4")]([SubResource("Resource_vwwgj"), SubResource("Resource_rsqvc"), SubResource("Resource_rax6v")])
+starting_power = ExtResource("329_i504w")
+
+[sub_resource type="Resource" id="Resource_aah1c"]
+script = ExtResource("326_0ui0b")
+cd_multiplier = 0.8
+
+[sub_resource type="Resource" id="Resource_61mpk"]
+script = ExtResource("322_t76av")
+powerups = Array[ExtResource("323_bsxh4")]([SubResource("Resource_aah1c")])
+starting_power = ExtResource("331_edgun")
+
+[sub_resource type="Resource" id="Resource_pd3mn"]
+script = ExtResource("326_0ui0b")
+cd_multiplier = 0.8
+
+[sub_resource type="Resource" id="Resource_oiogn"]
+script = ExtResource("325_6jutn")
+damage_multiplier = 1.2
+
+[sub_resource type="Resource" id="Resource_82lt5"]
+script = ExtResource("331_hi5my")
+instances = 2
+
+[sub_resource type="Resource" id="Resource_e3kdg"]
+script = ExtResource("322_t76av")
+powerups = Array[ExtResource("323_bsxh4")]([SubResource("Resource_pd3mn"), SubResource("Resource_oiogn"), SubResource("Resource_82lt5")])
+starting_power = ExtResource("332_sf1iw")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c661y"]
 bg_color = Color(0.627451, 0.72549, 0.729412, 0.72549)
@@ -6354,7 +6317,7 @@ collision_mask = 2
 script = ExtResource("2_sf0d6")
 stats = SubResource("Resource_a8456")
 max_health = 100
-level_progression = Array[float]([3.0, 5.0, 7.0, 9.0, 10.0, 18.0, 16.0, 18.0, 20.0, 20.0, 22.0, 22.0, 24.0, 24.0, 26.0, 28.0, 30.0, 30.0, 40.0, 42.0, 44.0, 46.0, 48.0, 50.0, 52.0, 54.0])
+level_progression = Array[float]([1.0, 1.0, 1.0, 9.0, 10.0, 18.0, 16.0, 18.0, 20.0, 20.0, 22.0, 22.0, 24.0, 24.0, 26.0, 28.0, 30.0, 30.0, 40.0, 42.0, 44.0, 46.0, 48.0, 50.0, 52.0, 54.0])
 basic_power = SubResource("Resource_n2qve")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
@@ -6494,64 +6457,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Shop" parent="CanvasLayer/ShopControlNode" instance=ExtResource("321_oxdco")]
-layout_mode = 0
-anchors_preset = 0
+[node name="Shop" parent="CanvasLayer/ShopControlNode" groups=["shop"] instance=ExtResource("321_oxdco")]
+visible = false
+layout_mode = 1
 offset_top = -189.0
 offset_bottom = 189.0
-
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/ShopControlNode"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -96.0
-offset_right = -19.0
-offset_bottom = -53.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ip24r")
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ShopControlNode/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="PowerUpDescription" type="Label" parent="CanvasLayer/ShopControlNode/PanelContainer/MarginContainer"]
-layout_mode = 2
-text = "THIS IS CELEBRATION!"
-horizontal_alignment = 1
-vertical_alignment = 1
-clip_text = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ShopControlNode"]
-root_node = NodePath("../..")
-libraries = {
-"": SubResource("AnimationLibrary_221h7")
-}
-
-[node name="ExitShopButton" type="Button" parent="CanvasLayer/ShopControlNode"]
-visible = false
-custom_minimum_size = Vector2(150, 35)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = 114.0
-offset_right = 43.0
-offset_bottom = 137.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-theme_override_styles/normal = SubResource("StyleBoxFlat_t6inf")
-text = "CONTINUE"
+power_ups = Array[ExtResource("322_t76av")]([SubResource("Resource_6i3aj"), SubResource("Resource_pvcba"), SubResource("Resource_61mpk"), SubResource("Resource_e3kdg")])
 
 [node name="ReloadReminder" type="PanelContainer" parent="CanvasLayer"]
 visible = false

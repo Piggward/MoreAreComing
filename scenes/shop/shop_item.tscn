@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cnwxfbw4r7ukv"]
 
-[ext_resource type="Script" path="res://scenes/shop_item_2.gd" id="1_wph70"]
-[ext_resource type="Texture2D" uid="uid://318kuti2tkud" path="res://art/towerDefense_tile250.png" id="2_jucjq"]
+[ext_resource type="Script" path="res://scenes/shop/shop_item_2.gd" id="1_wph70"]
+[ext_resource type="PackedScene" uid="uid://ieawb2miu8qr" path="res://scenes/shop/shop_image.tscn" id="2_ttw1e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lvet4"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -45,19 +45,23 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_uu8lw")
 [node name="Title" type="Label" parent="MarginContainer/PanelContainer/Vbox/TitleContainer"]
 layout_mode = 2
 mouse_filter = 1
-theme_override_font_sizes/font_size = 35
+theme_override_font_sizes/font_size = 20
 text = "Title"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Texture" type="TextureRect" parent="MarginContainer/PanelContainer/Vbox"]
-texture_filter = 1
-custom_minimum_size = Vector2(150, 200)
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/Vbox"]
 layout_mode = 2
-texture = ExtResource("2_jucjq")
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="Texture" parent="MarginContainer/PanelContainer/Vbox/MarginContainer" instance=ExtResource("2_ttw1e")]
+layout_mode = 2
 
 [node name="DescriptionContainer" type="PanelContainer" parent="MarginContainer/PanelContainer/Vbox"]
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(0, 125)
 layout_mode = 2
 mouse_filter = 1
 

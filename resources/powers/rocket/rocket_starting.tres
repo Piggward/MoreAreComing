@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Rocket" load_steps=2 format=3 uid="uid://dddctnxc343yt"]
+
+[ext_resource type="Script" path="res://resources/powers/rocket/rocket.gd" id="1_tjamt"]
+
+[resource]
+script = ExtResource("1_tjamt")
+radius = 5.0
+damage = 5
+cool_down = 0.5
+speed = 400.0
+instances = 1

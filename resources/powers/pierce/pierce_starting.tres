@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Pierce" load_steps=2 format=3 uid="uid://dw3imwapuh3xa"]
+
+[ext_resource type="Script" path="res://resources/powers/pierce/pierce.gd" id="1_q7m0t"]
+
+[resource]
+script = ExtResource("1_q7m0t")
+pierce = 0
+damage = 2
+cool_down = 0.5
+speed = 500.0
+instances = 3

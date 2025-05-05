@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://ieawb2miu8qr"]
+
+[ext_resource type="Script" path="res://scenes/shop/shop_image.gd" id="1_72tl5"]
+[ext_resource type="Shader" path="res://scenes/alt_art/teststs.gdshader" id="1_x2qfc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f7dhf"]
+shader = ExtResource("1_x2qfc")
+shader_parameter/primary_color = null
+shader_parameter/secondary_color = null
+shader_parameter/accent_color = null
+shader_parameter/accent_2_color = null
+shader_parameter/new_primary_color = null
+shader_parameter/tolerance = null
+
+[node name="Texture" type="TextureRect"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_f7dhf")
+custom_minimum_size = Vector2(150, 150)
+script = ExtResource("1_72tl5")

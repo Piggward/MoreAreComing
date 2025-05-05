@@ -15,12 +15,10 @@ var _elapsed_time := 0.0
 var _original_position := Vector2.ZERO
 var _is_rumbling := false
 var split_amount: int 
-var camera_container: Node2D
 
 func _ready():
 	_original_position = position
 	split_amount = randi_range(min_split_amount, max_split_amount)
-	camera_container = get_tree().get_first_node_in_group("camera_container")
 
 func start_rumble():
 	_elapsed_time = 0.0
@@ -48,7 +46,7 @@ func _process(delta):
 			for x in split_amount:
 				var i = EXP_PARTICLE_AREA.instantiate()
 				i.exp_worth = exp_worth / split_amount
-				camera_container.add_child(i)
+				get_parent().add_child(i)
 				i.global_position = self.global_position
 			self.queue_free()
 				

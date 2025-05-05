@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://iq7yrjg17ton"]
+
+[ext_resource type="PackedScene" uid="uid://ieawb2miu8qr" path="res://scenes/shop/shop_image.tscn" id="1_8mqbc"]
+[ext_resource type="Shader" path="res://scenes/alt_art/teststs.gdshader" id="2_24t87"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fidtb"]
+shader = ExtResource("2_24t87")
+shader_parameter/primary_color = Color(0.988235, 0.988235, 0.988235, 1)
+shader_parameter/secondary_color = Color(0.952941, 0.952941, 0.952941, 1)
+shader_parameter/accent_color = Color(0.815686, 0.815686, 0.815686, 1)
+shader_parameter/accent_2_color = Color(0.882353, 0.882353, 0.882353, 1)
+shader_parameter/new_primary_color = Color(0, 0.615686, 0, 1)
+shader_parameter/tolerance = 0.13
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ieae0"]
+load_path = "res://.godot/imported/powerball.png-713705c871e81a4c6803c0ad2e66f883.ctex"
+
+[sub_resource type="GDScript" id="GDScript_ux16m"]
+script/source = "extends TextureRect
+
+@export var tolerance = 0.15
+@export var should_change_color: bool = true
+
+func set_color(color):
+	self.material.set(\"shader_param/new_primary_color\", color) 
+	self.material.set(\"shader_param/tolerance\", tolerance)
+"
+
+[node name="Texture" instance=ExtResource("1_8mqbc")]
+material = SubResource("ShaderMaterial_fidtb")
+texture = SubResource("CompressedTexture2D_ieae0")
+script = SubResource("GDScript_ux16m")
+tolerance = 0.13

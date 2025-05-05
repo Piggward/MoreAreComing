@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://i5nj371oot5"]
+
+[ext_resource type="PackedScene" uid="uid://ieawb2miu8qr" path="res://scenes/shop/shop_image.tscn" id="1_pdy48"]
+[ext_resource type="Shader" path="res://scenes/alt_art/teststs.gdshader" id="2_gn6a1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vk8n6"]
+shader = ExtResource("2_gn6a1")
+shader_parameter/primary_color = Color(0.905882, 0.298039, 0.235294, 1)
+shader_parameter/secondary_color = Color(0.823529, 0.270588, 0.211765, 1)
+shader_parameter/accent_color = Color(0.686275, 0.223529, 0.176471, 1)
+shader_parameter/accent_2_color = Color(0.588235, 0.380392, 0.356863, 1)
+shader_parameter/new_primary_color = Color(0, 0.686275, 0, 1)
+shader_parameter/tolerance = 0.15
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mfuck"]
+load_path = "res://.godot/imported/turret.png-0b8d8e1319cd2669fd3f349246b3139b.ctex"
+
+[sub_resource type="GDScript" id="GDScript_qrefx"]
+script/source = "extends TextureRect
+
+@export var tolerance = 0.15
+@export var should_change_color: bool = true
+
+func set_color(color):
+	self.material.set(\"shader_param/new_primary_color\", color) 
+	self.material.set(\"shader_param/tolerance\", tolerance)
+"
+
+[node name="Texture" instance=ExtResource("1_pdy48")]
+material = SubResource("ShaderMaterial_vk8n6")
+texture = SubResource("CompressedTexture2D_mfuck")
+script = SubResource("GDScript_qrefx")

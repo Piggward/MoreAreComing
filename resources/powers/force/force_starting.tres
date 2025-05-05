@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Force" load_steps=2 format=3 uid="uid://d31s3mo50ttv3"]
+
+[ext_resource type="Script" path="res://resources/powers/force/force.gd" id="1_b23ku"]
+
+[resource]
+script = ExtResource("1_b23ku")
+knock_back = 25.0
+radius = 800.0
+damage = 0
+cool_down = 5.0
+speed = 50.0
+instances = 1

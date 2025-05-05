@@ -1,46 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://dhq2yysh4yu5g"]
+[gd_scene load_steps=2 format=3 uid="uid://dhq2yysh4yu5g"]
 
-[ext_resource type="PackedScene" uid="uid://c1dem4yovlxc8" path="res://scenes/shop_item2.tscn" id="1_a2ac8"]
-[ext_resource type="Script" path="res://scripts/new_shop/shop.gd" id="1_lkeoh"]
-[ext_resource type="Script" path="res://scripts/powers/force_power_up.gd" id="2_x6wrn"]
-[ext_resource type="Script" path="res://scripts/powers/rocket_power_up.gd" id="3_iqafo"]
-[ext_resource type="Script" path="res://scripts/powers/bounce_power_up.gd" id="4_34o80"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lvet4"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="Resource" id="Resource_epml4"]
-script = ExtResource("2_x6wrn")
-knock_back = 0.0
-title = "Force"
-title_color = Color(1, 1, 1, 1)
-power_up_description = "Pushes people away"
-shoot_speed = 0.0
-damage = 0.0
-shoot_cd = 0.0
-instances = 0.0
-
-[sub_resource type="Resource" id="Resource_vdcu7"]
-script = ExtResource("3_iqafo")
-radius = 0.0
-title = "ae"
-title_color = Color(1, 1, 1, 1)
-power_up_description = "f"
-shoot_speed = 0.0
-damage = 0.0
-shoot_cd = 0.0
-instances = 0.0
-
-[sub_resource type="Resource" id="Resource_e6y6q"]
-script = ExtResource("4_34o80")
-bounce = 0
-title = "wef"
-title_color = Color(1, 1, 1, 1)
-power_up_description = "wf"
-shoot_speed = 0.0
-damage = 0.0
-shoot_cd = 0.0
-instances = 0.0
+[ext_resource type="Script" path="res://scenes/shop/shop.gd" id="1_lkeoh"]
 
 [node name="Shop" type="HBoxContainer"]
 anchors_preset = 8
@@ -56,18 +16,3 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 25
 script = ExtResource("1_lkeoh")
-
-[node name="ItemContainer" parent="." instance=ExtResource("1_a2ac8")]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_lvet4")
-power_up = SubResource("Resource_epml4")
-
-[node name="ItemContainer2" parent="." instance=ExtResource("1_a2ac8")]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_lvet4")
-power_up = SubResource("Resource_vdcu7")
-
-[node name="ItemContainer3" parent="." instance=ExtResource("1_a2ac8")]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_lvet4")
-power_up = SubResource("Resource_e6y6q")

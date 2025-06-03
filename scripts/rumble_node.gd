@@ -46,6 +46,7 @@ func _process(delta):
 				var c_local_to_n_global = get_canvas_transform().affine_inverse() * exp_bar.get_global_transform_with_canvas()
 				var n_target_global_position: Vector2 = c_local_to_n_global * (exp_bar.size / 2)
 				i.target_position = n_target_global_position
+				i.pitch = 1 + x * 0.1
 				add_child(i)
 			#pickup = true
 			EventManager.exp_pickup.emit(exp_worth)

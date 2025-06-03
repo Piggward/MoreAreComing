@@ -36,9 +36,9 @@ func _ready():
 	EventManager.start_game.connect(game_start)
 
 func game_start():
-	_on_horde_timer_timeout()
-	_on_random_enemy_timer_timeout()
-	spawn_initial_enemies()
+	#_on_horde_timer_timeout()
+	#_on_random_enemy_timer_timeout()
+	#spawn_initial_enemies()
 	
 func spawn_initial_enemies():
 	for i in 6:

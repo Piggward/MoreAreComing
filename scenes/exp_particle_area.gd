@@ -8,6 +8,7 @@ extends Area2D
 #@export var target_position = Vector2.ZERO
 @export var homing_delay = 1.0  # Delay before homing starts
 @export var exp_worth: float
+@export var pitch: float = 1.0
 
 var velocity = Vector2.ZERO
 var state = "exploding"
@@ -15,12 +16,14 @@ var homing_timer = 0.0
 var exp_bar: ExperienceBar
 var target: Vector2 
 var target_global_pos: Vector2
+@onready var audio_stream_player_2d = $AudioStreamPlayer2D
 
 signal reached(exp_worth: float)
 
 func _ready():
 	explode_outward()
 	exp_bar = get_tree().get_first_node_in_group("experience_bar")
+	audio_stream_player_2d.pitch_scale = pitch
 
 func explode_outward():
 	var angle = randf() * TAU
@@ -62,8 +65,14 @@ func _physics_process(delta):
 			velocity = velocity.move_toward(target * max_homing_speed, acceleration * delta)
 			position += velocity * delta
 			if global_position.y >= target_global_pos.y:
+				state = "finished"
 				EventManager.exp_pickup.emit(self.exp_worth)
+				self.visible = false
+				audio_stream_player_2d.play()
+				await audio_stream_player_2d.finished
 				self.queue_free()
+		"finished":
+			pass
 				
 				
 func shortest_angle_diff(from: float, to: float) -> float:

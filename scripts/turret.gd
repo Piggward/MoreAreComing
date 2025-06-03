@@ -39,8 +39,9 @@ func reset():
 
 func shoot(power: Power):
 	spawn_power(power)
-	shoot_effects()
 	if power is BasicPower:
+		print(power.get_power_name())
+		shoot_effects()
 		update_ammo()
 	
 func shoot_effects():
@@ -61,7 +62,6 @@ func spawn_power(p: Power):
 		scenes[i].player_color = player.primary_color
 		scenes[i].global_position = self.global_position + power.get_position(nozzle).rotated(self.rotation)
 		shot_container.add_child(scenes[i])
-	shoot_effects()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

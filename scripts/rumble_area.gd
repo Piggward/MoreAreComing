@@ -2,7 +2,7 @@ class_name RumbleArea
 extends Area2D
 
 # Parameters to control the rumble effect
-@export var rumble_duration: float = 0.65   # How long the rumble should go on
+@export var rumble_duration: float = 1   # How long the rumble should go on
 @export var max_intensity: float = 4       # Max shake intensity
 @export var ramp_speed: float = 1   
 @export var exp_worth: float = 1.0
@@ -10,6 +10,9 @@ extends Area2D
 @export var max_split_amount: int = 25
 const EXP_PARTICLE_AREA = preload("res://scenes/exp_particle_area.tscn")
 @onready var gpu_particles_2d = $GPUParticles2D
+@onready var audio_stream_player_2d = $AudioStreamPlayer2D
+const EXP_BALL_BREAK = preload("res://sfx/exp_ball_break.wav")
+const EXP_BALL_RUMBLE = preload("res://sfx/exp_ball_rumble.mp3")
 
 var _elapsed_time := 0.0
 var _original_position := Vector2.ZERO
@@ -21,10 +24,13 @@ func _ready():
 	split_amount = randi_range(min_split_amount, max_split_amount)
 
 func start_rumble():
+	audio_stream_player_2d.stream = EXP_BALL_RUMBLE
+	audio_stream_player_2d.play()
 	_elapsed_time = 0.0
 	_is_rumbling = true
 	
 func stop_rumble():
+	audio_stream_player_2d.stop()
 	_is_rumbling = false
 	position = _original_position
 
@@ -48,6 +54,10 @@ func _process(delta):
 				i.exp_worth = exp_worth / split_amount
 				get_parent().add_child(i)
 				i.global_position = self.global_position
+			self.visible = false
+			audio_stream_player_2d.stream = EXP_BALL_BREAK
+			audio_stream_player_2d.play()
+			await audio_stream_player_2d.finished
 			self.queue_free()
 				
 		

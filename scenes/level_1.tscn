@@ -1,4 +1,4 @@
-[gd_scene load_steps=695 format=4 uid="uid://do804sfv5x0tt"]
+[gd_scene load_steps=694 format=4 uid="uid://do804sfv5x0tt"]
 
 [ext_resource type="Script" path="res://scripts/level_1.gd" id="1_3ju04"]
 [ext_resource type="Script" path="res://scripts/turret.gd" id="1_iom35"]
@@ -339,7 +339,6 @@
 [ext_resource type="Script" path="res://resources/power_up_scripts/instance_powerup.gd" id="331_hi5my"]
 [ext_resource type="Script" path="res://scripts/wave_label.gd" id="332_513re"]
 [ext_resource type="Resource" uid="uid://dw3imwapuh3xa" path="res://resources/powers/pierce/pierce_starting.tres" id="332_sf1iw"]
-[ext_resource type="PackedScene" uid="uid://cfsoakqld1n6s" path="res://scenes/rumble_node.tscn" id="343_kx7pq"]
 [ext_resource type="Script" path="res://scripts/enemies_killed.gd" id="345_7gdhx"]
 [ext_resource type="AudioStream" uid="uid://dba3b1hwbe16s" path="res://sfx/tanks_song_intro.mp3" id="347_cirr1"]
 [ext_resource type="AudioStream" uid="uid://dlvon3tc8ks6n" path="res://sfx/tanks_song_main.mp3" id="348_3fsji"]
@@ -6703,10 +6702,6 @@ script = ExtResource("356_ountv")
 exp_wait_time = 1.0
 
 [node name="Timer" type="Timer" parent="ExpManager"]
-
-[node name="RumbleNode" parent="." instance=ExtResource("343_kx7pq")]
-position = Vector2(505, 348)
-exp_worth = 1
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
 [connection signal="child_entered_tree" from="EnemyManager" to="EnemyManager" method="_on_child_entered_tree"]

@@ -5,7 +5,7 @@ const GAME_OVER_SCREEN = preload("res://scenes/game_over_screen.tscn")
 const TANKS_SONG = preload("res://sfx/tanks_song.wav")
 const GOODJOB = preload("res://sfx/Goodjob.mp3")
 const ENEMY_EXP_FACTOR = 5
-const ENEMY = preload("res://scenes/enemy.tscn")
+const ENEMY = preload("res://scenes/enemies/orbit_enemy.tscn")
 const TIME_BETWEEN_WAVES = 60
 
 @export var waves: Array[Wave]
@@ -56,7 +56,8 @@ func _on_player_health_updated(health: int, max_health: int):
 		game_over(false)
 	
 func start_game():
-	music.play()
+	pass
+	#music.play()
 	
 func resume_game():
 	get_tree().paused = false

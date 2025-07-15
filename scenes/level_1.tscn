@@ -350,7 +350,7 @@
 
 [sub_resource type="Resource" id="Resource_iaqbb"]
 script = ExtResource("2_5rwbk")
-speed = 18.0
+speed = 250.0
 damage = 10
 health = 15
 target_random_enemies_amount = 5
@@ -6094,7 +6094,7 @@ speed = 300.0
 instances = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fblkm"]
-size = Vector2(72, 76)
+size = Vector2(43, 38)
 
 [sub_resource type="Gradient" id="Gradient_npw4x"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -6320,8 +6320,8 @@ level_progression = Array[float]([1.0, 1.0, 1.0, 9.0, 10.0, 18.0, 16.0, 18.0, 20
 basic_power = SubResource("Resource_n2qve")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-visible = false
-position = Vector2(-4, 0)
+position = Vector2(-0.5, 0)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_fblkm")
 
 [node name="PowerUp" type="AudioStreamPlayer" parent="Player"]

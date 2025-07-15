@@ -1,9 +1,10 @@
 class_name EnemyManager
 extends Node2D
 
-const ENEMY = preload("res://scenes/enemy.tscn")
+const OLD_ENEMY = preload("res://scenes/enemies/enemy.tscn")
 const SPEEDY_ENEMY = preload("res://scenes/speedy_enemy.tscn")
 const TANKY_ENEMY = preload("res://scenes/tanky_enemy.tscn")
+const ENEMY = preload("res://scenes/enemies/orbit_enemy.tscn")
 const ENEMIES_PER_RING = 8  # Can vary per ring if you want
 const RING_DISTANCE = 50    # Distance between rings (can be your D)
 const JITTER_AMOUNT = 25  # Max pixels to jitter
@@ -36,12 +37,12 @@ func _ready():
 	EventManager.start_game.connect(game_start)
 
 func game_start():
-	#_on_horde_timer_timeout()
-	#_on_random_enemy_timer_timeout()
-	#spawn_initial_enemies()
+	_on_horde_timer_timeout()
+	_on_random_enemy_timer_timeout()
+	spawn_initial_enemies()
 	
 func spawn_initial_enemies():
-	for i in 6:
+	for i in 1:
 		var angle = randf() * TAU
 		var random_pos = player_pos + Vector2(random_spawn_radius() / 2, 0).rotated(angle)
 		var jitter = Vector2(randf_range(-JITTER_AMOUNT, JITTER_AMOUNT),

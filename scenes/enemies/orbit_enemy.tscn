@@ -1,0 +1,67 @@
+[gd_scene load_steps=11 format=3 uid="uid://b7e03qmdef2s3"]
+
+[ext_resource type="PackedScene" uid="uid://7nk3om0x8xav" path="res://scenes/enemies/enemy.tscn" id="1_isgox"]
+[ext_resource type="Script" path="res://scenes/enemies/orbit_enemy.gd" id="2_u6slo"]
+[ext_resource type="Shader" path="res://vfx/color_swap.gdshader" id="3_efvld"]
+[ext_resource type="Texture2D" uid="uid://dm85jmuycd2jr" path="res://art/enemy2.png" id="4_scf4t"]
+[ext_resource type="Texture2D" uid="uid://5ruhyx5o1vwg" path="res://art/enemy3.png" id="5_0rjd8"]
+[ext_resource type="Texture2D" uid="uid://cqfv4hfew32qf" path="res://art/enemy4.png" id="6_2avyl"]
+[ext_resource type="Texture2D" uid="uid://b4dpalgrej3wh" path="res://art/enemy5.png" id="7_gjmli"]
+[ext_resource type="Texture2D" uid="uid://iklq3onauy0v" path="res://art/enemy.png" id="8_gy1nj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j6fbj"]
+shader = ExtResource("3_efvld")
+shader_parameter/color_count = 4
+shader_parameter/target_colors = PackedColorArray(0.231373, 0.129412, 0.215686, 1, 0.309804, 0.321569, 0.466667, 1, 0.466667, 0.360784, 0.309804, 1, 0.396078, 0.45098, 0.54902, 1)
+shader_parameter/replace_colors = PackedColorArray(0.184314, 0.129412, 0.231373, 1, 0.184314, 0.129412, 0.231373, 1, 0.262745, 0.317647, 0.360784, 1, 0.466667, 0.454902, 0.309804, 1)
+shader_parameter/tolerance = 0.01
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tvwel"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_scf4t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0rjd8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_2avyl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_gjmli")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_gy1nj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="OrbitEnemy" instance=ExtResource("1_isgox")]
+rotation = 0.0
+scale = Vector2(0.5, 0.55)
+script = ExtResource("2_u6slo")
+turn_speed = 2
+damage = 0.0
+max_health = 0
+main_color = Color(0, 0, 0, 1)
+wheel_color_1 = Color(0, 0, 0, 1)
+wheel_color_2 = Color(0, 0, 0, 1)
+accent_color = Color(0, 0, 0, 1)
+exp_chance = 0.4
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_j6fbj")
+sprite_frames = SubResource("SpriteFrames_tvwel")
+frame_progress = 0.0
+
+[node name="Node2D" parent="." index="5"]
+scale = Vector2(0.5, 0.55)
+
+[node name="Polygon2D" parent="Eyes" index="0"]
+color = Color(0.752941, 0.819608, 0.8, 1)
+
+[node name="Polygon2D2" parent="Eyes" index="1"]
+color = Color(0.752941, 0.819608, 0.8, 1)

@@ -98,7 +98,6 @@ func spawn_particles(obj:GPUParticles2D):
 	obj.scale *= self.scale / normal_scale
 	level.add_child(obj)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	look_at(player.global_position)
 	self.position += Vector2(0, -speed * delta).rotated(self.rotation + deg_to_rad(90))

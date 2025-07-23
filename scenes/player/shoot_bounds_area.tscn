@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dh2kbkxkfla7h"]
+
+[ext_resource type="Script" path="res://scripts/shoot_bounds_area.gd" id="1_02vsb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eudq3"]
+radius = 200.0
+
+[node name="ShootBoundsArea" type="Area2D"]
+process_mode = 3
+modulate = Color(0.862745, 0, 0, 1)
+position = Vector2(575, 324)
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_02vsb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2.5004, 2.5004)
+shape = SubResource("CircleShape2D_eudq3")
+
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

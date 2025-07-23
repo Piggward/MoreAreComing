@@ -1,0 +1,90 @@
+[gd_scene load_steps=27 format=3 uid="uid://diwi88vg6uclj"]
+
+[ext_resource type="Script" path="res://scenes/test/test_scene.gd" id="1_5mr7u"]
+[ext_resource type="PackedScene" uid="uid://dxgo4ybiatj0b" path="res://scenes/player/player.tscn" id="1_qy3on"]
+[ext_resource type="PackedScene" uid="uid://cildlu1w3js4r" path="res://scenes/player/turret.tscn" id="2_dicpq"]
+[ext_resource type="Script" path="res://resources/powers/power_tree.gd" id="2_p7c70"]
+[ext_resource type="PackedScene" uid="uid://x7dx7xokbsmq" path="res://scenes/shot_container.tscn" id="3_kqnkd"]
+[ext_resource type="Script" path="res://resources/powers/power_up.gd" id="3_s2h8k"]
+[ext_resource type="Script" path="res://resources/power_up_scripts/bounce_powerup.gd" id="4_8iyy2"]
+[ext_resource type="PackedScene" uid="uid://dh2kbkxkfla7h" path="res://scenes/player/shoot_bounds_area.tscn" id="4_yq1h4"]
+[ext_resource type="Resource" uid="uid://bcovho5lbdklv" path="res://resources/powers/bounce/bounce_starting.tres" id="5_xlbyt"]
+[ext_resource type="Script" path="res://resources/power_up_scripts/knockback_powerup.gd" id="6_kcvru"]
+[ext_resource type="Resource" uid="uid://d31s3mo50ttv3" path="res://resources/powers/force/force_starting.tres" id="7_yahpx"]
+[ext_resource type="Script" path="res://resources/power_up_scripts/instance_powerup.gd" id="8_yghv6"]
+[ext_resource type="Resource" uid="uid://dw3imwapuh3xa" path="res://resources/powers/pierce/pierce_starting.tres" id="9_r7sm1"]
+[ext_resource type="Script" path="res://resources/power_up_scripts/aoe_powerup.gd" id="10_1dfra"]
+[ext_resource type="Resource" uid="uid://dddctnxc343yt" path="res://resources/powers/rocket/rocket_starting.tres" id="11_cj1su"]
+[ext_resource type="Script" path="res://scenes/test/enemy_manager.gd" id="16_jkjjv"]
+[ext_resource type="Script" path="res://scripts/wave.gd" id="17_b1cq2"]
+
+[sub_resource type="Resource" id="Resource_p6gs0"]
+script = ExtResource("4_8iyy2")
+bounces = 0
+
+[sub_resource type="Resource" id="Resource_ex7at"]
+script = ExtResource("2_p7c70")
+powerups = Array[ExtResource("3_s2h8k")]([SubResource("Resource_p6gs0")])
+starting_power = ExtResource("5_xlbyt")
+
+[sub_resource type="Resource" id="Resource_uw77k"]
+script = ExtResource("6_kcvru")
+knockback_multipler = 1.0
+
+[sub_resource type="Resource" id="Resource_khpba"]
+script = ExtResource("2_p7c70")
+powerups = Array[ExtResource("3_s2h8k")]([SubResource("Resource_uw77k")])
+starting_power = ExtResource("7_yahpx")
+
+[sub_resource type="Resource" id="Resource_t3fbt"]
+script = ExtResource("8_yghv6")
+instances = 1
+
+[sub_resource type="Resource" id="Resource_r1wdf"]
+script = ExtResource("2_p7c70")
+powerups = Array[ExtResource("3_s2h8k")]([SubResource("Resource_t3fbt")])
+starting_power = ExtResource("9_r7sm1")
+
+[sub_resource type="Resource" id="Resource_f23w1"]
+script = ExtResource("10_1dfra")
+aoe_multiplier = 1.0
+
+[sub_resource type="Resource" id="Resource_tqn12"]
+script = ExtResource("2_p7c70")
+powerups = Array[ExtResource("3_s2h8k")]([SubResource("Resource_f23w1")])
+starting_power = ExtResource("11_cj1su")
+
+[sub_resource type="Resource" id="Resource_dmtdq"]
+script = ExtResource("17_b1cq2")
+speed = 65.0
+damage = 10
+health = 15
+target_random_enemies_amount = 15
+target_hordes = 1
+horde_amount = 5
+horde_spawn_cd = 40.0
+random_enemy_spawn_cd = 10.0
+
+[node name="TestScene" type="Node2D"]
+script = ExtResource("1_5mr7u")
+powers = Array[ExtResource("2_p7c70")]([SubResource("Resource_ex7at"), SubResource("Resource_khpba"), SubResource("Resource_r1wdf"), SubResource("Resource_tqn12")])
+
+[node name="Player" parent="." instance=ExtResource("1_qy3on")]
+position = Vector2(576, 400)
+scale = Vector2(1, 1)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0.999939, 0.999969)
+
+[node name="Turret" parent="." instance=ExtResource("2_dicpq")]
+position = Vector2(576, 400)
+
+[node name="ShotContainer" parent="." instance=ExtResource("3_kqnkd")]
+
+[node name="ShootBoundsArea" parent="." instance=ExtResource("4_yq1h4")]
+position = Vector2(575, 400)
+scale = Vector2(0.585465, 0.585465)
+
+[node name="EnemyManager" type="Node2D" parent="."]
+script = ExtResource("16_jkjjv")
+current_wave = SubResource("Resource_dmtdq")

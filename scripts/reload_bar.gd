@@ -7,44 +7,27 @@ const RELOAD_1 = preload("res://sfx/reload2.mp3")
 
 var player: Player
 var turret: Turret
-var current_wait_time: float
-var s1_played = false
-var s2_played = false
 var show_reload_progress = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
 	turret = get_tree().get_first_node_in_group("turret")
-	turret.reload_requested.connect(_on_reload)
+	turret.reload_started.connect(_on_reload_started)
+	turret.reload_finished.connect(_on_reload_finished)
 	pass # Replace with function body.
 	
-func _on_reload():
-	if not show_reload_progress:
-		current_wait_time = 0
-		show_reload_progress = true
-
+func _on_reload_started():
+	show_reload_progress = true
+	self.visible = true
+	
+func _on_reload_finished():
+	show_reload_progress = false
+	self.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if show_reload_progress:
-		self.visible = true
-		current_wait_time += delta
-		var v = current_wait_time / player.stats.reload_speed
-		self.value = v * 100
-		if not s1_played and v > 0.2:
-			reload_audio.stream = RELOAD_1
-			reload_audio.play()
-			s1_played = true
-		if not s2_played and v > 0.9:
-			reload_audio.stream = RELOAD_2
-			reload_audio.play()
-			s2_played = true
-		if self.value >= max_value:
-			turret.reset()
-			show_reload_progress = false
-			s1_played = false
-			s2_played = false
-	else:
-		self.visible=false
+		var v = turret.current_reload_time / player.stats.reload_speed
+		self.value = clamp(v * 100, 0, 100)
 	pass

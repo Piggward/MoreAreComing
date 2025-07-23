@@ -1,4 +1,4 @@
-class_name EnemyManager
+class_name TestEnemyManager
 extends Node2D
 
 const NORMAL_ENEMY = preload("res://scenes/enemies/enemy.tscn")
@@ -12,7 +12,7 @@ const SPAWN_RADIUS_SPREAD = 0.3
 const RUMBLE_AREA = preload("res://scenes/rumble_area.tscn")
 
 var alive_enemies: Array[Enemy] = []
-var current_wave: Wave
+@export var current_wave: Wave
 var player_pos: Vector2
 var horde_timer: Timer
 var random_enemy_timer: Timer
@@ -27,17 +27,17 @@ signal enemy_killed(enemy: Enemy)
 func _ready():
 	var player = get_tree().get_first_node_in_group("player")
 	var level = get_tree().get_first_node_in_group("level")
-	level.new_wave.connect(_on_new_wave)
-	current_wave = level.waves[0]
+	#level.new_wave.connect(_on_new_wave)
+	#current_wave = level.waves[0]
 	player_pos = player.position
-	horde_timer = Timer.new()
-	horde_timer.timeout.connect(_on_horde_timer_timeout)
-	add_child(horde_timer)
-	random_enemy_timer = Timer.new()
-	random_enemy_timer.timeout.connect(_on_random_enemy_timer_timeout)
-	add_child(random_enemy_timer)
+	#horde_timer = Timer.new()
+	#horde_timer.timeout.connect(_on_horde_timer_timeout)
+	#add_child(horde_timer)
+	#random_enemy_timer = Timer.new()
+	#random_enemy_timer.timeout.connect(_on_random_enemy_timer_timeout)
+	#add_child(random_enemy_timer)
 	instantiate_enemy_dict()
-	EventManager.start_game.connect(game_start)
+	#EventManager.start_game.connect(game_start)
 	
 func instantiate_enemy_dict():
 	enemy_dict = {

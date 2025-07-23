@@ -62,7 +62,6 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("right_click"):
 		turret.reload()
-		level_up.emit(2)
 		
 func shoot():
 	if not basic_power.can_shoot() or turret.reloading:

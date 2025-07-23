@@ -2,7 +2,7 @@ class_name OrbitEnemy
 extends Enemy
 
 var current_target:= Vector2.ZERO
-var radius = 50   # Starting radius R
+var radius = 25   # Starting radius R
 var turns = 5
 
 @export var turn_speed = 2
@@ -19,7 +19,7 @@ func _process(delta):
 		var target_rotation = self.global_position.angle_to_point(current_target)
 		var r = shortest_angle_diff(self.rotation, target_rotation)
 		rotation += clamp(r, -(turn_speed * delta), (turn_speed * delta))
-		if abs(r) <= 0.0001:
+		if abs(r) <= 0.1:
 			await get_tree().create_timer(0.15).timeout
 			turning = false
 		return
@@ -28,8 +28,13 @@ func _process(delta):
 		turns -= 1
 		set_new_target()
 	else:
+		var x = (self.position - current_target).length()
+		var y = abs(speed)
 		look_at(current_target)
-		self.position += Vector2(0, -speed * delta).rotated(self.rotation + deg_to_rad(90))
+		if abs(speed * delta) > (self.position - current_target).length():
+			self.position = current_target
+		else:
+			self.position += Vector2(0, -speed * delta).rotated(self.rotation + deg_to_rad(90))
 		#global_position = global_position.move_toward(current_target, speed)
 		
 func set_new_target():

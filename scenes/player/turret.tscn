@@ -1,0 +1,86 @@
+[gd_scene load_steps=11 format=3 uid="uid://cildlu1w3js4r"]
+
+[ext_resource type="Script" path="res://scripts/turret.gd" id="1_254i8"]
+[ext_resource type="PackedScene" uid="uid://cp762k8rwshe2" path="res://scenes/turret_sprite.tscn" id="2_043mt"]
+[ext_resource type="Script" path="res://scripts/nozzle.gd" id="3_iyvy0"]
+[ext_resource type="Texture2D" uid="uid://qsps8vybv2u8" path="res://art/muzzle_02.png" id="4_t4blr"]
+[ext_resource type="AudioStream" uid="uid://cbaam4pwdps0q" path="res://sfx/PipeMoving.mp3" id="5_j1sqc"]
+[ext_resource type="AudioStream" uid="uid://cw6o5bb8uihtt" path="res://sfx/shoot.ogg" id="6_4n47g"]
+
+[sub_resource type="Gradient" id="Gradient_npw4x"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_y6o7x"]
+gradient = SubResource("Gradient_npw4x")
+fill = 1
+fill_from = Vector2(0.5, 0.491)
+fill_to = Vector2(0.8, 0.8)
+
+[sub_resource type="Gradient" id="Gradient_ofnja"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g8n2b"]
+gradient = SubResource("Gradient_ofnja")
+width = 200
+height = 200
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.132)
+
+[node name="Turret" type="Node2D" groups=["turret"]]
+process_mode = 1
+position = Vector2(576, 324)
+rotation = 0.0461211
+script = ExtResource("1_254i8")
+
+[node name="TurretSprite" parent="." instance=ExtResource("2_043mt")]
+position = Vector2(4, 0)
+rotation = 1.5708
+
+[node name="Nozzle" type="Marker2D" parent="."]
+position = Vector2(32, 0)
+script = ExtResource("3_iyvy0")
+
+[node name="Node2D" type="Node2D" parent="Nozzle"]
+modulate = Color(8, 8, 8, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Nozzle/Node2D"]
+visible = false
+modulate = Color(1, 0.333333, 0, 1)
+position = Vector2(20, 0)
+rotation = 1.5708
+scale = Vector2(0.100068, 0.100068)
+texture = ExtResource("4_t4blr")
+
+[node name="Shoot_light" type="PointLight2D" parent="Nozzle"]
+visible = false
+position = Vector2(9, 0)
+color = Color(1, 0.333333, 0, 1)
+energy = 2.0
+texture = SubResource("GradientTexture2D_y6o7x")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+energy = 2.0
+texture = SubResource("GradientTexture2D_g8n2b")
+
+[node name="RotatingPipe" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_j1sqc")
+volume_db = -12.0
+pitch_scale = 0.7
+bus = &"SFX"
+
+[node name="ShootAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_4n47g")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="ReloadAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_4n47g")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../../Player")
+update_position = false
+update_rotation = false

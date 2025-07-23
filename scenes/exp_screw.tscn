@@ -33,7 +33,7 @@ scale_curve = SubResource("CurveTexture_w7lga")
 alpha_curve = SubResource("CurveTexture_gsek7")
 
 [node name="ExpScrew" type="Sprite2D"]
-position = Vector2(179, 99)
+scale = Vector2(0.705432, 0.705432)
 script = ExtResource("1_tlk4k")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -39,6 +39,7 @@ func _ready() -> void:
 	current_health = max_health
 	progress_bar.value = current_health
 	normal_color = animated_sprite_2d.self_modulate
+	
 	pass # Replace with function body.
 	
 func find_bonus():
@@ -96,11 +97,17 @@ func spawn_particles(obj:GPUParticles2D):
 	obj.global_position = self.global_position
 	obj.emitting = false
 	obj.scale *= self.scale / normal_scale
-	level.add_child(obj)
+	if level:
+		level.add_child(obj)
 
 func _process(delta: float) -> void:
+	print(speed)
 	look_at(player.global_position)
-	self.position += Vector2(0, -speed * delta).rotated(self.rotation + deg_to_rad(90))
+	var to_player = player.global_position - global_position
+	var dir = to_player.normalized()
+	var move_vec = (dir * speed * delta)
+	global_position += move_vec
+	#self.position += Vector2(0, -speed * delta).rotated(self.rotation + deg_to_rad(90))
 	pass
 
 func _on_body_entered(body: Node2D) -> void:

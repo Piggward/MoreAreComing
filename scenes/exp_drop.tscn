@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://citgkffw0s73g"]
+
+[ext_resource type="Script" path="res://scripts/exp_drop.gd" id="1_cl3so"]
+[ext_resource type="PackedScene" uid="uid://c6tnbpnn27okn" path="res://scenes/exp_screw.tscn" id="2_5jm0m"]
+[ext_resource type="AudioStream" uid="uid://tjq5wql1jyj5" path="res://sfx/exp_gain.mp3" id="3_638fo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_07677"]
+size = Vector2(37, 44)
+
+[node name="ExpDrop" type="Area2D"]
+script = ExtResource("1_cl3so")
+
+[node name="ExpScrew" parent="." instance=ExtResource("2_5jm0m")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, -1)
+shape = SubResource("RectangleShape2D_07677")
+
+[node name="PickupSound" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("3_638fo")
+bus = &"SFX"

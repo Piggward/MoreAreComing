@@ -11,6 +11,7 @@ const RELOAD_1 = preload("res://sfx/reload2.mp3")
 @onready var rotating_pipe: AudioStreamPlayer = $RotatingPipe
 @onready var shoot_audio = $ShootAudio
 @onready var reload_audio = $ReloadAudio
+@onready var nozzle_2 = $Nozzle2
 
 var player: Player
 var shoot_ready: bool = true
@@ -20,6 +21,8 @@ var reloading: bool = false
 var current_reload_time: float = 0.0
 var s1_played = false
 var s2_played = false
+var nozzles = []
+
 
 signal shot_fired
 signal reload_started
@@ -32,6 +35,8 @@ func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
 	og_pos = position
 	reload_audio.stream = RELOAD_1
+	nozzles.append(nozzle)
+	nozzles.append(nozzle_2)
 	pass # Replace with function body.
 	
 func reload():
@@ -53,10 +58,12 @@ func shoot(power: Power):
 	if power is BasicPower:
 		shoot_effects()
 		update_ammo()
+		if power.shots_left == 0 and power.automatic_reload: 
+			reload()
 	
 func shoot_effects():
 	shoot_audio.pitch_scale = SHOOT_PITCH + randf_range(0, 0.04)
-	nozzle.light()
+	nozzles[1].light()
 	shoot_audio.play()
 	self.position = og_pos + Vector2(0, 20).rotated(self.rotation + deg_to_rad(90))
 	
@@ -70,7 +77,7 @@ func spawn_power(p: Power):
 		var power = scenes[i].power
 		scenes[i].direction = power.get_direction(self)
 		scenes[i].player_color = player.primary_color
-		scenes[i].global_position = self.global_position + power.get_position(nozzle).rotated(self.rotation)
+		scenes[i].global_position = self.global_position + power.get_position(get_nozzle()).rotated(self.rotation)
 		power_spawn.emit(scenes[i])
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -95,6 +102,11 @@ func _process(delta: float) -> void:
 		
 	position = lerp(position, og_pos, 0.1)
 	pass
+	
+func get_nozzle():
+	var n = nozzles.pop_front()
+	nozzles.append(n)
+	return n
 
 func handle_reload(delta):
 	current_reload_time += delta

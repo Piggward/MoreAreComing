@@ -343,80 +343,115 @@
 
 [sub_resource type="Resource" id="Resource_iaqbb"]
 script = ExtResource("2_5rwbk")
-speed = 250.0
-damage = 10
-health = 15
+wave_number = 1
+wave_duration = 30.0
+speed_multiplier = 1.0
+health_multiplier = 1.0
+damage_multiplier = 1.0
+exp_multiplier = 1.0
 target_random_enemies_amount = 5
 target_hordes = 1
 horde_amount = 3
 horde_spawn_cd = 15.0
 random_enemy_spawn_cd = 3.0
+plane_enemies = 0
+orbit_enemies = 0
 
 [sub_resource type="Resource" id="Resource_qkdxg"]
 script = ExtResource("2_5rwbk")
-speed = 18.0
-damage = 10
-health = 15
+wave_number = 1
+wave_duration = 30.0
+speed_multiplier = 1.0
+health_multiplier = 1.0
+damage_multiplier = 1.0
+exp_multiplier = 1.0
 target_random_enemies_amount = 10
 target_hordes = 1
-horde_amount = 5
+horde_amount = 3
 horde_spawn_cd = 15.0
 random_enemy_spawn_cd = 3.0
+plane_enemies = 0
+orbit_enemies = 0
 
 [sub_resource type="Resource" id="Resource_2gj2k"]
 script = ExtResource("2_5rwbk")
-speed = 18.0
-damage = 10
-health = 15
-target_random_enemies_amount = 15
+wave_number = 1
+wave_duration = 30.0
+speed_multiplier = 1.0
+health_multiplier = 1.0
+damage_multiplier = 1.0
+exp_multiplier = 1.0
+target_random_enemies_amount = 5
 target_hordes = 1
-horde_amount = 5
+horde_amount = 3
 horde_spawn_cd = 15.0
 random_enemy_spawn_cd = 3.0
+plane_enemies = 0
+orbit_enemies = 0
 
 [sub_resource type="Resource" id="Resource_a5e7d"]
 script = ExtResource("2_5rwbk")
-speed = 60.0
-damage = 10
-health = 15
-target_random_enemies_amount = 15
+wave_number = 1
+wave_duration = 30.0
+speed_multiplier = 1.0
+health_multiplier = 1.0
+damage_multiplier = 1.0
+exp_multiplier = 1.0
+target_random_enemies_amount = 5
 target_hordes = 1
-horde_amount = 5
-horde_spawn_cd = 40.0
-random_enemy_spawn_cd = 10.0
+horde_amount = 3
+horde_spawn_cd = 15.0
+random_enemy_spawn_cd = 3.0
+plane_enemies = 0
+orbit_enemies = 0
 
 [sub_resource type="Resource" id="Resource_bdgxe"]
 script = ExtResource("2_5rwbk")
-speed = 60.0
-damage = 10
-health = 20
-target_random_enemies_amount = 15
+wave_number = 1
+wave_duration = 30.0
+speed_multiplier = 1.0
+health_multiplier = 1.0
+damage_multiplier = 1.0
+exp_multiplier = 1.0
+target_random_enemies_amount = 5
 target_hordes = 1
-horde_amount = 5
-horde_spawn_cd = 40.0
-random_enemy_spawn_cd = 10.0
+horde_amount = 3
+horde_spawn_cd = 15.0
+random_enemy_spawn_cd = 3.0
+plane_enemies = 0
+orbit_enemies = 0
 
 [sub_resource type="Resource" id="Resource_51hkr"]
 script = ExtResource("2_5rwbk")
-speed = 60.0
-damage = 10
-health = 25
-target_random_enemies_amount = 15
+wave_number = 1
+wave_duration = 30.0
+speed_multiplier = 1.0
+health_multiplier = 1.0
+damage_multiplier = 1.0
+exp_multiplier = 1.0
+target_random_enemies_amount = 5
 target_hordes = 1
-horde_amount = 5
-horde_spawn_cd = 40.0
-random_enemy_spawn_cd = 10.0
+horde_amount = 3
+horde_spawn_cd = 15.0
+random_enemy_spawn_cd = 3.0
+plane_enemies = 0
+orbit_enemies = 0
 
 [sub_resource type="Resource" id="Resource_mhs0h"]
 script = ExtResource("2_5rwbk")
-speed = 65.0
-damage = 10
-health = 30
-target_random_enemies_amount = 15
+wave_number = 1
+wave_duration = 30.0
+speed_multiplier = 1.0
+health_multiplier = 1.0
+damage_multiplier = 1.0
+exp_multiplier = 1.0
+target_random_enemies_amount = 5
 target_hordes = 1
-horde_amount = 5
-horde_spawn_cd = 40.0
-random_enemy_spawn_cd = 10.0
+horde_amount = 3
+horde_spawn_cd = 15.0
+random_enemy_spawn_cd = 3.0
+plane_enemies = 0
+orbit_enemies = 0
 
 [sub_resource type="Animation" id="Animation_slm7m"]
 length = 0.001
@@ -6252,6 +6287,8 @@ tile_map_data = PackedByteArray("AAAQAAkAFwAAAAIAAAAQAAoAFwAAAAMAAAAQAAsAFwAAAAA
 tile_set = SubResource("TileSet_rtraq")
 
 [node name="Player" parent="." instance=ExtResource("309_mpaoc")]
+scale = Vector2(1, 1)
+level_progression = Array[float]([5.0, 10.0, 15.0, 20.0, 25.0, 30.0, 35.0, 40.0, 45.0, 20.0, 22.0, 22.0, 24.0, 24.0, 26.0, 28.0, 30.0, 30.0, 40.0, 42.0, 44.0, 46.0, 48.0, 50.0, 52.0, 54.0])
 
 [node name="Turret" parent="." instance=ExtResource("310_3cme3")]
 
@@ -6418,6 +6455,7 @@ offset_left = -711.024
 offset_top = 698.6
 offset_right = -268.808
 offset_bottom = 730.0
+mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_0ur24")
 theme_override_styles/fill = SubResource("StyleBoxFlat_0pq74")
 show_percentage = false
@@ -6536,6 +6574,13 @@ offset_right = 3.86398
 offset_bottom = 4.99999
 text = "FPS: "
 script = ExtResource("359_8aym7")
+
+[node name="Label" type="Label" parent="CanvasLayer/Label"]
+layout_mode = 0
+offset_left = 729.0
+offset_top = 45.0
+offset_right = 769.0
+offset_bottom = 68.0
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 process_mode = 3

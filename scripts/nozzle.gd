@@ -18,6 +18,7 @@ func _ready():
 func light():
 	if cd:
 		return
+	print("lighting " + self.name)
 	#shoot_light.visible = true
 	var rand = randi_range(0, 1)
 	var rand_s = randf_range(0.7, 1.4)

@@ -9,6 +9,7 @@ extends PanelContainer
 @onready var margin_container = $MarginContainer/PanelContainer/Vbox/MarginContainer
 @onready var texture = $MarginContainer/PanelContainer/Vbox/MarginContainer/Texture
 
+var input_ready = false
 signal selected(si: ShopItem)
 
 # Called when the node enters the scene tree for the first time.
@@ -22,6 +23,8 @@ func _ready():
 		new_texture.set_color(Global.player_color)
 	margin_container.add_child(new_texture)
 	texture.queue_free()
+	await get_tree().create_timer(0.4).timeout
+	input_ready = true
 	pass # Replace with function body.
 
 
@@ -41,6 +44,6 @@ func _on_mouse_exited():
 
 
 func _on_gui_input(event: InputEvent):
-	if event.is_action_pressed("left_click"):
+	if event.is_action_pressed("left_click") and input_ready:
 		selected.emit(self)
 	pass # Replace with function body.

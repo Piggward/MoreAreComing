@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 	# Direction straight to player
 	var to_player = target.global_position - global_position
 	var distance = to_player.length()
-	if distance < 175:
+	if distance < 100:
 		speed *= 5
 		super(delta)
 		speed /= 5

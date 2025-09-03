@@ -4,9 +4,9 @@
 
 [resource]
 script = ExtResource("1_b23ku")
-knock_back = 150.0
-radius = 800.0
+knock_back = 75.0
+radius = 500.0
 damage = 0
-cool_down = 5.0
+cool_down = 10.0
 speed = 50.0
 instances = 1

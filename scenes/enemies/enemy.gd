@@ -101,7 +101,6 @@ func spawn_particles(obj:GPUParticles2D):
 		level.add_child(obj)
 
 func _process(delta: float) -> void:
-	print(speed)
 	look_at(player.global_position)
 	var to_player = player.global_position - global_position
 	var dir = to_player.normalized()

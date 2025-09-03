@@ -6,6 +6,6 @@
 script = ExtResource("1_q7m0t")
 pierce = 0
 damage = 2
-cool_down = 0.5
+cool_down = 1.5
 speed = 400.0
 instances = 3

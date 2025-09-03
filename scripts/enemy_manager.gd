@@ -9,8 +9,7 @@ const RING_DISTANCE = 50    # Distance between rings (can be your D)
 const JITTER_AMOUNT = 25  # Max pixels to jitter
 const SPAWN_RADIUS = 800
 const SPAWN_RADIUS_SPREAD = 0.3
-const RUMBLE_AREA = preload("res://scenes/rumble_area.tscn")
-
+const EXP_DROP = preload("res://scenes/exp_drop.tscn")
 var alive_enemies: Array[Enemy] = []
 var current_wave: Wave
 var player_pos: Vector2
@@ -23,6 +22,7 @@ var enemy_dict = {}
 enum ENEMYTYPE { NORMAL, ZIG_ZAG, ORBIT }
 
 signal enemy_killed(enemy: Enemy)
+signal enemies_updated(enemies: Array[Enemy])
 
 func _ready():
 	var player = get_tree().get_first_node_in_group("player")
@@ -67,7 +67,6 @@ func _on_random_enemy_timer_timeout():
 		add_child(timer)
 		timer.start(rand_time)
 		await timer.timeout
-		#print("spawning random enemy " + str(i))
 		spawn_random_enemy(ENEMYTYPE.NORMAL)
 	var offset = current_wave.random_enemy_spawn_cd * 0.15
 	var rand = randf_range(current_wave.random_enemy_spawn_cd - offset, current_wave.random_enemy_spawn_cd + offset)
@@ -91,6 +90,12 @@ func _on_horde_timer_timeout():
 func _on_new_wave(wave: Wave):
 	print("new wave")
 	current_wave = wave
+	for i in wave.orbit_enemies:
+		spawn_random_enemy(ENEMYTYPE.ORBIT)
+	for i in wave.plane_enemies:
+		var time = wave.wave_duration / wave.plane_enemies
+		await get_tree().create_timer(time)
+		spawn_random_enemy(ENEMYTYPE.ZIG_ZAG)
 	
 func random_spawn_radius():
 	var rand = 1 - randf_range(-SPAWN_RADIUS_SPREAD, SPAWN_RADIUS_SPREAD)
@@ -132,22 +137,20 @@ func spawn_random_enemy(type: ENEMYTYPE):
 func spawn_enemy(pos, part_of_horde, type: ENEMYTYPE):
 	var enemy = enemy_dict[type].instantiate()
 	var speed_offset = randf_range(0.8, 1.2)
-	var es = current_wave.speed * speed_offset
-	enemy.speed = es if not part_of_horde else es * 0.7
-	enemy.damage = current_wave.damage
-	enemy.max_health = current_wave.health
+	enemy.speed *= current_wave.speed_multiplier if not part_of_horde else current_wave.speed_multiplier * 0.7
+	enemy.speed *= speed_offset
+	enemy.damage *= current_wave.damage_multiplier
+	enemy.max_health *= current_wave.health_multiplier
 	enemy.died.connect(_on_enemy_died)
 	enemy.position = pos
 	enemy.part_of_horde = part_of_horde
 	alive_enemies.append(enemy)
-	#print("target random enemies: " + str(current_wave.target_random_enemies_amount))
-	#print("random enemies: " + str(alive_random_enemies()))
-	#print("horde enemies: " + str(alive_horde_enemies()))
-	#print("total enemies: " + str(alive_enemies.size()))
+	enemies_updated.emit(alive_enemies)
 	add_child(enemy)
 	
 func _on_enemy_died(enemy: Enemy):
 	alive_enemies.erase(enemy)
+	enemies_updated.emit(alive_enemies)
 	enemy_killed.emit(enemy)
 	_spawn_exp(enemy)
 	if enemy.part_of_horde:
@@ -157,7 +160,7 @@ func _spawn_exp(enemy: Enemy):
 	var rand = randf_range(0.0, 1.0)
 	if enemy.exp <= 0 or enemy.exp_chance < rand:
 		return
-	var rn = RUMBLE_AREA.instantiate()
+	var rn = EXP_DROP.instantiate()
 	rn.exp_worth = enemy.exp
 	rn.position = enemy.global_position - self.global_position
 	add_child(rn)

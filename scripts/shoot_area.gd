@@ -26,7 +26,7 @@ func _process(delta: float) -> void:
 
 func terminate_self():
 	self.monitoring = false
-	hit_sound.pitch_scale += randf_range(0, 0.04)
+	hit_sound.pitch_scale = randf_range(0.9, 1.1)
 	hit_sound.play()
 	dead = true
 	for child in get_children():

@@ -38,7 +38,8 @@ position = Vector2(4, 0)
 rotation = 1.5708
 
 [node name="Nozzle" type="Marker2D" parent="."]
-position = Vector2(32, 0)
+position = Vector2(32.7805, -5.5172)
+rotation = 0.122173
 script = ExtResource("3_iyvy0")
 
 [node name="Node2D" type="Node2D" parent="Nozzle"]
@@ -53,6 +54,29 @@ scale = Vector2(0.100068, 0.100068)
 texture = ExtResource("4_t4blr")
 
 [node name="Shoot_light" type="PointLight2D" parent="Nozzle"]
+visible = false
+position = Vector2(9, 0)
+color = Color(1, 0.333333, 0, 1)
+energy = 2.0
+texture = SubResource("GradientTexture2D_y6o7x")
+
+[node name="Nozzle2" type="Marker2D" parent="."]
+position = Vector2(32.3348, 6.51615)
+rotation = -0.122173
+script = ExtResource("3_iyvy0")
+
+[node name="Node2D" type="Node2D" parent="Nozzle2"]
+modulate = Color(8, 8, 8, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Nozzle2/Node2D"]
+visible = false
+modulate = Color(1, 0.333333, 0, 1)
+position = Vector2(20, 0)
+rotation = 1.5708
+scale = Vector2(0.100068, 0.100068)
+texture = ExtResource("4_t4blr")
+
+[node name="Shoot_light" type="PointLight2D" parent="Nozzle2"]
 visible = false
 position = Vector2(9, 0)
 color = Color(1, 0.333333, 0, 1)

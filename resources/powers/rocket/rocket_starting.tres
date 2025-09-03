@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_tjamt")
-radius = 5.0
-damage = 5
-cool_down = 0.5
+radius = 100.0
+damage = 15
+cool_down = 5.0
 speed = 400.0
 instances = 1

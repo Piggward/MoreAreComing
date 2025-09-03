@@ -6,6 +6,7 @@ extends Power
 @export var automatic_reload: bool = false
 @export var automatic_shooting: bool = false
 @export var mag_size: int = 10
+@export var direction_offset: float = deg_to_rad(5)
 const TURRET_SHOP_ICON = preload("res://resources/powers/basic_power/turret_shop_icon.tscn")
 
 func get_power_name():
@@ -29,3 +30,7 @@ func on_shoot():
 	shoot_ready = false
 	shots_left -= 1
 	timer.start(cool_down)
+	
+func get_direction(turret):
+	var offset = randf_range(-deg_to_rad(10), deg_to_rad(10))
+	return turret.rotation - deg_to_rad(90) + offset

@@ -6,6 +6,6 @@
 script = ExtResource("1_eiabs")
 bounces = 1
 damage = 5
-cool_down = 6.0
-speed = 150.0
+cool_down = 7.0
+speed = 250.0
 instances = 1

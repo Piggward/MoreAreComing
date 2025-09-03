@@ -1,16 +1,16 @@
-[gd_resource type="Resource" script_class="BasicPower" load_steps=2 format=3 uid="uid://co44qrqwmily3"]
+[gd_resource type="Resource" script_class="BasicPower" load_steps=2 format=3 uid="uid://dqgkevdq63cpp"]
 
-[ext_resource type="Script" uid="uid://oiy71gg67jo0" path="res://resources/powers/basic_power.gd" id="1_02rd7"]
+[ext_resource type="Script" path="res://resources/powers/basic_power/basic_power.gd" id="1_p13ho"]
 
 [resource]
-script = ExtResource("1_02rd7")
+script = ExtResource("1_p13ho")
 shoot_ready = true
 shots_left = 10
-automatic_reload = false
-automatic_shooting = false
+automatic_reload = true
+automatic_shooting = true
 mag_size = 10
+direction_offset = 0.174533
 damage = 10
-cool_down = 0.4
+cool_down = 0.25
 speed = 400.0
 instances = 1
-power_name = "BASIC"

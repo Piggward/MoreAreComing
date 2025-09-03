@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://c137k3r5rd0os"]
 
-[ext_resource type="Script" uid="uid://bucbhgg3aka77" path="res://scripts/shoot_area.gd" id="1_u46cq"]
-[ext_resource type="Script" uid="uid://pfwsatqi5k62" path="res://scripts/ball_polygon.gd" id="2_nmfh1"]
+[ext_resource type="Script" path="res://scripts/shoot_area.gd" id="1_u46cq"]
+[ext_resource type="Script" path="res://scripts/ball_polygon.gd" id="2_nmfh1"]
 [ext_resource type="Texture2D" uid="uid://b63phd1s6qt0r" path="res://art/slash_02.png" id="4_tdjhk"]
 [ext_resource type="Texture2D" uid="uid://cbdp7nrn3odv4" path="res://art/trace_01.png" id="5_dsovy"]
 [ext_resource type="AudioStream" uid="uid://bwamlv2otq8la" path="res://sfx/muffled_explosion.mp3" id="8_aa30y"]
@@ -49,6 +49,7 @@ color_ramp = SubResource("GradientTexture1D_64k8x")
 
 [node name="ShootArea" type="Area2D" groups=["pauseable", "projectile"]]
 modulate = Color(2, 2, 2, 1)
+scale = Vector2(1.58724, 1.58724)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_u46cq")
@@ -57,7 +58,7 @@ script = ExtResource("1_u46cq")
 rotation = 0.00277402
 scale = Vector2(1.17116, 1.17116)
 color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(5.99166, -3.01663, -1.00832, -2.99721, -4.99998, 0.0138701, -0.991674, 3.00276, 6.0083, 2.98334)
+polygon = PackedVector2Array(5.57503, -3.06102, -1.00832, -2.99721, -4.99998, 0.0138701, -0.991674, 3.00276, 5.59193, 3.03005)
 
 [node name="BulletPolygon" type="Polygon2D" parent="."]
 rotation = 0.00277402
@@ -66,32 +67,34 @@ script = ExtResource("2_nmfh1")
 
 [node name="Particles" type="Node2D" parent="."]
 modulate = Color(1, 1, 1, 0.222)
+position = Vector2(-2.97235, 0)
+scale = Vector2(0.355306, 0.355306)
 
 [node name="SpeedHead" type="GPUParticles2D" parent="Particles"]
 process_mode = 3
 amount = 1
+process_material = SubResource("ParticleProcessMaterial_6lmhe")
 texture = ExtResource("4_tdjhk")
 lifetime = 2.0
 local_coords = true
-process_material = SubResource("ParticleProcessMaterial_6lmhe")
 
 [node name="SpeedLines2" type="GPUParticles2D" parent="Particles"]
 process_mode = 3
 position = Vector2(-4, -13)
 amount = 15
+process_material = SubResource("ParticleProcessMaterial_odwe6")
 texture = ExtResource("5_dsovy")
 lifetime = 1.5
 local_coords = true
-process_material = SubResource("ParticleProcessMaterial_odwe6")
 
 [node name="SpeedLines1" type="GPUParticles2D" parent="Particles"]
 process_mode = 3
 position = Vector2(-5, 12)
 amount = 15
+process_material = SubResource("ParticleProcessMaterial_odwe6")
 texture = ExtResource("5_dsovy")
 lifetime = 1.5
 local_coords = true
-process_material = SubResource("ParticleProcessMaterial_odwe6")
 
 [node name="HitSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_aa30y")

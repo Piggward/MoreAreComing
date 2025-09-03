@@ -74,8 +74,6 @@ func _on_exp_pickup(value: float):
 	EventManager.experience_added.emit(exp)
 	if current_level + 1 >= level_progression.size():
 		return
-	#print(str(exp) + " / " + str(level_progression[current_level]))
-	#print(exp >= level_progression[current_level])
 	if exp >= level_progression[current_level]:
 		current_level += 1
 		level_up.emit(current_level)
@@ -99,4 +97,3 @@ func get_power(power_name: String):
 		return null
 		
 	return find_power[0]
-		

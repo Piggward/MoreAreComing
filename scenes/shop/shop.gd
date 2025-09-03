@@ -26,6 +26,7 @@ func add_powerups():
 		var si = SHOP_ITEM.instantiate()
 		var pu: PowerUp = power_ups[i].get_random_powerup()
 		si.power_up = pu
+		si.new = not player.has_power(pu.starting_power)
 		si.selected.connect(_on_select)
 		add_child(si)
 

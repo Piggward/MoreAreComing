@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c6tnbpnn27okn"]
+[gd_scene load_steps=15 format=3 uid="uid://c6tnbpnn27okn"]
 
 [ext_resource type="Texture2D" uid="uid://dpholxwifyih8" path="res://art/genericItem_color_018.png" id="1_6gqi2"]
 [ext_resource type="Script" path="res://scripts/exp_screw.gd" id="1_tlk4k"]
 [ext_resource type="Texture2D" uid="uid://bsq0vjs08aocx" path="res://art/star_07.png" id="2_jf2fj"]
+[ext_resource type="Texture2D" uid="uid://bblxxku0whmhe" path="res://art/particles/circle_01.png" id="4_gmcgu"]
 
 [sub_resource type="Curve" id="Curve_ujlgw"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.137717, 1), 0.0, 0.0, 0, 0, Vector2(0.465261, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -32,7 +33,30 @@ scale_max = 0.1
 scale_curve = SubResource("CurveTexture_w7lga")
 alpha_curve = SubResource("CurveTexture_gsek7")
 
+[sub_resource type="Curve" id="Curve_sdcnk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.0596491, 0.498715), 0.912757, 0.912757, 0, 0, Vector2(0.192982, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_d4iwn"]
+curve = SubResource("Curve_sdcnk")
+
+[sub_resource type="Curve" id="Curve_63r4p"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25614, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_rvspy"]
+curve = SubResource("Curve_63r4p")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ih27h"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_rvspy")
+alpha_curve = SubResource("CurveTexture_d4iwn")
+
 [node name="ExpScrew" type="Sprite2D"]
+modulate = Color(0, 2, 2, 1)
 scale = Vector2(0.705432, 0.705432)
 script = ExtResource("1_tlk4k")
 
@@ -56,3 +80,9 @@ texture = ExtResource("2_jf2fj")
 lifetime = 4.0
 explosiveness = 0.15
 randomness = 0.5
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_ih27h")
+texture = ExtResource("4_gmcgu")
+lifetime = 5.0

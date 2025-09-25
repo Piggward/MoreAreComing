@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqousxj7k7c3c"]
+
+[ext_resource type="Texture2D" uid="uid://dnt38ya4vcm3m" path="res://art/particles/slash_04.png" id="1_6msrj"]
+
+[sub_resource type="Curve" id="Curve_0gwc5"]
+_data = [Vector2(0.0140351, 0), 0.0, 0.0, 0, 0, Vector2(0.250877, 0.243895), 0.0, 0.0, 0, 0, Vector2(0.833333, 0.227185), 0.0, 0.0, 0, 0, Vector2(0.963158, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_cdnji"]
+curve = SubResource("Curve_0gwc5")
+
+[sub_resource type="Curve" id="Curve_575b4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.319087), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3gw8f"]
+curve = SubResource("Curve_575b4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lal0u"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -500, 0)
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = -125.0
+initial_velocity_max = -125.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = -2.23517e-06
+scale_min = 0.2
+scale_max = 0.2
+scale_curve = SubResource("CurveTexture_3gw8f")
+color = Color(0.764706, 0.980392, 0.992157, 1)
+alpha_curve = SubResource("CurveTexture_cdnji")
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+rotation = 0.000236541
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_lal0u")
+texture = ExtResource("1_6msrj")
+lifetime = 4.0
+preprocess = 5.0
+local_coords = true

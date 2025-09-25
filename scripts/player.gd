@@ -15,10 +15,13 @@ var exp: float = 0.0
 var current_level = 0
 var shoot_ready = true
 var t: float = 0.0
+var using_magnet = false
 
 signal attributes_updated
 signal health_updated(health: int, max_health: int)
 signal level_up(level: int)
+signal magnet_size_updated(new_size: Vector2)
+signal magnet_speed_updated(new_speed: float)
 
 func _ready():
 	EventManager.exp_pickup.connect(_on_exp_pickup)
@@ -54,14 +57,22 @@ func power_time(timer: Timer):
 func _physics_process(delta: float) -> void:
 	t += delta
 	if stats.has_automatic_shooting:
-		if Input.is_action_pressed("left_click"):
+		if Input.is_action_pressed("left_click") and not using_magnet:
 			shoot()
 	else:
-		if Input.is_action_just_pressed("left_click"):
+		if Input.is_action_just_pressed("left_click") and not using_magnet:
 			shoot()
 	
-	if Input.is_action_just_pressed("right_click"):
-		turret.reload()
+	if Input.is_action_just_pressed("ui_accept"):
+		current_level += 1
+		level_up.emit(current_level)
+	
+	if Input.is_action_pressed("right_click") and not using_magnet:
+		using_magnet = true
+		turret.start_magnet()
+	elif not Input.is_action_pressed("right_click") and using_magnet:
+		using_magnet = false
+		turret.stop_magnet()
 		
 func shoot():
 	if not basic_power.can_shoot() or turret.reloading:
@@ -89,11 +100,23 @@ func update_attributes():
 	
 func has_power(p: Power):
 	var find_power = powers.filter(func(a): return a.get_power_name() == p.get_power_name())
+	if p.get_power_name() == "Turret bullets":
+		return true
 	return find_power and not find_power.is_empty()
 	
 func get_power(power_name: String):
 	var find_power = powers.filter(func(a): return a.get_power_name() == power_name)
+	if power_name == "Turret bullets":
+		return basic_power
 	if not find_power or find_power.is_empty():
 		return null
 		
 	return find_power[0]
+
+func update_magnet_size(multiplier: float):
+	self.stats.magnet_size *= multiplier
+	magnet_size_updated.emit(Vector2(1, self.stats.magnet_size))
+	
+func update_magnet_speed(multiplier: float):
+	self.stats.magnet_speed *= multiplier
+	magnet_speed_updated.emit(self.stats.magnet_speed)

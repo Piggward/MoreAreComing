@@ -47,8 +47,8 @@ func _on_player_health_updated(health: int, max_health: int):
 		game_over(false)
 	
 func start_game():
-	pass
 	#music.play()
+	pass
 	
 func resume_game():
 	get_tree().paused = false

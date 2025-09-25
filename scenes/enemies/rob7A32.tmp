@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://c0tlfi1k0nco2"]
+
+[ext_resource type="PackedScene" uid="uid://7nk3om0x8xav" path="res://scenes/enemies/enemy.tscn" id="1_bjqfp"]
+[ext_resource type="Texture2D" uid="uid://iupdydferdq4" path="res://art/robot1_hold.png" id="2_0qp31"]
+[ext_resource type="Script" path="res://scenes/enemies/robot_enemy.gd" id="2_acu3i"]
+[ext_resource type="Texture2D" uid="uid://ddpl0dj2hhp63" path="res://art/robot1_hold5.png" id="3_ag3q0"]
+[ext_resource type="Texture2D" uid="uid://c6c2hdn6xg2xc" path="res://art/robot1_hold2.png" id="4_efg6d"]
+[ext_resource type="Texture2D" uid="uid://d7mby6koub0s" path="res://art/robot1_hold4.png" id="5_ijf0c"]
+[ext_resource type="Texture2D" uid="uid://cujrmcrlsxmgv" path="res://art/robot1_hold3.png" id="6_8207k"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jsgsl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0qp31")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ag3q0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_efg6d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ag3q0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0qp31")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ijf0c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8207k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ijf0c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="Enemy" instance=ExtResource("1_bjqfp")]
+script = ExtResource("2_acu3i")
+main_color = Color(0, 0, 0, 1)
+wheel_color_1 = Color(0, 0, 0, 1)
+wheel_color_2 = Color(0, 0, 0, 1)
+accent_color = Color(0, 0, 0, 1)
+exp_chance = 0.4
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_jsgsl")
+autoplay = "default"
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+visible = false
+frame_progress = 0.0
+
+[node name="CollisionShape2D" parent="." index="2"]
+visible = true
+position = Vector2(1.66666, -6.03329e-06)
+
+[node name="Eyes" parent="." index="7"]
+visible = false

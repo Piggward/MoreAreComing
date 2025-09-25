@@ -10,7 +10,6 @@ var time := 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super()
-	speed = 45
 	target = get_tree().get_first_node_in_group("player")
 	pass # Replace with function body.
 

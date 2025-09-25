@@ -76,7 +76,6 @@ powers = Array[ExtResource("2_p7c70")]([SubResource("Resource_ex7at"), SubResour
 
 [node name="Player" parent="." instance=ExtResource("1_qy3on")]
 position = Vector2(576, 400)
-scale = Vector2(1, 1)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0.999939, 0.999969)

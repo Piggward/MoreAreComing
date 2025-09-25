@@ -60,6 +60,7 @@ color_ramp = SubResource("GradientTexture1D_64k8x")
 
 [node name="ShootArea" type="Area2D" groups=["pauseable", "projectile"]]
 modulate = Color(2.5, 2.5, 2.5, 1)
+scale = Vector2(1.6, 1.6)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_typhe")

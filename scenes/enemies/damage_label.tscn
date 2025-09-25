@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b42qytx70tnqk"]
+
+[ext_resource type="Script" path="res://scenes/enemies/damage_label.gd" id="1_n3vpu"]
+
+[node name="DamageLabel" type="Label"]
+offset_left = -17.0
+offset_top = -205.0
+offset_right = 23.0
+offset_bottom = -170.0
+theme_override_font_sizes/font_size = 25
+text = "13"
+script = ExtResource("1_n3vpu")
+damage = 15

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="PowerTree" load_steps=3 format=3 uid="uid://cdwramkxd8yi3"]
+
+[ext_resource type="Script" path="res://resources/powers/power_up.gd" id="1_nsxvo"]
+[ext_resource type="Script" path="res://resources/powers/power_tree.gd" id="2_8hucs"]
+
+[resource]
+script = ExtResource("2_8hucs")
+powerups = Array[ExtResource("1_nsxvo")]([null])

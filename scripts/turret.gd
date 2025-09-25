@@ -12,6 +12,7 @@ const RELOAD_1 = preload("res://sfx/reload2.mp3")
 @onready var shoot_audio = $ShootAudio
 @onready var reload_audio = $ReloadAudio
 @onready var nozzle_2 = $Nozzle2
+@onready var magnet_area = $MagnetArea
 
 var player: Player
 var shoot_ready: bool = true
@@ -108,6 +109,12 @@ func get_nozzle():
 	nozzles.append(n)
 	return n
 
+func start_magnet():
+	magnet_area.start()
+	
+func stop_magnet():
+	magnet_area.stop()
+	
 func handle_reload(delta):
 	current_reload_time += delta
 	var v = current_reload_time / player.stats.reload_speed

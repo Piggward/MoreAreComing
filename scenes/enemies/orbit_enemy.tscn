@@ -41,16 +41,16 @@ animations = [{
 
 [node name="OrbitEnemy" instance=ExtResource("1_isgox")]
 rotation = 0.0
-scale = Vector2(0.5, 0.55)
+scale = Vector2(0.75, 0.825)
 script = ExtResource("2_u6slo")
 turn_speed = 2
+speed = 20.0
 damage = 25.0
 max_health = 200
 main_color = Color(0, 0, 0, 1)
 wheel_color_1 = Color(0, 0, 0, 1)
 wheel_color_2 = Color(0, 0, 0, 1)
 accent_color = Color(0, 0, 0, 1)
-exp_chance = 0.4
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 material = SubResource("ShaderMaterial_j6fbj")
@@ -58,7 +58,7 @@ sprite_frames = SubResource("SpriteFrames_tvwel")
 frame_progress = 0.0
 
 [node name="Node2D" parent="." index="5"]
-scale = Vector2(0.5, 0.55)
+scale = Vector2(0.75, 0.825)
 
 [node name="Polygon2D" parent="Eyes" index="0"]
 color = Color(0.752941, 0.819608, 0.8, 1)

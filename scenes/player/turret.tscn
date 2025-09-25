@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cildlu1w3js4r"]
+[gd_scene load_steps=19 format=3 uid="uid://cildlu1w3js4r"]
 
 [ext_resource type="Script" path="res://scripts/turret.gd" id="1_254i8"]
 [ext_resource type="PackedScene" uid="uid://cp762k8rwshe2" path="res://scenes/turret_sprite.tscn" id="2_043mt"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://qsps8vybv2u8" path="res://art/muzzle_02.png" id="4_t4blr"]
 [ext_resource type="AudioStream" uid="uid://cbaam4pwdps0q" path="res://sfx/PipeMoving.mp3" id="5_j1sqc"]
 [ext_resource type="AudioStream" uid="uid://cw6o5bb8uihtt" path="res://sfx/shoot.ogg" id="6_4n47g"]
+[ext_resource type="Texture2D" uid="uid://dmkm3bwfbe8y7" path="res://art/googly-a.png" id="7_wnr7q"]
+[ext_resource type="PackedScene" uid="uid://cqousxj7k7c3c" path="res://scenes/magnet_particles.tscn" id="8_eqldi"]
+[ext_resource type="Script" path="res://scenes/player/magnet_area.gd" id="8_ooo7h"]
 
 [sub_resource type="Gradient" id="Gradient_npw4x"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -27,18 +30,48 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.132)
 
+[sub_resource type="Curve" id="Curve_0gwc5"]
+_data = [Vector2(0.0140351, 0), 0.0, 0.0, 0, 0, Vector2(0.250877, 0.243895), 0.0, 0.0, 0, 0, Vector2(0.833333, 0.227185), 0.0, 0.0, 0, 0, Vector2(0.963158, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_cdnji"]
+curve = SubResource("Curve_0gwc5")
+
+[sub_resource type="Curve" id="Curve_575b4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.319087), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3gw8f"]
+curve = SubResource("Curve_575b4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mbmjj"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -500, 0)
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = -125.0
+initial_velocity_max = -125.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = -2.23517e-06
+scale_min = 0.2
+scale_max = 0.2
+scale_curve = SubResource("CurveTexture_3gw8f")
+color = Color(0.752941, 1, 1, 1)
+alpha_curve = SubResource("CurveTexture_cdnji")
+
 [node name="Turret" type="Node2D" groups=["turret"]]
 process_mode = 1
-position = Vector2(576, 324)
-rotation = 0.0461211
+rotation = 4.71763
 script = ExtResource("1_254i8")
 
 [node name="TurretSprite" parent="." instance=ExtResource("2_043mt")]
-position = Vector2(4, 0)
+position = Vector2(12, -5.24537e-07)
 rotation = 1.5708
 
 [node name="Nozzle" type="Marker2D" parent="."]
-position = Vector2(32.7805, -5.5172)
+position = Vector2(40, -6)
 rotation = 0.122173
 script = ExtResource("3_iyvy0")
 
@@ -61,7 +94,7 @@ energy = 2.0
 texture = SubResource("GradientTexture2D_y6o7x")
 
 [node name="Nozzle2" type="Marker2D" parent="."]
-position = Vector2(32.3348, 6.51615)
+position = Vector2(41, 6)
 rotation = -0.122173
 script = ExtResource("3_iyvy0")
 
@@ -108,3 +141,29 @@ bus = &"SFX"
 remote_path = NodePath("../../Player")
 update_position = false
 update_rotation = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(7, -7)
+scale = Vector2(0.0502628, 0.0502628)
+texture = ExtResource("7_wnr7q")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(7, 9)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("7_wnr7q")
+
+[node name="MagnetArea" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 32
+monitoring = false
+monitorable = false
+script = ExtResource("8_ooo7h")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MagnetArea"]
+polygon = PackedVector2Array(39.9418, -11.2094, 857.705, -58.4951, 858.261, 47.5034, 45.0675, 12.764, 40.0571, 10.7903)
+
+[node name="GPUParticles2D" parent="MagnetArea" instance=ExtResource("8_eqldi")]
+position = Vector2(42.9994, -0.22216)
+rotation = 1.5708
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_mbmjj")

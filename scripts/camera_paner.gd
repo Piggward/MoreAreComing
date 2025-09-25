@@ -1,12 +1,14 @@
 extends Node2D
 
 var player: Player
-const BASE_MAX_OFFSET := 30       # Min camera offset range
-const MAX_EXTRA_OFFSET := 70      # Max *additional* offset (so total max = 30 + 70 = 100)
+const BASE_MAX_OFFSET := 0       # Min camera offset range
+const MAX_EXTRA_OFFSET := 300     # Max *additional* offset (so total max = 30 + 70 = 100)
 const MAX_CURSOR_DISTANCE := 800  # How far the mouse can be to reach full offset effect
 
 const MIN_EASING := 0.025
 const MAX_EASING := 0.07
+const MIN_CAMERA_SPEED := 10
+const MIN_DISTANCE := 300
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
@@ -30,17 +32,27 @@ func _process(delta):
 	var max_offset = BASE_MAX_OFFSET + (MAX_EXTRA_OFFSET * clamp(distance_to_mouse_from_player / MAX_CURSOR_DISTANCE, 0.0, 1.0))
 	if direction_to_mouse.length() > max_offset:
 		direction_to_mouse = direction_to_mouse.normalized() * max_offset
-
+		
 	var target_pos = player_pos + direction_to_mouse
+	
+	#if distance_to_mouse_from_player < MIN_DISTANCE:
+		#target_pos = player_pos
+
 
 	# STEP 2: Determine easing speed based on distance between camera and mouse
 	var camera_to_mouse_dist = (mouse_world_pos - camera_pos).length()
-	var easing_ratio = clamp(camera_to_mouse_dist / MAX_CURSOR_DISTANCE, 0.0, 1.0)
+	var easing_ratio = clamp(camera_to_mouse_dist / (MAX_CURSOR_DISTANCE + MIN_DISTANCE), 0.0, 1.0)
 	var easing = lerp(MIN_EASING, MAX_EASING, easing_ratio)
 	var lerp_speed = 1.0 - pow(1.0 - easing, delta * 60)
+	
+	var move_delta = global_position.lerp(target_pos, lerp_speed) - global_position
+	
+		# If movement is too small, enforce minimum speed
+	if move_delta.length() / delta < MIN_CAMERA_SPEED:
+		move_delta = move_delta.normalized() * MIN_CAMERA_SPEED * delta
 
 	# Smoothly move the camera towards the clamped target
-	global_position = global_position.lerp(target_pos, lerp_speed)
+	global_position = global_position + move_delta
 	#var player_pos = player.global_position
 	#var mouse_pos = get_viewport().get_mouse_position()
 	#var mouse_world_pos = get_global_mouse_position()

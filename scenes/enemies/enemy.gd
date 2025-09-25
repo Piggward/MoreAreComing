@@ -5,6 +5,7 @@ const NAILSPARTICLES = preload("res://scenes/nailsparticles.tscn")
 const SCREWSPARTICLES = preload("res://scenes/screwsparticles.tscn")
 const EXPLOSION_2 = preload("res://scenes/explosion2.tscn")
 const EXPLOSION_PARTICLES = preload("res://scenes/explosion_particles.tscn")
+const DAMAGE_LABEL = preload("res://scenes/enemies/damage_label.tscn")
 
 @export var speed: float
 @export var damage: float
@@ -56,6 +57,11 @@ func find_bonus():
 func take_damage(damage: int):
 	current_health -= damage
 	progress_bar.value = current_health
+	progress_bar.visible = true
+	var damage_label = DAMAGE_LABEL.instantiate()
+	damage_label.damage = damage
+	get_tree().root.add_child(damage_label)
+	damage_label.global_position = progress_bar.global_position
 	if current_health <= 0:
 		die()
 	if taking_damage:

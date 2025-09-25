@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 	pass
 
 func terminate_self():
-	self.monitoring = false
+	set_deferred("monitoring", false)
 	hit_sound.pitch_scale = randf_range(0.9, 1.1)
 	hit_sound.play()
 	dead = true

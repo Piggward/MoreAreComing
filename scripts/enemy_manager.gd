@@ -7,7 +7,7 @@ const ZIG_ZAG_ENEMY = preload("res://scenes/enemies/plane_enemy.tscn")
 const ENEMIES_PER_RING = 8  # Can vary per ring if you want
 const RING_DISTANCE = 50    # Distance between rings (can be your D)
 const JITTER_AMOUNT = 25  # Max pixels to jitter
-const SPAWN_RADIUS = 800
+const SPAWN_RADIUS = 1200
 const SPAWN_RADIUS_SPREAD = 0.3
 const EXP_DROP = preload("res://scenes/exp_drop.tscn")
 var alive_enemies: Array[Enemy] = []
@@ -27,6 +27,8 @@ signal enemies_updated(enemies: Array[Enemy])
 func _ready():
 	var player = get_tree().get_first_node_in_group("player")
 	var level = get_tree().get_first_node_in_group("level")
+	if not level.is_node_ready():
+		await level.ready
 	level.new_wave.connect(_on_new_wave)
 	current_wave = level.waves[0]
 	player_pos = player.position
@@ -52,7 +54,7 @@ func game_start():
 	spawn_initial_enemies()
 	
 func spawn_initial_enemies():
-	for i in 1:
+	for i in 20:
 		var angle = randf() * TAU
 		var random_pos = player_pos + Vector2(random_spawn_radius() / 2, 0).rotated(angle)
 		var jitter = Vector2(randf_range(-JITTER_AMOUNT, JITTER_AMOUNT),
@@ -88,7 +90,6 @@ func _on_horde_timer_timeout():
 	pass
 	
 func _on_new_wave(wave: Wave):
-	print("new wave")
 	current_wave = wave
 	for i in wave.orbit_enemies:
 		spawn_random_enemy(ENEMYTYPE.ORBIT)

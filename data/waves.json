@@ -2,13 +2,13 @@
   {
 	"wave_number": 1,
 	"wave_duration": 20.0,
-	"speed_multiplier": 1.0,
+	"speed_multiplier": 0.3,
 	"damage_multiplier": 1.0,
 	"health_multiplier": 1.0,
 	"exp_multiplier": 1.0,
-	"target_random_enemies_amount": 7,
-	"target_hordes": 1,
-	"horde_amount": 5,
+	"target_random_enemies_amount": 15,
+	"target_hordes": 3,
+	"horde_amount": 25,
 	"horde_spawn_cd": 15,
 	"random_enemy_spawn_cd": 3,
   "plane_enemies": 0,
@@ -16,7 +16,7 @@
   },
   {
 	"wave_number": 2,
-	"wave_duration": 20.0,
+	"wave_duration": 40.0,
 	"speed_multiplier": 1.0,
 	"damage_multiplier": 1.0,
 	"health_multiplier": 1.5,
@@ -31,7 +31,7 @@
   },
   {
 	"wave_number": 3,
-	"wave_duration": 20.0,
+	"wave_duration": 40.0,
 	"speed_multiplier": 1.0,
 	"damage_multiplier": 1.0,
 	"health_multiplier": 1.5,
@@ -46,7 +46,7 @@
   },
   {
 	"wave_number": 4,
-	"wave_duration": 20.0,
+	"wave_duration": 40.0,
 	"speed_multiplier": 1.0,
 	"damage_multiplier": 1.0,
 	"health_multiplier": 2,
@@ -61,7 +61,7 @@
 	},
   {
 	"wave_number": 5,
-	"wave_duration": 20.0,
+	"wave_duration": 40.0,
 	"speed_multiplier": 1.0,
 	"damage_multiplier": 1.0,
 	"health_multiplier": 2,
@@ -76,7 +76,7 @@
   },
   {
 	"wave_number": 6,
-	"wave_duration": 20.0,
+	"wave_duration": 40.0,
 	"speed_multiplier": 1.0,
 	"damage_multiplier": 1.0,
 	"health_multiplier": 2.5,
@@ -91,7 +91,7 @@
   },
   {
 	"wave_number": 7,
-	"wave_duration": 20.0,
+	"wave_duration": 40.0,
 	"speed_multiplier": 1.0,
 	"damage_multiplier": 1.0,
 	"health_multiplier": 1.5,
@@ -106,7 +106,7 @@
   },
   {
 	"wave_number": 8,
-	"wave_duration": 20.0,
+	"wave_duration": 40.0,
 	"speed_multiplier": 1.0,
 	"damage_multiplier": 1.0,
 	"health_multiplier": 1.5,
@@ -121,7 +121,7 @@
 	},
   {
 	"wave_number": 9,
-	"wave_duration": 20.0,
+	"wave_duration": 40.0,
 	"speed_multiplier": 1.0,
 	"damage_multiplier": 1.0,
 	"health_multiplier": 1.0,
@@ -136,7 +136,7 @@
   },
   {
 	"wave_number": 10,
-	"wave_duration": 20.0,
+	"wave_duration": 40.0,
 	"speed_multiplier": 1.0,
 	"damage_multiplier": 1.0,
 	"health_multiplier": 1.5,
@@ -151,7 +151,7 @@
   },
   {
 	"wave_number": 11,
-	"wave_duration": 20.0,
+	"wave_duration": 40.0,
 	"speed_multiplier": 1.0,
 	"damage_multiplier": 1.0,
 	"health_multiplier": 1.5,
@@ -166,7 +166,7 @@
   },
   {
 	"wave_number": 12,
-	"wave_duration": 20.0,
+	"wave_duration": 40.0,
 	"speed_multiplier": 1.0,
 	"damage_multiplier": 1.0,
 	"health_multiplier": 1.5,
@@ -181,7 +181,7 @@
 	},
   {
 	"wave_number": 13,
-	"wave_duration": 20.0,
+	"wave_duration": 40.0,
 	"speed_multiplier": 1.0,
 	"damage_multiplier": 1.0,
 	"health_multiplier": 1.0,
@@ -196,7 +196,7 @@
   },
   {
 	"wave_number": 14,
-	"wave_duration": 20.0,
+	"wave_duration": 40.0,
 	"speed_multiplier": 1.0,
 	"damage_multiplier": 1.0,
 	"health_multiplier": 1.5,
@@ -211,7 +211,7 @@
   },
   {
 	"wave_number": 15,
-	"wave_duration": 20.0,
+	"wave_duration": 40.0,
 	"speed_multiplier": 1.0,
 	"damage_multiplier": 1.0,
 	"health_multiplier": 1.5,
@@ -226,7 +226,7 @@
   },
   {
 	"wave_number": 16,
-	"wave_duration": 20.0,
+	"wave_duration": 40.0,
 	"speed_multiplier": 1.0,
 	"damage_multiplier": 1.0,
 	"health_multiplier": 1.5,

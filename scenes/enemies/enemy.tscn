@@ -42,7 +42,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pwanm"]
-size = Vector2(433.333, 426.667)
+size = Vector2(371.116, 371.118)
 
 [node name="Enemy" type="Area2D"]
 process_mode = 1
@@ -51,14 +51,13 @@ scale = Vector2(0.3, 0.3)
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_hir0y")
-speed = 35.0
+speed = 25.0
 damage = 10.0
 max_health = 10
 main_color = Color(0.396078, 0.45098, 0.54902, 1)
 wheel_color_1 = Color(0.27451, 0.27451, 0.27451, 1)
 wheel_color_2 = Color(0.329412, 0.329412, 0.329412, 1)
 accent_color = Color(0.309804, 0.321569, 0.466667, 1)
-exp_chance = 1.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -68,8 +67,7 @@ autoplay = "default"
 frame_progress = 0.0979066
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(2, 1)
+position = Vector2(-6.66653, 3.01666e-05)
 scale = Vector2(0.449095, 0.449095)
 shape = SubResource("RectangleShape2D_pwanm")
 
